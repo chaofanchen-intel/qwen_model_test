@@ -1,0 +1,59 @@
+================================================================================
+  Qwen3.5 OpenVINO GenAI VLM Benchmark (C++)
+================================================================================
+  Devices:       GPU 
+  Mode:          text-only
+  infer_count:   512
+  num_iters:     8 (+1 warm-up)
+  permutation:   ON
+  profile:       OFF
+
+################################################################################
+  Model: Qwen3.5-0.8B-INT4 | Device: GPU | Mode: text-only | Backend: VLMPipeline
+################################################################################
+  Plugin config: ATTENTION_BACKEND=PA CACHE_DIR= PERFORMANCE_HINT=LATENCY
+  Compiling VLMPipeline...
+  Compiled in 4.31s
+  Prompts loaded: 1
+
+  [P0] raw_text_tokens=988  infer_count(max_new)=512  num_iters=8 (+1 warmup)  permute=true
+    [warm-up][0][P0] in=1002 out=512 TTFT=371.2ms TPOT=8.75ms E2E=4847ms TPS=105.6
+    [1][P0] in=1002 out=512 TTFT=212.6ms TPOT=8.75ms E2E=4687ms TPS=109.2
+    [2][P0] in=1002 out=512 TTFT=201.0ms TPOT=8.70ms E2E=4648ms TPS=110.2
+    [3][P0] in=1002 out=512 TTFT=202.8ms TPOT=8.63ms E2E=4616ms TPS=110.9
+    [4][P0] in=1002 out=512 TTFT=203.9ms TPOT=8.66ms E2E=4633ms TPS=110.5
+    [5][P0] in=1002 out=512 TTFT=203.9ms TPOT=8.68ms E2E=4640ms TPS=110.3
+    [6][P0] in=1002 out=512 TTFT=201.2ms TPOT=8.68ms E2E=4640ms TPS=110.3
+    [7][P0] in=1002 out=512 TTFT=200.1ms TPOT=8.76ms E2E=4679ms TPS=109.4
+    [8][P0] in=1002 out=512 TTFT=201.8ms TPOT=8.81ms E2E=4704ms TPS=108.8
+
+================================================================================
+  Result: Qwen3.5-0.8B-INT4 | GPU | text-only | prompt[0] in=1002 out_max=512
+  Pipeline: VLMPipeline  measured_iters=8  compile=4.31s
+================================================================================
+  Metric                   Mean      Std        P50        P90        P95      Min      Max  Unit
+  ------------------ ---------- -------- ---------- ---------- ---------- -------- --------  ----
+  TTFT                   203.42     3.72     202.32     206.55     209.60   200.05   212.64  [ms]
+  TPOT                     8.71     0.05       8.69       8.77       8.79     8.63     8.81  [ms]
+  1st infer              153.14     2.50     152.39     155.65     157.29   150.54   158.92  [ms]
+  2nd infer                8.71     0.05       8.69       8.77       8.79     8.63     8.81  [ms]
+  Throughput             109.97     0.67     110.25     110.64     110.78   108.85   110.92  [tok/s]
+  Decode TPS             114.83     0.72     115.07     115.55     115.70   113.56   115.84  [tok/s]
+  Output tokens          512.00     0.00     512.00     512.00     512.00   512.00   512.00  [tok]
+  Gen time                 4.66     0.03       4.64       4.69       4.70     4.62     4.70  [s]
+  Prefill                203.42     3.72     202.32     206.55     209.60   200.05   212.64  [ms]
+  Decode                4452.45    27.92    4442.86    4486.05    4494.07  4413.21  4502.10  [ms]
+  E2E                   4655.87    28.51    4644.08    4692.02    4697.96  4616.05  4703.90  [ms]
+  Tokenization             0.91     0.07       0.92       0.97       1.00     0.78     1.03  [ms]
+  Detokenization           0.25     0.03       0.24       0.27       0.30     0.22     0.33  [ms]
+
+  --- Memory ---
+  Memory monitor: unavailable/disabled
+
+  --- Device Utilization ---
+================================================================================
+CSV  written: benchmark/tests/repro_rerun_20260710/gpu_pa/0.8B-INT4/pristine.csv
+JSON written: benchmark/tests/repro_rerun_20260710/gpu_pa/0.8B-INT4/pristine.json
+
+  Total runs: 1
+  Done.

@@ -1,0 +1,178 @@
+diff --git a/src/plugins/intel_gpu/src/graph/impls/ocl_v2/paged_causal_conv1d_ref.cl b/src/plugins/intel_gpu/src/graph/impls/ocl_v2/paged_causal_conv1d_ref.cl
+index 82fbebfa2b..11122094fd 100644
+--- a/src/plugins/intel_gpu/src/graph/impls/ocl_v2/paged_causal_conv1d_ref.cl
++++ b/src/plugins/intel_gpu/src/graph/impls/ocl_v2/paged_causal_conv1d_ref.cl
+@@ -4,6 +4,23 @@
+ 
+ #include "include/batch_headers/common.cl"
+ 
++// TTFT-opt (PA): token-parallel causal conv1d.
++//
++// The original reference kernel dispatched GWS={seq_count, hidden_size} and each
++// work-item walked the whole sequence serially (for t in [0, seq_tokens)). During
++// prefill seq_count==1, so the entire kernel ran on only `hidden_size` threads,
++// each looping over ~1000 tokens — ~20% XVE occupancy.
++//
++// This is a depthwise causal conv of kernel size K: out[t] = bias + sum_k w[k] *
++// in_window[t][k], where in_window[t] is the last K elements ending at token t.
++// Output tokens are mutually independent (each only reads K input values), so we
++// add the token axis to the global range: GWS={seq_count, hidden_size, max_tokens}.
++// Each (seq, h, t) work-item rebuilds its own K-element window directly from
++// input_embeds (and, for the first K-1 tokens of the sequence, from the initial
++// conv_state_table history), computes out[t], and — only on the same boundary
++// tokens the serial version wrote — stores the rolling state back to the KV cache.
++// The math per output element is byte-identical to the serial version.
++
+ KERNEL(paged_causal_conv1d_ref)
+ (__global INPUT0_TYPE* input_embeds,
+  __global INPUT1_TYPE* conv_state_table,
+@@ -30,6 +47,7 @@ KERNEL(paged_causal_conv1d_ref)
+  int num_blocks) {
+     const int seq = (int)get_global_id(0);
+     const int h = (int)get_global_id(1);
++    const int t = (int)get_global_id(2);
+ 
+     if (seq >= seq_count || h >= hidden_size)
+         return;
+@@ -43,33 +61,45 @@ KERNEL(paged_causal_conv1d_ref)
+         return;
+ 
+     const int seq_tokens = token_end - token_begin;
++    if (t >= seq_tokens)
++        return;
+     const int block_span = blk_end - blk_begin;
+ 
++    // Degenerate cases: write zeros (matches the serial reference) and bail.
+     if (blk_end <= blk_begin || block_span <= 1) {
+-        for (int t = 0; t < seq_tokens; t++) {
+-            const int out_off = (token_begin + t) * output_token_stride + h * output_hidden_stride;
+-            output_embeds[out_off] = TO_OUTPUT_TYPE(0.0f);
+-        }
++        const int out_off = (token_begin + t) * output_token_stride + h * output_hidden_stride;
++        output_embeds[out_off] = TO_OUTPUT_TYPE(0.0f);
+         return;
+     }
+-
+     const int read_physical_block = block_indices[blk_begin];
+     if (read_physical_block < 0 || read_physical_block >= num_blocks) {
+-        for (int t = 0; t < seq_tokens; t++) {
+-            const int out_off = (token_begin + t) * output_token_stride + h * output_hidden_stride;
+-            output_embeds[out_off] = TO_OUTPUT_TYPE(0.0f);
+-        }
++        const int out_off = (token_begin + t) * output_token_stride + h * output_hidden_stride;
++        output_embeds[out_off] = TO_OUTPUT_TYPE(0.0f);
+         return;
+     }
+ 
+     const int seq_interval = cache_interval[seq];
+     const int prev_nums = (seq_interval > 0) ? (past_lens[seq] % seq_interval) : 0;
+ 
+-    float state[KERNEL_SIZE];
+-
++    // Rebuild this token's K-element causal window. window[k] corresponds to
++    // sequence-relative input index (t - (KERNEL_SIZE-1) + k):
++    //   idx >= 0 -> input_embeds[token_begin + idx]
++    //   idx  < 0 -> initial conv_state_table history at kernel slot (KERNEL_SIZE + idx)
++    // This reproduces the serial state[] exactly: the serial loop shifts in
++    // in[token_begin..t] on top of the initial state, so the last K values are
++    // precisely this window.
+     const int read_state_base = read_physical_block * state_block_stride + h * state_hidden_stride;
++
++    float window[KERNEL_SIZE];
+     for (int k = 0; k < KERNEL_SIZE; k++) {
+-        state[k] = convert_float(conv_state_table[read_state_base + k * state_kernel_stride]);
++        const int idx = t - (KERNEL_SIZE - 1) + k;
++        if (idx >= 0) {
++            const int in_off = (token_begin + idx) * input_token_stride + h * input_hidden_stride;
++            window[k] = convert_float(input_embeds[in_off]);
++        } else {
++            // history slot: initial state[KERNEL_SIZE + idx] (idx negative)
++            window[k] = convert_float(conv_state_table[read_state_base + (KERNEL_SIZE + idx) * state_kernel_stride]);
++        }
+     }
+ 
+     float bias_val = 0.0f;
+@@ -77,37 +107,30 @@ KERNEL(paged_causal_conv1d_ref)
+     bias_val = convert_float(conv_bias[h * bias_hidden_stride]);
+ #endif
+ 
+-    for (int t = 0; t < seq_tokens; t++) {
+-        const int token_idx = token_begin + t;
+-
+-        for (int k = 0; k + 1 < KERNEL_SIZE; k++) {
+-            state[k] = state[k + 1];
+-        }
+-
+-        const int in_off = token_idx * input_token_stride + h * input_hidden_stride;
+-        state[KERNEL_SIZE - 1] = convert_float(input_embeds[in_off]);
+-
+-        float sum = bias_val;
+-        const int w_base = h * weight_hidden_stride;
+-        for (int k = 0; k < KERNEL_SIZE; k++) {
+-            sum = fma(state[k], convert_float(conv_weight[w_base + k * weight_kernel_stride]), sum);
+-        }
+-
+-        const int out_off = token_idx * output_token_stride + h * output_hidden_stride;
+-        output_embeds[out_off] = TO_OUTPUT_TYPE(sum);
++    float sum = bias_val;
++    const int w_base = h * weight_hidden_stride;
++    for (int k = 0; k < KERNEL_SIZE; k++) {
++        sum = fma(window[k], convert_float(conv_weight[w_base + k * weight_kernel_stride]), sum);
++    }
+ 
+-        const int cached_tokens = prev_nums + (t + 1);
+-        const int interval_hit = (seq_interval > 0) && ((cached_tokens % seq_interval) == 0);
+-        const int is_last_token = (t == seq_tokens - 1);
+-        if (interval_hit || is_last_token) {
+-            const int slot = (seq_interval > 0) ? (1 + (cached_tokens - 1) / seq_interval) : 1;
+-            if (slot >= 1 && slot < block_span) {
+-                const int physical_block = block_indices[blk_begin + slot];
+-                if (physical_block >= 0 && physical_block < num_blocks) {
+-                    const int state_base = physical_block * state_block_stride + h * state_hidden_stride;
+-                    for (int k = 0; k < KERNEL_SIZE; k++) {
+-                        conv_state_table[state_base + k * state_kernel_stride] = TO_INPUT1_TYPE(state[k]);
+-                    }
++    const int out_off = (token_begin + t) * output_token_stride + h * output_hidden_stride;
++    output_embeds[out_off] = TO_OUTPUT_TYPE(sum);
++
++    // State write-back: the serial version saves the rolling window to a KV-cache
++    // slot on interval boundaries and on the last token. Each such token is owned
++    // by exactly one (seq,h,t) work-item here, so the writes do not race: this
++    // work-item writes the same window[] the serial loop held at that t.
++    const int cached_tokens = prev_nums + (t + 1);
++    const int interval_hit = (seq_interval > 0) && ((cached_tokens % seq_interval) == 0);
++    const int is_last_token = (t == seq_tokens - 1);
++    if (interval_hit || is_last_token) {
++        const int slot = (seq_interval > 0) ? (1 + (cached_tokens - 1) / seq_interval) : 1;
++        if (slot >= 1 && slot < block_span) {
++            const int physical_block = block_indices[blk_begin + slot];
++            if (physical_block >= 0 && physical_block < num_blocks) {
++                const int state_base = physical_block * state_block_stride + h * state_hidden_stride;
++                for (int k = 0; k < KERNEL_SIZE; k++) {
++                    conv_state_table[state_base + k * state_kernel_stride] = TO_INPUT1_TYPE(window[k]);
+                 }
+             }
+         }
+diff --git a/src/plugins/intel_gpu/src/graph/impls/ocl_v2/paged_causal_conv1d_ref.cpp b/src/plugins/intel_gpu/src/graph/impls/ocl_v2/paged_causal_conv1d_ref.cpp
+index cdf3fb0aa5..10678deb58 100644
+--- a/src/plugins/intel_gpu/src/graph/impls/ocl_v2/paged_causal_conv1d_ref.cpp
++++ b/src/plugins/intel_gpu/src/graph/impls/ocl_v2/paged_causal_conv1d_ref.cpp
+@@ -90,9 +90,17 @@ protected:
+             const int32_t output_token_stride = read_pitch(out_layout, 0);
+             const int32_t output_hidden_stride = read_pitch(out_layout, 1);
+ 
++            // TTFT-opt (PA): parallelize over the token axis too. Output tokens of a
++            // depthwise causal conv are mutually independent (each reads only its own
++            // K-element window), so instead of one work-item walking the whole sequence
++            // serially (GWS={seq_count, hidden} -> only `hidden` threads at prefill,
++            // ~20% occupancy) we add dim 2 = token. total_tokens (= input rows) is an
++            // upper bound on per-sequence length; the in-kernel `t >= seq_tokens` guard
++            // keeps multi-sequence dispatch correct (exact for the seq_count==1 prefill).
++            const size_t total_tokens = static_cast<size_t>(input_shape[0].get_length());
+             const size_t lws_y = std::min<size_t>(256, static_cast<size_t>(hidden_size));
+             const size_t gws_y = ((static_cast<size_t>(hidden_size) + lws_y - 1) / lws_y) * lws_y;
+-            wgs.global = {static_cast<size_t>(seq_count), gws_y, 1};
++            wgs.global = {static_cast<size_t>(seq_count), gws_y, total_tokens > 0 ? total_tokens : 1};
+             wgs.local = {1, lws_y, 1};
+ 
+             kd.params.scalars.clear();

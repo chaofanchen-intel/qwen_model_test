@@ -1,0 +1,412 @@
+Multiple distributions found for package optimum. Picked distribution: optimum-intel
+[ INFO ] ==SUCCESS FOUND==: use_case: visual_text_gen, model_type: qwen3-5, model_Name: Qwen3.5-4B-INT4
+[ INFO ] OV Config={'PERFORMANCE_HINT': 'LATENCY', 'ATTENTION_BACKEND': 'PA', 'CACHE_DIR': ''}
+[ INFO ] Model path=/home/chaofan/model_benchmark/benchmark/models/Qwen3.5-4B-INT4, openvino runtime version: 2026.2.1-21919-ede283a88e3-releases/2026/2, genai version: 2026.2.1.0-3123-7dea0459b2a
+[ INFO ] Selected OpenVINO GenAI for benchmarking
+[ INFO ] Pipeline initialization time: 7.58s
+[ INFO ] Read prompts from /home/chaofan/model_benchmark/benchmark/tests/prompts/qwen3.5_1k.jsonl
+[ INFO ] Numbeams: 1, benchmarking iter nums(exclude warm-up): 10, prompt nums: 1, prompt idx: [0]
+[ INFO ] [warm-up][P0] Input text: {'prompt': '<s>[INST] <<SYS>> A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user\'s questions. <</SYS>> You will act as a Christian, and fully summarize following text:\nSometimes it\'s nice to take a minute in the pew by yourself beforehand. You have this beautiful church probably almost all to yourself. Can you feel its energy resonating through you? Can you feel the majesty of the Lord\'s kingdom and how you\'re a part of it? Take a moment to kneel and pray with your head down and hands clasped together. Reflect on your faith and how you feel currently. Think about how you\'ve been responding to God\'s call and how you\'ve been living in the light of his love. When the priest is ready for you, of course. You\'ll probably see him there by his lonesome or someone else walk out just before you. Sit down either across from him or behind the screen -- it\'s totally up to you whether or not you pr ... [truncated to 1024]
+[ INFO ] [warm-up][P0] Input image nums: 0
+[ INFO ] [warm-up][P0] Input video nums: 0
+[ WARNING ] Enabled input prompt permutations. It means that generated results may vary on different steps and the prompt grows by one leading token. This defeats the prefix cache so first-token latency reflects a cold prefill. If it is not expected, please specify --disable_prompt_permutation in your benchmarking command to disable this behavior
+[ INFO ] [warm-up][P0] Text generation start: 2026-06-30T14:31:53.615739
+[ INFO ] [warm-up][P0] Text generation end: 2026-06-30T14:32:07.970319
+[ INFO ] [warm-up][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 2.65ms, Detokenization Time: 0.68ms,  Multimodal Embeddings Preparation Time: 57.91ms, Generation Time: 14.35s, Latency: 28.0363 ms/token
+[ INFO ] [warm-up][P0] First token latency: 724.98 ms, other tokens latency: 26.66 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [warm-up][P0] First infer latency: 616.67 ms, other infers latency: 26.66 ms/infer, inference count: 512
+[ INFO ] [warm-up][P0] Result MD5:['937b156d99935c2097b9118b4cbe0b7d']
+[ INFO ] [warm-up][P0] Generated: Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Role:** Christian (specifically acting as a Christian assistant, likely providing guidance based on Catholic theology given the text content).
+    *   **Task:** Fully summarize the provided text.
+    *   **Input Text:** A passage describing the experience of going to confession in a Catholic church. It covers preparation, the encounter with the priest, the process of confession, the Act of Contrition, and the meaning of absolution and penance.
+    *   **Constraints:** The user prompt ends abruptly ("fully summ"). I need to complete the sentence and provide a summary.
+    *   **Tone:** Helpful, detailed, polite, and in character as a Christian (warm, encouraging, informative).
+
+2.  **Analyze the Source Text:**
+    *   **Topic:** Catholic Confession (Sacrament of Penance).
+    *   **Key Sections:**
+        1.  *Preparation:* Taking a moment in the pew, feeling the energy of the church, kneeling to pray, reflecting on faith and God's call.
+        2.  *Meeting the Priest:* The priest is waiting (lonesome or someone else leaves). Seating options (across or behind). Anonymity is okay.
+        3.  *The Process:* Making the sign of the cross. Standard phrasing ("Bless me, Father..."). Alternative greeting.
+        4.  *The Conversation:* Casual, no pressure. Priest knows what he's doing.
+        5.  *Byzantine Rite:* Mentioned as different (epitrachelion, Prayer of Absolution).
+        6.  *Content of Confession:* No need to remember exact details or motivations. Honest enough is fine. Priest is understanding.
+        7.  *Act of Contrition:* Specific prayers (General vs. Roman Catholic).
+        8.  *Absolution & Penance:* Clean slate, expression of regret, resolution to avoid sin.
+
+3.  **Determine the Output Strategy:**
+    *   Adopt the persona of a Christian assistant.
+    *   Summarize the text accurately and concisely.
+    *   Ensure the tone is warm and encouraging, matching the source text's intent (reassuring the reader).
+    *   Structure the summary logically (Preparation -> Encounter -> Process -> Resolution).
+[ INFO ] [warm-up][P0] start: 2026-06-30T14:31:53.615665, end: 2026-06-30T14:32:07.971101
+[ INFO ] [1][P0] Input image nums: 0
+[ INFO ] [1][P0] Input video nums: 0
+[ WARNING ] Enabled input prompt permutations. It means that generated results may vary on different steps and the prompt grows by one leading token. This defeats the prefix cache so first-token latency reflects a cold prefill. If it is not expected, please specify --disable_prompt_permutation in your benchmarking command to disable this behavior
+[ INFO ] [1][P0] Text generation start: 2026-06-30T14:32:07.971161
+[ INFO ] [1][P0] Text generation end: 2026-06-30T14:32:22.097437
+[ INFO ] [1][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 0.80ms, Detokenization Time: 0.25ms,  Multimodal Embeddings Preparation Time: 50.76ms, Generation Time: 14.13s, Latency: 27.5904 ms/token
+[ INFO ] [1][P0] First token latency: 563.83 ms, other tokens latency: 26.54 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [1][P0] First infer latency: 511.27 ms, other infers latency: 26.54 ms/infer, inference count: 512
+[ INFO ] [1][P0] Result MD5:['629697f40d0924b8bfc2e6d7e71d9b14']
+[ INFO ] [1][P0] Generated: Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Role:** Christian (specifically acting as a Christian assistant, likely providing guidance based on Catholic theology given the text content).
+    *   **Task:** Fully summarize the provided text.
+    *   **Input Text:** A passage describing the experience of going to confession in a Catholic church. It covers preparation, the interaction with the priest, the process of confession, the Act of Contrition, and the meaning of absolution and penance.
+    *   **Constraints:** The user prompt ends abruptly ("fully summ"). I need to complete the sentence and provide a summary.
+    *   **Tone:** Helpful, detailed, polite, and in character as a Christian (warm, encouraging, informative).
+
+2.  **Analyze the Source Text:**
+    *   **Topic:** Catholic Confession (Sacrament of Penance).
+    *   **Key Sections:**
+        1.  *Preparation:* Taking a moment in the pew, feeling the energy of the church, kneeling to pray, reflecting on faith and God's call.
+        2.  *Meeting the Priest:* The priest is waiting; seating arrangements vary (across or behind); anonymity is okay; the priest treats everyone equally.
+        3.  *The Process:* Making the sign of the cross; stating time since last confession (standard phrasing); greeting the priest; sitting back and following the priest's lead.
+        4.  *The Conversation:* Casual, no pressure; priest knows what he's doing; sharing sins (serious to least); answering questions briefly; no need for exact details or motivation; priest is understanding and loving.
+        5.  *The Act of Contrition:* A specific prayer of repentance (provided in the text, including both general and Roman Catholic versions).
+        6.  *Absolution & Penance:* The priest gives absolution (clean slate); penance is an expression of regret/repentance.
+    *   **Tone of Source:** Informative, reassuring, instructional.
+
+3.  **Determine the Output Strategy:**
+    *   Adopt the persona of a Christian assistant.
+    *   Summarize the text accurately and concisely.
+    *   Ensure the summary captures the emotional and procedural aspects (reassurance, anonymity, structure of the sacrament).
+    *   Maintain the "fully
+[ INFO ] [1][P0] start: 2026-06-30T14:32:07.971119, end: 2026-06-30T14:32:22.098288
+[ INFO ] [2][P0] Input image nums: 0
+[ INFO ] [2][P0] Input video nums: 0
+[ WARNING ] Enabled input prompt permutations. It means that generated results may vary on different steps and the prompt grows by one leading token. This defeats the prefix cache so first-token latency reflects a cold prefill. If it is not expected, please specify --disable_prompt_permutation in your benchmarking command to disable this behavior
+[ INFO ] [2][P0] Text generation start: 2026-06-30T14:32:22.098356
+[ INFO ] [2][P0] Text generation end: 2026-06-30T14:32:36.220405
+[ INFO ] [2][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 0.78ms, Detokenization Time: 0.33ms,  Multimodal Embeddings Preparation Time: 51.95ms, Generation Time: 14.12s, Latency: 27.5821 ms/token
+[ INFO ] [2][P0] First token latency: 565.26 ms, other tokens latency: 26.53 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [2][P0] First infer latency: 511.28 ms, other infers latency: 26.52 ms/infer, inference count: 512
+[ INFO ] [2][P0] Result MD5:['7e013bc9ae68484526a4fc841f336625']
+[ INFO ] [2][P0] Generated: Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Role:** Christian (specifically acting as a Christian assistant, likely providing guidance based on Catholic theology given the content).
+    *   **Task:** Fully summarize the provided text.
+    *   **Input Text:** A passage describing the experience of going to confession in a Catholic church. It covers preparation, the encounter with the priest, the process of confession, the Act of Contrition, and the meaning of absolution and penance.
+    *   **Constraints:** The user prompt ends abruptly ("fully summ"). I need to complete the instruction based on the pattern provided in the prompt structure (which seems to be a few-shot prompt style where the user is asking the AI to act as a Christian and summarize the text).
+    *   **Safety & Policy:** The content is about religious practice (Catholic confession). It's not harmful, sensitive, or controversial in a way that violates safety policies. It's educational/informational.
+    *   **Tone:** Helpful, detailed, polite, and in character as a Christian.
+
+2.  **Analyze the Source Text:**
+    *   **Topic:** Catholic Confession (Sacrament of Penance).
+    *   **Key Sections:**
+        1.  *Preparation:* Taking a moment in the pew, feeling the energy of the church, kneeling/praying.
+        2.  *Meeting the Priest:* Waiting for the priest, seating arrangements (across or behind), anonymity options.
+        3.  *The Act of Contrition:* Making the sign of the cross, standard phrasing ("Bless me, Father..."), alternative greetings.
+        4.  *The Confession:* Casual conversation, no pressure, priest knows what he's doing, no need to disclose everything if not remembered.
+        5.  *The Priest's Role:* Understanding, offering guidance, emphasizing God's love.
+        6.  *Act of Contrition:* Specific prayers (General vs. Roman Catholic).
+        7.  *Absolution & Penance:* Receiving absolution (clean slate), penance as expression of regret.
+
+3.  **Drafting the Summary:**
+    *   *Tone:* Warm, encouraging, faithful to the "Christian" persona requested.
+    *   *Structure:* Logical flow matching the text's progression (Preparation -> Encounter -> The
+[ INFO ] [2][P0] start: 2026-06-30T14:32:22.098310, end: 2026-06-30T14:32:36.221113
+[ INFO ] [3][P0] Input image nums: 0
+[ INFO ] [3][P0] Input video nums: 0
+[ WARNING ] Enabled input prompt permutations. It means that generated results may vary on different steps and the prompt grows by one leading token. This defeats the prefix cache so first-token latency reflects a cold prefill. If it is not expected, please specify --disable_prompt_permutation in your benchmarking command to disable this behavior
+[ INFO ] [3][P0] Text generation start: 2026-06-30T14:32:36.221169
+[ INFO ] [3][P0] Text generation end: 2026-06-30T14:32:50.342481
+[ INFO ] [3][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 0.84ms, Detokenization Time: 0.33ms,  Multimodal Embeddings Preparation Time: 59.79ms, Generation Time: 14.12s, Latency: 27.5807 ms/token
+[ INFO ] [3][P0] First token latency: 572.04 ms, other tokens latency: 26.51 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [3][P0] First infer latency: 510.46 ms, other infers latency: 26.51 ms/infer, inference count: 512
+[ INFO ] [3][P0] Result MD5:['aa24ec5db3e206280613e857bb0effc8']
+[ INFO ] [3][P0] Generated: Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Role:** Christian (specifically acting as a Christian assistant, likely providing guidance based on Catholic theology given the text content).
+    *   **Task:** Fully summarize the provided text.
+    *   **Input Text:** A passage describing the experience of going to confession in a Catholic church. It covers preparation, the encounter with the priest, the process of confession, the Act of Contrition, and the meaning of absolution and penance.
+    *   **Constraints:** The user prompt ends abruptly ("fully summ"). I need to complete the sentence and provide a summary.
+    *   **Tone:** Helpful, detailed, polite, and in character as a Christian (warm, encouraging, informative).
+
+2.  **Analyze the Source Text:**
+    *   **Topic:** Catholic Confession (Sacrament of Penance).
+    *   **Key Sections:**
+        1.  *Preparation:* Taking a moment in the pew, feeling the energy of the church, kneeling to pray.
+        2.  *Meeting the Priest:* The priest is waiting; seating arrangements (across or behind); anonymity options; no pressure.
+        3.  *The Process:* Sign of the cross; stating time since last confession; casual conversation about feelings/sins; no need for excessive detail; priest's role is to help, not judge.
+        4.  *The Act of Contrition:* A specific prayer of repentance (both general and Roman Catholic versions provided).
+        5.  *Absolution:* The priest's action of forgiving sins; it gives a clean slate.
+        6.  *Penance:* The expression of regret/repentance following absolution.
+    *   **Tone of Source:** Informative, reassuring, instructional.
+
+3.  **Determine the Output Strategy:**
+    *   Since the prompt ends with "fully summ", I need to complete the instruction and provide the summary.
+    *   I need to adopt the persona of a Christian assistant (warm, supportive).
+    *   The summary should be structured logically, capturing the main points of the text without simply copying it verbatim.
+    *   I should maintain the encouraging tone of the original text (reassuring the reader that there is no pressure).
+
+4.  **Drafting the Summary:**
+    *   *
+[ INFO ] [3][P0] start: 2026-06-30T14:32:36.221130, end: 2026-06-30T14:32:50.343200
+[ INFO ] [4][P0] Input image nums: 0
+[ INFO ] [4][P0] Input video nums: 0
+[ WARNING ] Enabled input prompt permutations. It means that generated results may vary on different steps and the prompt grows by one leading token. This defeats the prefix cache so first-token latency reflects a cold prefill. If it is not expected, please specify --disable_prompt_permutation in your benchmarking command to disable this behavior
+[ INFO ] [4][P0] Text generation start: 2026-06-30T14:32:50.343257
+[ INFO ] [4][P0] Text generation end: 2026-06-30T14:33:04.466197
+[ INFO ] [4][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 0.88ms, Detokenization Time: 0.25ms,  Multimodal Embeddings Preparation Time: 50.98ms, Generation Time: 14.12s, Latency: 27.5838 ms/token
+[ INFO ] [4][P0] First token latency: 562.55 ms, other tokens latency: 26.53 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [4][P0] First infer latency: 509.82 ms, other infers latency: 26.53 ms/infer, inference count: 512
+[ INFO ] [4][P0] Result MD5:['afd972af2c8eba8c9e4d2775daf37dc9']
+[ INFO ] [4][P0] Generated: Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Role:** Christian (specifically acting as a Christian assistant, likely providing guidance based on Catholic theology given the content).
+    *   **Task:** Fully summarize the provided text.
+    *   **Input Text:** A passage describing the experience of going to confession in a Catholic church. It covers preparation, the encounter with the priest, the process of confession, the Act of Contrition, and the meaning of absolution and penance.
+    *   **Constraints:** The user prompt ends abruptly ("fully summ"). I need to complete the instruction based on the pattern provided in the prompt structure (`4 <s>[INST] ... <s>[INST] ...`). The prompt seems to be a few-shot example or a continuation of a system instruction. The core instruction is "You will act as a Christian, and fully summarize following text:".
+    *   **Safety & Policy:** The content is about religious practice (Confession/Reconciliation). It's not harmful, sensitive, or controversial in a way that violates safety policies. It's educational/informational.
+    *   **Tone:** Helpful, detailed, polite, acting as a Christian.
+
+2.  **Analyze the Source Text:**
+    *   **Topic:** Catholic Confession (Sacrament of Reconciliation).
+    *   **Key Sections:**
+        1.  *Preparation:* Taking a moment in the pew, feeling the energy of the church, kneeling to pray.
+        2.  *Meeting the Priest:* The priest is waiting; seating arrangements (across or behind); anonymity options; making the sign of the cross.
+        3.  *The Conversation:* Casual, no pressure, sharing how long since last confession, feelings, specific sins.
+        4.  *The Priest's Role:* Understanding, no judgment, offering guidance.
+        5.  *The Act of Contrition:* A specific prayer of sorrow and resolution (provided in the text).
+        6.  *Absolution:* The priest's action granting forgiveness ("clean slate").
+        7.  *Penance:* Expression of regret and penance.
+    *   **Tone of Source:** Informative, reassuring, instructional.
+
+3.  **Determine the Output Strategy:**
+    *   **Role Adherence:** I need to maintain the persona of a "Christian" (specific
+[ INFO ] [4][P0] start: 2026-06-30T14:32:50.343218, end: 2026-06-30T14:33:04.466997
+[ INFO ] [5][P0] Input image nums: 0
+[ INFO ] [5][P0] Input video nums: 0
+[ WARNING ] Enabled input prompt permutations. It means that generated results may vary on different steps and the prompt grows by one leading token. This defeats the prefix cache so first-token latency reflects a cold prefill. If it is not expected, please specify --disable_prompt_permutation in your benchmarking command to disable this behavior
+[ INFO ] [5][P0] Text generation start: 2026-06-30T14:33:04.467064
+[ INFO ] [5][P0] Text generation end: 2026-06-30T14:33:18.590566
+[ INFO ] [5][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 0.86ms, Detokenization Time: 0.31ms,  Multimodal Embeddings Preparation Time: 50.01ms, Generation Time: 14.12s, Latency: 27.5849 ms/token
+[ INFO ] [5][P0] First token latency: 560.14 ms, other tokens latency: 26.54 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [5][P0] First infer latency: 508.32 ms, other infers latency: 26.54 ms/infer, inference count: 512
+[ INFO ] [5][P0] Result MD5:['3f3eba9701845dcd64317fa93edda5ad']
+[ INFO ] [5][P0] Generated: Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Role:** Christian (specifically acting as a Christian assistant, likely providing guidance based on Catholic theology given the content).
+    *   **Task:** Fully summarize the provided text.
+    *   **Input Text:** A passage describing the experience of going to confession in a Catholic church. It covers preparation, the encounter with the priest, the process of confession, the Act of Contrition, and the meaning of absolution and penance.
+    *   **Constraints:** The user prompt ends abruptly ("fully summ"). I need to complete the sentence and provide a summary.
+    *   **Tone:** Helpful, detailed, polite, and in character as a Christian (warm, encouraging, informative).
+
+2.  **Analyze the Source Text:**
+    *   **Topic:** Catholic Confession (Sacrament of Penance).
+    *   **Key Sections:**
+        1.  *Preparation:* Taking a moment in the pew, feeling the energy of the church, kneeling to pray.
+        2.  *Meeting the Priest:* The priest is waiting; seating arrangements (across or behind); anonymity options; making the sign of the cross.
+        3.  *The Confession:* Casual conversation, no pressure, sharing sins (serious to least), no need for exact details or timeframe, priest's role is to help and offer guidance.
+        4.  *Act of Contrition:* A specific prayer of repentance (general version and Roman Catholic version provided).
+        5.  *Absolution & Penance:* The priest says "I absolve you"; the penitent receives a clean slate; penance is an expression of regret and repentance.
+    *   **Tone of Source:** Informative, reassuring, instructional.
+
+3.  **Determine the Output Strategy:**
+    *   Since the prompt ends with "fully summ", I need to complete the instruction and provide the summary.
+    *   I need to adopt the persona of a Christian assistant (as per the system instruction "You will act as a Christian").
+    *   The summary should be structured, clear, and capture the essence of the text without losing the encouraging tone.
+    *   I should avoid simply copying the text but rather synthesize it into a coherent summary.
+
+4.  **Drafting the Summary:**
+    *   *Introduction
+[ INFO ] [5][P0] start: 2026-06-30T14:33:04.467018, end: 2026-06-30T14:33:18.591281
+[ INFO ] [6][P0] Input image nums: 0
+[ INFO ] [6][P0] Input video nums: 0
+[ WARNING ] Enabled input prompt permutations. It means that generated results may vary on different steps and the prompt grows by one leading token. This defeats the prefix cache so first-token latency reflects a cold prefill. If it is not expected, please specify --disable_prompt_permutation in your benchmarking command to disable this behavior
+[ INFO ] [6][P0] Text generation start: 2026-06-30T14:33:18.591336
+[ INFO ] [6][P0] Text generation end: 2026-06-30T14:33:32.714554
+[ INFO ] [6][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 0.86ms, Detokenization Time: 0.37ms,  Multimodal Embeddings Preparation Time: 52.38ms, Generation Time: 14.12s, Latency: 27.5844 ms/token
+[ INFO ] [6][P0] First token latency: 565.56 ms, other tokens latency: 26.53 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [6][P0] First infer latency: 511.40 ms, other infers latency: 26.53 ms/infer, inference count: 512
+[ INFO ] [6][P0] Result MD5:['8def5675a1dde1c10d5311d153b8d8c4']
+[ INFO ] [6][P0] Generated: Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Role:** Christian (specifically acting as a Christian assistant, likely providing guidance based on Catholic theology given the content).
+    *   **Task:** Fully summarize the provided text.
+    *   **Input Text:** A passage describing the experience of going to confession in a Catholic church. It covers preparation, the encounter with the priest, the process of confession, the Act of Contrition, and the meaning of absolution and penance.
+    *   **Constraints:** The user prompt ends abruptly ("fully summ"). I need to complete the sentence and provide a summary.
+    *   **Tone:** Helpful, detailed, polite, and in character as a Christian (warm, encouraging, informative).
+
+2.  **Analyze the Source Text:**
+    *   **Topic:** Catholic Confession (Sacrament of Penance).
+    *   **Key Sections:**
+        1.  *Preparation:* Taking a moment in the pew, feeling the energy of the church, kneeling to pray, reflecting on faith and God's call.
+        2.  *Meeting the Priest:* The priest is waiting (lonesome or someone else leaves). Seating options (across or behind). Anonymity is okay.
+        3.  *The Process:* Sign of the cross, greeting.
+        4.  *Dialogue:* Priest asks about time since last confession, current feelings, specific sins. Casual conversation, no pressure.
+        5.  *Attitude:* No pressure, priest knows everything, no wrong way to go.
+        6.  *Act of Contrition:* Specific prayers (General vs. Roman Catholic version).
+        7.  *Resolution:* Absolution (clean slate), Penance (expression of regret).
+    *   **Tone of Source:** Informative, instructional, reassuring.
+
+3.  **Determine the Output Strategy:**
+    *   Adopt the persona of a Christian assistant.
+    *   Summarize the text accurately but concisely.
+    *   Maintain the encouraging tone of the original text (reassuring, non-intimidating).
+    *   Structure the summary logically (Preparation -> Encounter -> Process -> Resolution).
+    *   Ensure the summary captures the theological nuances (e.g., distinction between general and Roman Catholic Act of Contrition).
+
+4.  **
+[ INFO ] [6][P0] start: 2026-06-30T14:33:18.591298, end: 2026-06-30T14:33:32.715270
+[ INFO ] [7][P0] Input image nums: 0
+[ INFO ] [7][P0] Input video nums: 0
+[ WARNING ] Enabled input prompt permutations. It means that generated results may vary on different steps and the prompt grows by one leading token. This defeats the prefix cache so first-token latency reflects a cold prefill. If it is not expected, please specify --disable_prompt_permutation in your benchmarking command to disable this behavior
+[ INFO ] [7][P0] Text generation start: 2026-06-30T14:33:32.715328
+[ INFO ] [7][P0] Text generation end: 2026-06-30T14:33:46.832611
+[ INFO ] [7][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 0.98ms, Detokenization Time: 0.24ms,  Multimodal Embeddings Preparation Time: 50.54ms, Generation Time: 14.12s, Latency: 27.5728 ms/token
+[ INFO ] [7][P0] First token latency: 560.57 ms, other tokens latency: 26.53 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [7][P0] First infer latency: 508.33 ms, other infers latency: 26.52 ms/infer, inference count: 512
+[ INFO ] [7][P0] Result MD5:['3dd5e659b746ef1a726bb36abaddf66d']
+[ INFO ] [7][P0] Generated: Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Role:** Christian (specifically acting as a Christian assistant, likely providing guidance based on Catholic theology given the content).
+    *   **Task:** Fully summarize the provided text.
+    *   **Input Text:** A passage describing the experience of going to confession in a Catholic church. It covers preparation, the encounter with the priest, the process of confession, the Act of Contrition, and the meaning of absolution and penance.
+    *   **Constraints:** The user prompt ends abruptly ("fully summ"). I need to complete the instruction based on the pattern provided in the prompt structure (`[INST] <<SYS>> ... <</SYS>>`). The user wants me to act as a Christian and summarize the text.
+    *   **Safety & Policy:** The content is about religious practice (Catholic confession). It's not harmful, sensitive, or controversial in a way that violates safety policies. It's educational/informational.
+    *   **Tone:** Helpful, detailed, polite, and in character as a Christian.
+
+2.  **Analyze the Source Text:**
+    *   **Topic:** Catholic Confession (Sacrament of Penance).
+    *   **Key Sections:**
+        1.  *Preparation:* Taking a moment in the pew, feeling the energy of the church, kneeling to pray.
+        2.  *Meeting the Priest:* The priest is waiting; seating arrangements (across or behind); anonymity options; making the sign of the cross.
+        3.  *The Confession:* Casual conversation, no pressure, sharing sins (serious to least), no need for exact details or timeframe, priest's role is to help and offer guidance.
+        4.  *Act of Contrition:* A specific prayer of repentance (general version and Roman Catholic version provided).
+        5.  *Absolution & Penance:* The priest says "I absolve you"; the penitent receives absolution (clean slate); penance is an expression of regret/repentance.
+    *   **Tone of Source:** Informative, reassuring, instructional.
+
+3.  **Determine the Output Strategy:**
+    *   I need to adopt the persona of a Christian (as requested in the system instruction and the prompt).
+    *   I need to summarize the text accurately and concisely.
+   
+[ INFO ] [7][P0] start: 2026-06-30T14:33:32.715286, end: 2026-06-30T14:33:46.833490
+[ INFO ] [8][P0] Input image nums: 0
+[ INFO ] [8][P0] Input video nums: 0
+[ WARNING ] Enabled input prompt permutations. It means that generated results may vary on different steps and the prompt grows by one leading token. This defeats the prefix cache so first-token latency reflects a cold prefill. If it is not expected, please specify --disable_prompt_permutation in your benchmarking command to disable this behavior
+[ INFO ] [8][P0] Text generation start: 2026-06-30T14:33:46.833554
+[ INFO ] [8][P0] Text generation end: 2026-06-30T14:34:00.948820
+[ INFO ] [8][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 0.70ms, Detokenization Time: 0.25ms,  Multimodal Embeddings Preparation Time: 51.34ms, Generation Time: 14.12s, Latency: 27.5688 ms/token
+[ INFO ] [8][P0] First token latency: 562.48 ms, other tokens latency: 26.52 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [8][P0] First infer latency: 509.07 ms, other infers latency: 26.52 ms/infer, inference count: 512
+[ INFO ] [8][P0] Result MD5:['8b5ed4be4fca3ad5bfd5ccaba7c2b11a']
+[ INFO ] [8][P0] Generated: Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Role:** Christian (specifically acting as a Christian assistant, likely providing guidance based on Catholic theology given the text content).
+    *   **Task:** Fully summarize the provided text.
+    *   **Input Text:** A passage describing the experience of going to confession in a Catholic church. It covers preparation, the encounter with the priest, the process of confession, the Act of Contrition, and the meaning of absolution and penance.
+    *   **Constraints:** The user prompt ends abruptly ("fully summ"). I need to complete the sentence and provide a summary.
+    *   **Tone:** Helpful, detailed, polite, and in character as a Christian (warm, encouraging, informative).
+
+2.  **Analyze the Source Text:**
+    *   **Topic:** Catholic Confession (Sacrament of Penance).
+    *   **Key Sections:**
+        1.  *Preparation:* Taking a moment in the pew, feeling the energy of the church, kneeling to pray, reflecting on faith and God's call.
+        2.  *Meeting the Priest:* The priest is waiting (lonesome or someone else leaves). Seating options (across or behind). Anonymity is okay.
+        3.  *The Process:* Making the sign of the cross. Standard phrasing ("Bless me, Father..."). Alternative greeting.
+        4.  *The Conversation:* Casual, no pressure. Priest asks about time since last confession, feelings, and specific sins.
+        5.  *The Act of Contrition:* A specific prayer of repentance. Includes a standard version and a Roman Catholic version.
+        6.  *Absolution & Penance:* The priest gives absolution (clean slate). Penance is the expression of regret/repentance.
+    *   **Tone of Source:** Informative, reassuring, instructional.
+
+3.  **Determine the Output Strategy:**
+    *   Adopt the persona of a Christian assistant.
+    *   Summarize the text accurately and concisely.
+    *   Ensure the summary captures the key steps and the emotional/spiritual intent of the text.
+    *   Maintain the "fully summarize" instruction from the prompt (which was cut off).
+    *   Structure the summary logically (Preparation -> Encounter -> Process -> Resolution
+[ INFO ] [8][P0] start: 2026-06-30T14:33:46.833510, end: 2026-06-30T14:34:00.949683
+[ INFO ] [9][P0] Input image nums: 0
+[ INFO ] [9][P0] Input video nums: 0
+[ WARNING ] Enabled input prompt permutations. It means that generated results may vary on different steps and the prompt grows by one leading token. This defeats the prefix cache so first-token latency reflects a cold prefill. If it is not expected, please specify --disable_prompt_permutation in your benchmarking command to disable this behavior
+[ INFO ] [9][P0] Text generation start: 2026-06-30T14:34:00.949750
+[ INFO ] [9][P0] Text generation end: 2026-06-30T14:34:15.082952
+[ INFO ] [9][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 0.88ms, Detokenization Time: 0.39ms,  Multimodal Embeddings Preparation Time: 50.50ms, Generation Time: 14.13s, Latency: 27.6039 ms/token
+[ INFO ] [9][P0] First token latency: 560.20 ms, other tokens latency: 26.56 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [9][P0] First infer latency: 507.82 ms, other infers latency: 26.56 ms/infer, inference count: 512
+[ INFO ] [9][P0] Result MD5:['1b6cfdd8ae86e4c01adabdd116063bc1']
+[ INFO ] [9][P0] Generated: Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Role:** Christian (specifically acting as a Christian assistant, likely providing guidance based on Catholic theology given the text content).
+    *   **Task:** Fully summarize the provided text.
+    *   **Input Text:** A passage describing the experience of going to confession in a Catholic church. It covers preparation, interaction with the priest, the process of confession, and the act of absolution.
+    *   **Constraints:** The user prompt ends abruptly ("fully summ"). I need to complete the sentence and provide a summary.
+    *   **Tone:** Helpful, detailed, polite, and in character as a Christian (warm, encouraging, pastoral).
+
+2.  **Analyze the Source Text:**
+    *   **Topic:** Confession (Sacrament of Penance) in a Catholic context.
+    *   **Key Sections:**
+        1.  *Preparation:* Taking a moment alone in the pew, feeling the energy of the church, kneeling to pray.
+        2.  *Meeting the Priest:* The priest is waiting; seating arrangements (across or behind); anonymity options; making the sign of the cross.
+        3.  *The Conversation:* Casual, no pressure, sharing how long it's been since the last confession, current feelings, specific sins.
+        4.  *The Priest's Role:* Understanding, no judgment, offering guidance, emphasizing God's love.
+        5.  *The Act of Contrition:* A specific prayer of repentance (both general and Roman Catholic versions provided).
+        6.  *Absolution:* The priest's act of forgiving sins, giving a clean slate.
+        7.  *Penance:* Expressing regret and repentance.
+        8.  *Reassurance:* No wrong way to go, no need to worry about being judged.
+
+3.  **Drafting the Summary:**
+    *   *Goal:* Summarize the text accurately while maintaining the persona of a Christian assistant.
+    *   *Structure:*
+        *   Introduction: Setting the scene (preparation).
+        *   Body: The interaction with the priest (casual, no pressure).
+        *   Body: The Act of Contrition (the prayer).
+        *   Conclusion: The effect of Absolution and Penance (healing, clean slate).
+
+[ INFO ] [9][P0] start: 2026-06-30T14:34:00.949704, end: 2026-06-30T14:34:15.083684
+[ INFO ] [10][P0] Input image nums: 0
+[ INFO ] [10][P0] Input video nums: 0
+[ WARNING ] Enabled input prompt permutations. It means that generated results may vary on different steps and the prompt grows by one leading token. This defeats the prefix cache so first-token latency reflects a cold prefill. If it is not expected, please specify --disable_prompt_permutation in your benchmarking command to disable this behavior
+[ INFO ] [10][P0] Text generation start: 2026-06-30T14:34:15.083742
+[ INFO ] [10][P0] Text generation end: 2026-06-30T14:34:29.218783
+[ INFO ] [10][P0] Input token size: 1001, Output size: 512, Infer count: 512, Tokenization Time: 1.10ms, Detokenization Time: 0.34ms,  Multimodal Embeddings Preparation Time: 50.78ms, Generation Time: 14.14s, Latency: 27.6075 ms/token
+[ INFO ] [10][P0] First token latency: 564.53 ms, other tokens latency: 26.55 ms/token, len of input tokens: 1001 * 1
+[ INFO ] [10][P0] First infer latency: 512.13 ms, other infers latency: 26.55 ms/infer, inference count: 512
+[ INFO ] [10][P0] Result MD5:['5c19050c5804acc02e8d7cc6496557d9']
+[ INFO ] [10][P0] Generated: Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Role:** Christian (specifically acting as a Christian assistant, likely providing guidance based on Catholic theology given the content).
+    *   **Task:** Fully summarize the provided text.
+    *   **Input Text:** A passage describing the experience of going to confession in a Catholic church. It covers preparation, the encounter with the priest, the process of confession, the Act of Contrition, and the meaning of absolution and penance.
+    *   **Constraints:** The user prompt ends abruptly ("fully summ"). I need to complete the sentence and provide the summary.
+    *   **Tone:** Helpful, detailed, polite, and in character as a Christian (warm, encouraging, informative).
+
+2.  **Analyze the Source Text:**
+    *   **Topic:** Catholic Confession (Sacrament of Penance).
+    *   **Key Sections:**
+        1.  *Preparation:* Taking a moment in the pew, feeling the energy of the church, kneeling to pray, reflecting on faith and God's call.
+        2.  *Meeting the Priest:* The priest is waiting (lonesome or someone else leaves). Seating options (across or behind). Anonymity is okay.
+        3.  *The Process:* Making the sign of the cross. Standard phrasing ("Bless me, Father..."). Alternative greeting.
+        4.  *The Conversation:* Casual, no pressure. Priest asks about time since last confession, feelings, and specific sins.
+        5.  *The Act of Contrition:* A specific prayer of repentance (Latin/English versions provided).
+        6.  *Absolution:* The priest forgives sins.
+        7.  *Penance:* Expression of regret/repentance to show true sorrow.
+        8.  *Reassurance:* No wrong way to go, zero pressure, priest is understanding, no need to detail everything.
+
+3.  **Determine the Output Structure:**
+    *   Since the prompt ends with "fully summ", I should complete the sentence "fully summarize" and then provide the summary.
+    *   The persona is "A Christian".
+    *   The summary should be faithful to the text provided while maintaining the persona.
+
+4.  **Drafting the Summary:**
+    *   *Introduction:* Ack
+[ INFO ] [10][P0] start: 2026-06-30T14:34:15.083701, end: 2026-06-30T14:34:29.219504
+[ INFO ] <<< Warm-up iteration is excluded. >>>
+[ INFO ] [Total] Iterations: 10
+[ INFO ] [Average] P[0] Input token size: 1000, 1st token latency: 563.72 ms, 2nd token latency: 26.53 ms/token, 2nd tokens throughput: 37.69 tokens/s

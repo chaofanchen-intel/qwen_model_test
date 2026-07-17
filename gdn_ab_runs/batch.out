@@ -1,0 +1,17 @@
+[15:02:56] base: cooled 54C->62C in 120s; env=none
+  first_token_infer=197.37±0.48  ttft=248.72  md5[:3]=dd753679,dd753679,dd753679
+[15:07:03] vblock2: cooled 74C->52C in 240s; env=OV_GDN_VBLOCK=2
+  first_token_infer=217.77±0.20  ttft=269.23  md5[:3]=dd753679,dd753679,dd753679
+[15:09:09] vblock8: cooled 58C->72C in 120s; env=OV_GDN_VBLOCK=8
+  first_token_infer=224.72±0.47  ttft=276.42  md5[:3]=dd753679,dd753679,dd753679
+[15:13:14] sg32: cooled 57C->73C in 240s; env=OV_GDN_SG=32
+  first_token_infer=246.77±8.88  ttft=297.81  md5[:3]=dd753679,dd753679,dd753679
+[15:17:25] base_recheck: cooled 70C->53C in 240s; env=none
+  first_token_infer=197.86±0.36  ttft=248.61  md5[:3]=dd753679,dd753679,dd753679
+=== BATCH DONE ===
+label         fti_ms  std   ttft_ms  md5[:3]
+base          197.37  0.48  248.72   dd753679,dd753679,dd753679
+vblock2       217.77  0.20  269.23   dd753679,dd753679,dd753679
+vblock8       224.72  0.47  276.42   dd753679,dd753679,dd753679
+sg32          246.77  8.88  297.81   dd753679,dd753679,dd753679
+base_recheck  197.86  0.36  248.61   dd753679,dd753679,dd753679

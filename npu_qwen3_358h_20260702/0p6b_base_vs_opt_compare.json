@@ -1,0 +1,42 @@
+{
+  "base_md5": "c8a27c900e6d63b0d8c2257fc1b08851",
+  "opt_md5": "75355c2b11e6d26a291fd6b29c444f67",
+  "base_tokens": 64,
+  "opt_tokens": 64,
+  "same_positions": 4,
+  "aligned_positions": 64,
+  "first_diff_index": 4,
+  "sequence_ratio": 0.984375,
+  "opcodes": [
+    [
+      "equal",
+      0,
+      4,
+      0,
+      4
+    ],
+    [
+      "insert",
+      4,
+      4,
+      4,
+      5
+    ],
+    [
+      "equal",
+      4,
+      63,
+      5,
+      64
+    ],
+    [
+      "delete",
+      63,
+      64,
+      64,
+      64
+    ]
+  ],
+  "base_text_prefix": " pew by yourself before. You have this beautiful church probably almost all to yourself. Can you feel its energy resonating through you? Can you feel the majesty of the Lord's kingdom and how you're a part of it? Take a moment to kneel and pray with your head down and hands clasped together.",
+  "opt_text_prefix": " pew by yourself before you. You have this beautiful church probably almost all to yourself. Can you feel its energy resonating through you? Can you feel the majesty of the Lord's kingdom and how you're a part of it? Take a moment to kneel and pray with your head down and hands clasped together"
+}

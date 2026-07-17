@@ -1,0 +1,22 @@
+iteration,model,framework,device,pretrain_time(s),initial_sys_mem(MiB),initial_rss_mem(MiB),compile_max_rss_mem(MiB),compile_max_sys_mem(MiB),compile_max_increase_rss_mem(MiB),compile_max_increase_sys_mem(MiB),input_size,infer_count,generation_time(s),output_size,latency(ms),2nd_tokens_throughput(tokens/s),total_throughput(tokens/s),1st_latency(ms),2nd_avg_latency(ms),precision,max_rss_mem(MiB),max_sys_mem(MiB),max_increase_rss_mem(MiB),max_increase_sys_mem(MiB),prompt_idx,1st_infer_latency(ms),2nd_infer_avg_latency(ms),num_beams,batch_size,tokenization_time,detokenization_time,resource_cpu_avg_util(%),resource_gpu_avg_util(%),resource_gpu_memory_avg_util(%),resource_npu_avg_util(%),resource_avg_rss_mem(MiB),resource_peak_rss_mem(MiB),resource_avg_sys_mem(MiB),resource_peak_sys_mem(MiB),resource_memory_samples,result_md5,start,end
+0,Qwen3-0.6B-INT4,ov,NPU,12.4598,,,,,,,1000,512,5.35702,512,10.46294,102.57568,95.57545,375.02994,9.7489,,,,,,0,374.18,9.39909,1,1,2.43762,1.05051,,,,,,,,,0,['b6cb5167c4428eabe6cd2c09b5193a1d'],2026-07-02T13:09:37.982644,2026-07-02T13:09:43.345453
+1,Qwen3-0.6B-INT4,ov,NPU,,,,,,,,1000,512,4.99751,512,9.76076,105.49865,102.45102,153.5032,9.47879,,,,,,0,152.427,9.15716,1,1,1.81237,0.51168,,,,,,,,,0,['b6cb5167c4428eabe6cd2c09b5193a1d'],2026-07-02T13:09:43.345537,2026-07-02T13:09:48.347452
+avg,Qwen3-0.6B-INT4,ov,NPU,,,,,,,,1000.0,512.0,4.99751,512.0,9.76076,105.49865,102.45102,153.5032,9.47879,,,,,,0,152.427,9.15716,1,1,1.81237,0.51168,,,,,,,,,0,['b6cb5167c4428eabe6cd2c09b5193a1d'],,
+mini,Qwen3-0.6B-INT4,ov,NPU,,,,,,,,1000,512,4.99751,512,9.76076,105.49865,102.45102,153.5032,9.47879,,,,,,0,152.427,9.15716,1,1,1.81237,0.51168,,,,,,,,,0,['b6cb5167c4428eabe6cd2c09b5193a1d'],,
+median,Qwen3-0.6B-INT4,ov,NPU,,,,,,,,1000.0,512.0,4.99751,512.0,9.76076,105.49865,102.45102,153.5032,9.47879,,,,,,0,152.427,9.15716,1,1,1.81237,0.51168,,,,,,,,,0,['b6cb5167c4428eabe6cd2c09b5193a1d'],,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+tokenization_time: Tokenizer encode time,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+detokenization_time: Tokenizer decode time,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2nd_tokens_throughput: batch_size * 1000 / 2nd_avg_latency(ms),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+total_throughput: output_size / generation_time(s),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+pretrain_time: Total time of load model and compile model,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+generation_time: Time for one interaction. (e.g. The duration of  answering one question or generating one picture),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+iteration=0: warm-up; iteration=avg: average (exclude warm-up);iteration=mini: minimum value (exclude warm-up);iteration=median: median value (exclude warm-up);,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+max_rss_mem/max_sys_mem: max rss/system memory consumption during iteration;,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+max_increase_rss_mem/max_increase_sys_mem: max increase of rss/system memory during iteration;,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+initial_rss_mem/initial_sys_mem: rss/system memory state at start;,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+compile_max_rss_mem/compile_max_sys_mem: max rss/system memory consumption on compilation phase;,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+compile_max_increase_rss_mem/compile_max_increase_sys_mem: max increase of rss/system memory on compilation phase;,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+resource_* fields: compact whole-run CPU/GPU/NPU utilization and RSS/System memory summary; GPU util is blank if xpu-smi does not expose compute utilization.,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+resource_cpu_cpuN_avg_util: average per-core CPU utilization over the benchmark run,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+resource_gpu_memory_avg_util: average GPU memory utilization reported by xpu-smi,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

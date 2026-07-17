@@ -1,0 +1,12 @@
+[22:21:19] ============ RERUN v2 START (TARGET=60C CAP=420s, permute ON) ============
+[22:21:19] ---- GPU 0.8B-INT4 ----
+[22:21:19]   plugin -> pristine (e989ab40506e)
+[22:21:29]   cooldown 61C -> 60C in 10s (target 60C)
+[22:21:29] GPU size=0.8B-INT4 label=pristine start_pkg=60C
+[22:22:13]   done end_pkg=71C  TTFT=206.26 std=2.05 p50=208.39
+[22:22:14]   plugin -> opt3 (80490f6764b6)
+[22:24:14]   cooldown 69C -> 60C in 120s (target 60C)
+[22:24:14] GPU size=0.8B-INT4 label=opt3 start_pkg=60C
+[22:24:58]   done end_pkg=69C  TTFT=202.85 std=1.39 p50=203.93
+[22:24:58]   plugin -> opt3_opt5 (d47dfb60a747)
+[22:25:50] RESTORED plugin -> de95bee0c6c6 (want de95bee0c6c6)

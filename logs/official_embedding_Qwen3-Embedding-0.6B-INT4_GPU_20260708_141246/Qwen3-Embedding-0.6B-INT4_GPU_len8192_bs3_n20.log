@@ -1,0 +1,79 @@
+Multiple distributions found for package optimum. Picked distribution: optimum-intel
+[ INFO ] ==SUCCESS FOUND==: use_case: text_embed, model_type: qwen3, model_Name: Qwen3-Embedding-0.6B-INT4
+[ INFO ] OV Config={'CACHE_DIR': ''}
+[ INFO ] Model path=/home/chaofan/model_benchmark/benchmark/models/Qwen3-Embedding-0.6B-INT4, openvino runtime version: 2026.2.1-21919-ede283a88e3-releases/2026/2, genai version: 2026.2.1.0-3123-7dea0459b2a
+[ INFO ] Selected OpenVINO GenAI for benchmarking
+[ INFO ] Pipeline initialization time: 2.97s
+[ INFO ] Read prompts from /home/chaofan/model_benchmark/benchmark/tests/prompts/embedding/texts_len_1k_2k_4k_6k_8k.jsonl
+[ INFO ] [warm-up][P4] Input text: embedding token performance retrieval vector semantic OpenVINO benchmark embedding token performance retrieval vector semantic OpenVINO benchmark embedding token performance retrieval vector semantic OpenVINO benchmark embedding token performance retrieval vector semantic OpenVINO benchmark embedding token performance retrieval vector semantic OpenVINO benchmark embedding token performance retrieval vector semantic OpenVINO benchmark embedding token performance retrieval vector semantic OpenVINO benchmark embedding token performance retrieval vector semantic OpenVINO benchmark embedding token performance retrieval vector semantic OpenVINO benchmark embedding token performance retrieval vector semantic OpenVINO benchmark embedding token performance retrieval vector semantic OpenVINO benchmark embedding token performance retrieval vector semantic OpenVINO benchmark embedding token performance retrieval vector semantic OpenVINO benchmark embedding token performance retrieval vector sema ... [truncated to 1024]
+[ INFO ] [warm-up] Batch_size=3, all input token size after padding: 8192 * 3, 
+[ INFO ] [warm-up][P4] Input token size: 24576, Infer count: 1, Tokenization Time: 48.97ms, Generation Time: 12.55s, Latency: 12.5507 ms/3prompts
+[ INFO ] [warm-up][P4] First iteration latency: 12550.73 ms, other iterations latency: NA, len of input tokens: 24576 * 3
+[ INFO ] [warm-up][P4] First infer latency: 12550.73 ms, other infers latency: NA, inference count: 1
+[ INFO ] [warm-up][P4] start: 2026-07-08T14:25:24.412170, end: 2026-07-08T14:25:37.013432
+[ INFO ] [1] Batch_size=3, all input token size after padding: 8192 * 3, 
+[ INFO ] [1][P4] Input token size: 24576, Infer count: 1, Tokenization Time: 50.13ms, Generation Time: 12.85s, Latency: 12.8540 ms/3prompts
+[ INFO ] [1][P4] First iteration latency: 12853.96 ms, other iterations latency: NA, len of input tokens: 24576 * 3
+[ INFO ] [1][P4] First infer latency: 12853.96 ms, other infers latency: NA, inference count: 1
+[ INFO ] [1][P4] start: 2026-07-08T14:25:37.013477, end: 2026-07-08T14:25:49.919275
+[ INFO ] [2] Batch_size=3, all input token size after padding: 8192 * 3, 
+[ INFO ] [2][P4] Input token size: 24576, Infer count: 1, Tokenization Time: 37.17ms, Generation Time: 12.92s, Latency: 12.9220 ms/3prompts
+[ INFO ] [2][P4] First iteration latency: 12921.98 ms, other iterations latency: NA, len of input tokens: 24576 * 3
+[ INFO ] [2][P4] First infer latency: 12921.98 ms, other infers latency: NA, inference count: 1
+[ INFO ] [2][P4] start: 2026-07-08T14:25:49.919320, end: 2026-07-08T14:26:02.885221
+[ INFO ] [3] Batch_size=3, all input token size after padding: 8192 * 3, 
+[ INFO ] [3][P4] Input token size: 24576, Infer count: 1, Tokenization Time: 44.52ms, Generation Time: 13.08s, Latency: 13.0813 ms/3prompts
+[ INFO ] [3][P4] First iteration latency: 13081.30 ms, other iterations latency: NA, len of input tokens: 24576 * 3
+[ INFO ] [3][P4] First infer latency: 13081.30 ms, other infers latency: NA, inference count: 1
+[ INFO ] [3][P4] start: 2026-07-08T14:26:02.885352, end: 2026-07-08T14:26:16.017239
+[ INFO ] [4] Batch_size=3, all input token size after padding: 8192 * 3, 
+[ INFO ] [4][P4] Input token size: 24576, Infer count: 1, Tokenization Time: 46.93ms, Generation Time: 13.27s, Latency: 13.2711 ms/3prompts
+[ INFO ] [4][P4] First iteration latency: 13271.06 ms, other iterations latency: NA, len of input tokens: 24576 * 3
+[ INFO ] [4][P4] First infer latency: 13271.06 ms, other infers latency: NA, inference count: 1
+[ INFO ] [4][P4] start: 2026-07-08T14:26:16.017359, end: 2026-07-08T14:26:29.342008
+[ INFO ] [5] Batch_size=3, all input token size after padding: 8192 * 3, 
+[ INFO ] [5][P4] Input token size: 24576, Infer count: 1, Tokenization Time: 40.82ms, Generation Time: 13.25s, Latency: 13.2493 ms/3prompts
+[ INFO ] [5][P4] First iteration latency: 13249.27 ms, other iterations latency: NA, len of input tokens: 24576 * 3
+[ INFO ] [5][P4] First infer latency: 13249.27 ms, other infers latency: NA, inference count: 1
+[ INFO ] [5][P4] start: 2026-07-08T14:26:29.342127, end: 2026-07-08T14:26:42.638906
+[ INFO ] [6] Batch_size=3, all input token size after padding: 8192 * 3, 
+[ INFO ] [6][P4] Input token size: 24576, Infer count: 1, Tokenization Time: 52.68ms, Generation Time: 13.32s, Latency: 13.3177 ms/3prompts
+[ INFO ] [6][P4] First iteration latency: 13317.68 ms, other iterations latency: NA, len of input tokens: 24576 * 3
+[ INFO ] [6][P4] First infer latency: 13317.68 ms, other infers latency: NA, inference count: 1
+[ INFO ] [6][P4] start: 2026-07-08T14:26:42.639050, end: 2026-07-08T14:26:56.011759
+[ INFO ] [7] Batch_size=3, all input token size after padding: 8192 * 3, 
+[ INFO ] [7][P4] Input token size: 24576, Infer count: 1, Tokenization Time: 49.06ms, Generation Time: 13.27s, Latency: 13.2666 ms/3prompts
+[ INFO ] [7][P4] First iteration latency: 13266.55 ms, other iterations latency: NA, len of input tokens: 24576 * 3
+[ INFO ] [7][P4] First infer latency: 13266.55 ms, other infers latency: NA, inference count: 1
+[ INFO ] [7][P4] start: 2026-07-08T14:26:56.011819, end: 2026-07-08T14:27:09.329108
+[ INFO ] [8] Batch_size=3, all input token size after padding: 8192 * 3, 
+[ INFO ] [8][P4] Input token size: 24576, Infer count: 1, Tokenization Time: 46.76ms, Generation Time: 13.36s, Latency: 13.3605 ms/3prompts
+[ INFO ] [8][P4] First iteration latency: 13360.51 ms, other iterations latency: NA, len of input tokens: 24576 * 3
+[ INFO ] [8][P4] First infer latency: 13360.51 ms, other infers latency: NA, inference count: 1
+[ INFO ] [8][P4] start: 2026-07-08T14:27:09.329155, end: 2026-07-08T14:27:22.738061
+[ INFO ] [9] Batch_size=3, all input token size after padding: 8192 * 3, 
+[ INFO ] [9][P4] Input token size: 24576, Infer count: 1, Tokenization Time: 49.72ms, Generation Time: 13.41s, Latency: 13.4056 ms/3prompts
+[ INFO ] [9][P4] First iteration latency: 13405.60 ms, other iterations latency: NA, len of input tokens: 24576 * 3
+[ INFO ] [9][P4] First infer latency: 13405.60 ms, other infers latency: NA, inference count: 1
+[ INFO ] [9][P4] start: 2026-07-08T14:27:22.738108, end: 2026-07-08T14:27:36.199700
+[ INFO ] [10] Batch_size=3, all input token size after padding: 8192 * 3, 
+[ ERROR ] An exception occurred
+[ INFO ] Traceback (most recent call last):
+  File "/home/chaofan/model_benchmark/benchmark/openvino.genai/tools/llm_bench/benchmark.py", line 577, in main
+    iter_data_list, pretrain_time, iter_timestamp = CASE_TO_BENCH[model_args["use_case"].task](
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chaofan/model_benchmark/benchmark/openvino.genai/tools/llm_bench/task/text_embeddings.py", line 189, in run_text_embddings_benchmark
+    text_emb_fn(input_text, num, model, tokenizer, args, iter_data_list, p_idx, bench_hook, proc_id, mem_consumption)
+  File "/home/chaofan/model_benchmark/benchmark/openvino.genai/tools/llm_bench/task/text_embeddings.py", line 120, in run_text_embeddings_genai
+    model.embed_documents(input_text_list)
+RuntimeError: Exception from src/inference/src/cpp/infer_request.cpp:246:
+Exception from src/plugins/intel_gpu/src/runtime/ocl/ocl_stream.cpp:385:
+[GPU] clFinish, error code: -5 CL_OUT_OF_RESOURCES
+
+
+
+terminate called after throwing an instance of 'ov::Exception'
+  what():  Exception from src/plugins/intel_gpu/src/runtime/ocl/ocl_stream.cpp:385:
+[GPU] clFinish, error code: -5 CL_OUT_OF_RESOURCES
+
+[WARN] command exited non-zero (code=134); continuing.

@@ -1,0 +1,91 @@
+Multiple distributions found for package optimum. Picked distribution: optimum-intel
+[ INFO ] ==SUCCESS FOUND==: use_case: text_gen, model_type: qwen, model_Name: Qwen3-4B-INT4
+[ INFO ] OV Config={'MAX_PROMPT_LEN': 1024, 'MIN_RESPONSE_LEN': 512, 'NPUW_LLM_PREFILL_CHUNK_SIZE': 2048, 'CACHE_DIR': ''}
+[ INFO ] Model path=/home/chaofan/model_benchmark/benchmark/models/Qwen3-4B-INT4, openvino runtime version: 2026.2.1-21920-7102b88c1f1-qwen-ttft-optimizations, genai version: 2026.2.1.0-3124-5f787b2aaee-qwen-ttft-llm-bench
+[ INFO ] Selected OpenVINO GenAI for benchmarking
+[ INFO ] Pipeline initialization time: 15.03s
+[ INFO ] Read prompts from /home/chaofan/model_benchmark/benchmark/tests/prompts/qwen3_1k.jsonl
+[ INFO ] Numbeams: 1, benchmarking iter nums(exclude warm-up): 10, prompt nums: 1, prompt idx: [0]
+[ INFO ] [warm-up][P0] Input text: <s>[INST] <<SYS>> A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. <</SYS>> You will act as a Christian, and fully summarize following text:
+Sometimes it's nice to take a minute in the pew by yourself beforehand. You have this beautiful church probably almost all to yourself. Can you feel its energy resonating through you? Can you feel the majesty of the Lord's kingdom and how you're a part of it? Take a moment to kneel and pray with your head down and hands clasped together. Reflect on your faith and how you feel currently. Think about how you've been responding to God's call and how you've been living in the light of his love. When the priest is ready for you, of course. You'll probably see him there by his lonesome or someone else walk out just before you. Sit down either across from him or behind the screen -- it's totally up to you whether or not you prefer to remain anonymo ... [truncated to 1024]
+[ INFO ] [warm-up][P0] Text generation start: 2026-07-02T13:23:55.552591
+[ INFO ] [warm-up][P0] Text generation end: 2026-07-02T13:24:12.542151
+[ INFO ] [warm-up][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 2.62ms, Detokenization Time: 1.42ms, Generation Time: 16.99s, Latency: 33.1826 ms/token
+[ INFO ] [warm-up][P0] First token latency: 1085.25 ms, other tokens latency: 31.12 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [warm-up][P0] First infer latency: 1084.31 ms, other infers latency: 30.74 ms/infer, inference count: 512
+[ INFO ] [warm-up][P0] Result MD5:['7b561c08e09e67dec579f8a525fe6897']
+[ INFO ] [warm-up][P0] Generated:  pew by yourself beforehand. You have this beautiful church probably almost all to yourself. Can you feel its energy resonating through you? Can you feel the majesty of the Lord's kingdom and how you're a part of it? Take a moment to kneel and pray with your head down and hands clasped together. Reflect on your faith and how you feel currently. Think about how you've been responding to God's call and how you've been living in the light of his love. When the priest is ready for you, of course. You'll probably see him there by his lonesome or someone else walk out just before you. Sit down either across from him or behind the screen -- it's totally up to you whether or not you prefer to remain anonymous. He won't treat you any differently either way. Make the sign of the cross upon his prompt, saying, "Bless me, Father, for I have sinned. It has been 10 years since my last confession." This is your standard, traditional phrasing. However, if you just sit down and say hello, that's fine, too. The priest knows what he's doing. The Byzantine Rite is a bit different. The priest may sit to your side and put his epitrachelion on your head. He may then also do the Prayer of Absolution. But the idea remains the exact same -- just go wherever he takes you. Once you sit down and you've made the sign of the cross, just sit back and follow the priest's lead. He'll ask you how long it's been since your last confession (if you don't voluntarily offer that information), how you are feeling, maybe how your faith is going, and then ask you what sins you would like to talk about with him and God. It's just a casual conversation! Do not fret. There is absolutely zero pressure on your part. Again, as long as you come there with the intention of leaving with a clean heart, you're more than welcome in the church. There is no wrong way to go about confession! This part is intimidating, but think about it this way: the priest you're talking to has probably heard just about everything before. So when he asks, start rattling them off, from the most serious to the least. If he asks any questions, answer them, but do not feel the need to go into detail. A simple, "I did so and so," will suffice. Your priest is going to be very understanding. If you
+[ INFO ] [warm-up][P0] start: 2026-07-02T13:23:55.549794, end: 2026-07-02T13:24:12.546621
+[ INFO ] [1][P0] Text generation start: 2026-07-02T13:24:12.548980
+[ INFO ] [1][P0] Text generation end: 2026-07-02T13:24:29.106298
+[ INFO ] [1][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 2.09ms, Detokenization Time: 1.05ms, Generation Time: 16.56s, Latency: 32.3383 ms/token
+[ INFO ] [1][P0] First token latency: 713.15 ms, other tokens latency: 31.00 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [1][P0] First infer latency: 711.99 ms, other infers latency: 30.68 ms/infer, inference count: 512
+[ INFO ] [1][P0] Result MD5:['7b561c08e09e67dec579f8a525fe6897']
+[ INFO ] [1][P0] start: 2026-07-02T13:24:12.546731, end: 2026-07-02T13:24:29.109693
+[ INFO ] [2][P0] Text generation start: 2026-07-02T13:24:29.111885
+[ INFO ] [2][P0] Text generation end: 2026-07-02T13:24:45.973635
+[ INFO ] [2][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 1.98ms, Detokenization Time: 0.59ms, Generation Time: 16.86s, Latency: 32.9329 ms/token
+[ INFO ] [2][P0] First token latency: 715.23 ms, other tokens latency: 31.60 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [2][P0] First infer latency: 714.00 ms, other infers latency: 31.22 ms/infer, inference count: 512
+[ INFO ] [2][P0] Result MD5:['7b561c08e09e67dec579f8a525fe6897']
+[ INFO ] [2][P0] start: 2026-07-02T13:24:29.109777, end: 2026-07-02T13:24:45.976328
+[ INFO ] [3][P0] Text generation start: 2026-07-02T13:24:45.978725
+[ INFO ] [3][P0] Text generation end: 2026-07-02T13:25:02.937095
+[ INFO ] [3][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 2.19ms, Detokenization Time: 0.66ms, Generation Time: 16.96s, Latency: 33.1216 ms/token
+[ INFO ] [3][P0] First token latency: 715.29 ms, other tokens latency: 31.79 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [3][P0] First infer latency: 713.88 ms, other infers latency: 31.39 ms/infer, inference count: 512
+[ INFO ] [3][P0] Result MD5:['7b561c08e09e67dec579f8a525fe6897']
+[ INFO ] [3][P0] start: 2026-07-02T13:24:45.976413, end: 2026-07-02T13:25:02.940028
+[ INFO ] [4][P0] Text generation start: 2026-07-02T13:25:02.942669
+[ INFO ] [4][P0] Text generation end: 2026-07-02T13:25:19.807804
+[ INFO ] [4][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 2.42ms, Detokenization Time: 1.28ms, Generation Time: 16.87s, Latency: 32.9395 ms/token
+[ INFO ] [4][P0] First token latency: 721.85 ms, other tokens latency: 31.59 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [4][P0] First infer latency: 720.52 ms, other infers latency: 31.20 ms/infer, inference count: 512
+[ INFO ] [4][P0] Result MD5:['7b561c08e09e67dec579f8a525fe6897']
+[ INFO ] [4][P0] start: 2026-07-02T13:25:02.940122, end: 2026-07-02T13:25:19.811651
+[ INFO ] [5][P0] Text generation start: 2026-07-02T13:25:19.814222
+[ INFO ] [5][P0] Text generation end: 2026-07-02T13:25:36.196798
+[ INFO ] [5][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 2.35ms, Detokenization Time: 0.98ms, Generation Time: 16.38s, Latency: 31.9970 ms/token
+[ INFO ] [5][P0] First token latency: 713.47 ms, other tokens latency: 30.66 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [5][P0] First infer latency: 712.27 ms, other infers latency: 30.40 ms/infer, inference count: 512
+[ INFO ] [5][P0] Result MD5:['7b561c08e09e67dec579f8a525fe6897']
+[ INFO ] [5][P0] start: 2026-07-02T13:25:19.811743, end: 2026-07-02T13:25:36.200282
+[ INFO ] [6][P0] Text generation start: 2026-07-02T13:25:36.202921
+[ INFO ] [6][P0] Text generation end: 2026-07-02T13:25:52.815733
+[ INFO ] [6][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 2.41ms, Detokenization Time: 0.62ms, Generation Time: 16.61s, Latency: 32.4467 ms/token
+[ INFO ] [6][P0] First token latency: 726.07 ms, other tokens latency: 31.09 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [6][P0] First infer latency: 724.81 ms, other infers latency: 30.72 ms/infer, inference count: 512
+[ INFO ] [6][P0] Result MD5:['7b561c08e09e67dec579f8a525fe6897']
+[ INFO ] [6][P0] start: 2026-07-02T13:25:36.200380, end: 2026-07-02T13:25:52.818827
+[ INFO ] [7][P0] Text generation start: 2026-07-02T13:25:52.821388
+[ INFO ] [7][P0] Text generation end: 2026-07-02T13:26:09.449963
+[ INFO ] [7][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 2.36ms, Detokenization Time: 0.61ms, Generation Time: 16.63s, Latency: 32.4775 ms/token
+[ INFO ] [7][P0] First token latency: 722.62 ms, other tokens latency: 31.13 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [7][P0] First infer latency: 721.68 ms, other infers latency: 30.75 ms/infer, inference count: 512
+[ INFO ] [7][P0] Result MD5:['7b561c08e09e67dec579f8a525fe6897']
+[ INFO ] [7][P0] start: 2026-07-02T13:25:52.818911, end: 2026-07-02T13:26:09.452777
+[ INFO ] [8][P0] Text generation start: 2026-07-02T13:26:09.455255
+[ INFO ] [8][P0] Text generation end: 2026-07-02T13:26:26.386296
+[ INFO ] [8][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 2.27ms, Detokenization Time: 0.96ms, Generation Time: 16.93s, Latency: 33.0682 ms/token
+[ INFO ] [8][P0] First token latency: 725.08 ms, other tokens latency: 31.71 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [8][P0] First infer latency: 723.81 ms, other infers latency: 31.14 ms/infer, inference count: 512
+[ INFO ] [8][P0] Result MD5:['7b561c08e09e67dec579f8a525fe6897']
+[ INFO ] [8][P0] start: 2026-07-02T13:26:09.452858, end: 2026-07-02T13:26:26.399302
+[ INFO ] [9][P0] Text generation start: 2026-07-02T13:26:26.402139
+[ INFO ] [9][P0] Text generation end: 2026-07-02T13:26:43.338696
+[ INFO ] [9][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 2.59ms, Detokenization Time: 0.60ms, Generation Time: 16.94s, Latency: 33.0790 ms/token
+[ INFO ] [9][P0] First token latency: 721.65 ms, other tokens latency: 31.73 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [9][P0] First infer latency: 720.25 ms, other infers latency: 31.23 ms/infer, inference count: 512
+[ INFO ] [9][P0] Result MD5:['7b561c08e09e67dec579f8a525fe6897']
+[ INFO ] [9][P0] start: 2026-07-02T13:26:26.399403, end: 2026-07-02T13:26:43.341373
+[ INFO ] [10][P0] Text generation start: 2026-07-02T13:26:43.343378
+[ INFO ] [10][P0] Text generation end: 2026-07-02T13:27:00.143161
+[ INFO ] [10][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 1.80ms, Detokenization Time: 0.86ms, Generation Time: 16.80s, Latency: 32.8117 ms/token
+[ INFO ] [10][P0] First token latency: 719.14 ms, other tokens latency: 31.47 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [10][P0] First infer latency: 718.05 ms, other infers latency: 30.98 ms/infer, inference count: 512
+[ INFO ] [10][P0] Result MD5:['7b561c08e09e67dec579f8a525fe6897']
+[ INFO ] [10][P0] start: 2026-07-02T13:26:43.341454, end: 2026-07-02T13:27:00.146877
+[ INFO ] <<< Warm-up iteration is excluded. >>>
+[ INFO ] [Total] Iterations: 10
+[ INFO ] [Average] P[0] Input token size: 1000, 1st token latency: 719.36 ms, 2nd token latency: 31.38 ms/token, 2nd tokens throughput: 31.87 tokens/s

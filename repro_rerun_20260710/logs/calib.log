@@ -1,0 +1,6 @@
+[22:11:24] calibration start, cooling to <=60C (now 65C)
+[22:13:35] reached 60C after 130s; running 4B (installed plugin=opt3_opt5_opt6/final)
+[22:15:49] done, end pkg=82C
+TTFT mean=576.76 std=23.85 min=553 max=624 first->last=553->624
+per-iter TTFT: 553 555 557 567 570 586 602 624
+TPOT=27.08 TPS=35.51 E2E=14417

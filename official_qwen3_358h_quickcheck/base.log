@@ -1,0 +1,28 @@
+Multiple distributions found for package optimum. Picked distribution: optimum-intel
+[ INFO ] ==SUCCESS FOUND==: use_case: text_gen, model_type: qwen, model_Name: Qwen3-0.6B-INT4
+[ INFO ] OV Config={'MAX_PROMPT_LEN': 1024, 'MIN_RESPONSE_LEN': 512, 'NPUW_LLM_PREFILL_CHUNK_SIZE': 2048, 'CACHE_DIR': ''}
+[ INFO ] Model path=/home/chaofan/model_benchmark/benchmark/models/Qwen3-0.6B-INT4, openvino runtime version: 2026.2.1-21920-7102b88c1f1-qwen-ttft-optimizations, genai version: 2026.2.1.0-3124-5f787b2aaee-qwen-ttft-llm-bench
+[ INFO ] Selected OpenVINO GenAI for benchmarking
+[ INFO ] Pipeline initialization time: 6.72s
+[ INFO ] Read prompts from /home/chaofan/model_benchmark/benchmark/tests/prompts/qwen3_1k.jsonl
+[ INFO ] Numbeams: 1, benchmarking iter nums(exclude warm-up): 1, prompt nums: 1, prompt idx: [0]
+[ INFO ] [warm-up][P0] Input text: <s>[INST] <<SYS>> A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. <</SYS>> You will act as a Christian, and fully summarize following text:
+Sometimes it's nice to take a minute in the pew by yourself beforehand. You have this beautiful church probably almost all to yourself. Can you feel its energy resonating through you? Can you feel the majesty of the Lord's kingdom and how you're a part of it? Take a moment to kneel and pray with your head down and hands clasped together. Reflect on your faith and how you feel currently. Think about how you've been responding to God's call and how you've been living in the light of his love. When the priest is ready for you, of course. You'll probably see him there by his lonesome or someone else walk out just before you. Sit down either across from him or behind the screen -- it's totally up to you whether or not you prefer to remain anonymo ... [truncated to 1024]
+[ INFO ] [warm-up][P0] Text generation start: 2026-07-02T13:09:08.261540
+[ INFO ] [warm-up][P0] Text generation end: 2026-07-02T13:09:14.310271
+[ INFO ] [warm-up][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 2.41ms, Detokenization Time: 1.50ms, Generation Time: 6.05s, Latency: 11.8138 ms/token
+[ INFO ] [warm-up][P0] First token latency: 628.11 ms, other tokens latency: 10.61 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [warm-up][P0] First infer latency: 627.22 ms, other infers latency: 10.30 ms/infer, inference count: 512
+[ INFO ] [warm-up][P0] Result MD5:['2720e56e1b6d9f555ca4438496aeaf77']
+[ INFO ] [warm-up][P0] Generated:  pew by yourself before. You have this beautiful church probably almost all to yourself. Can you feel its energy resonating through you? Can you feel the majesty of the Lord's kingdom and how you're a part of it? Take a moment to kneel and pray with your head down and hands clasped together. Reflect on your faith and how you feel currently. Think about how you've been responding to God's call and how you've been living in the light of his love. When the priest is ready for you, of course. You'll probably see him there by his lonesome or someone else walk out just before you. Sit down either across from him or behind the screen -- it's totally up to you whether or not you prefer to remain anonymous. He will not treat you any differently either way. Make the sign of the cross upon his prompt, saying, "Bless me, Father, for I have sinned." This is the standard, traditional phrasing. But if you're going to do anything else, like a prayer or something, then you can do it anywhere. Just do it. The idea is to do it in the right place, and not to take it too far. So you don't have to do it in the pew, but you can do it in the church. It's up to you. So you don't have to do it in the pew, but you can do it in the church. It's totally up to you. So you don't have to do it in the pew, but you can do it in the church. It's totally up to you. So you don't have to do it in the pew, but you can do it in the church. It's totally up to you. So you don't have to do it in the pew, but you can do it in the church. It's totally up to you. So you don't have to do it in the pew, but you can do it in the church. It's totally up to you. So you don't have to do it in the pew, but you can do it in the church. It's totally up to you. So you don't have to do it in the pew, but you can do it in the church. It's totally up to you. So you don't have to do it in the pew, but you can do it in the church. It's totally up to you. So you don't have to do it in the pew, but you can do
+[ INFO ] [warm-up][P0] start: 2026-07-02T13:09:08.258961, end: 2026-07-02T13:09:14.314549
+[ INFO ] [1][P0] Text generation start: 2026-07-02T13:09:14.316690
+[ INFO ] [1][P0] Text generation end: 2026-07-02T13:09:19.894558
+[ INFO ] [1][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 1.90ms, Detokenization Time: 0.72ms, Generation Time: 5.58s, Latency: 10.8940 ms/token
+[ INFO ] [1][P0] First token latency: 157.86 ms, other tokens latency: 10.61 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [1][P0] First infer latency: 156.81 ms, other infers latency: 10.08 ms/infer, inference count: 512
+[ INFO ] [1][P0] Result MD5:['2720e56e1b6d9f555ca4438496aeaf77']
+[ INFO ] [1][P0] start: 2026-07-02T13:09:14.314647, end: 2026-07-02T13:09:19.897202
+[ INFO ] <<< Warm-up iteration is excluded. >>>
+[ INFO ] [Total] Iterations: 1
+[ INFO ] [Average] P[0] Input token size: 1000, 1st token latency: 157.86 ms, 2nd token latency: 10.61 ms/token, 2nd tokens throughput: 94.29 tokens/s

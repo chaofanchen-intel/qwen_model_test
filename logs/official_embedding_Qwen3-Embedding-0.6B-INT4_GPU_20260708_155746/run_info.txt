@@ -1,0 +1,26 @@
+runner:           official_embedding
+task:             text_embed
+devices:          GPU
+models:           /home/chaofan/model_benchmark/benchmark/models/Qwen3-Embedding-0.6B-INT4
+prompt_file:      /home/chaofan/model_benchmark/benchmark/tests/prompts/embedding/texts_len_sweep.jsonl
+prompt_index:     0
+lengths:          100 200 400 600 800
+batch_sizes:      1 2 3 4 5 6
+iters:            100
+batch_size:       1
+pooling:          last_token
+normalize:        1
+padding_side:     left
+max_length:       512
+pad_to_max_len:   1
+load_config:      
+npu_load_config:  {"CACHE_DIR":"/home/chaofan/model_benchmark/benchmark/cache_npu/embedding"}
+resource_monitor: 1
+resource_interval:500
+memory_mode:      0
+benchmark_csv:    /home/chaofan/model_benchmark/benchmark/results/benchmark_embedding_official.csv
+benchmark_json:   /home/chaofan/model_benchmark/benchmark/results/benchmark_embedding_official.json
+python_cmd:       python
+python:           Python 3.12.3
+openvino:         2026.2.1-21919-ede283a88e3-releases/2026/2
+openvino_genai:   2026.2.1.0-3123-7dea0459b2a

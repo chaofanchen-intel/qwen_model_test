@@ -1,0 +1,6 @@
+prompt_index	target_tokens	word_count	tokenizer_checked_tokens	chars
+0	1024	820	1024	7483
+1	2048	1639	2049	14954
+2	4096	3278	4096	29910
+3	6144	4916	6144	44859
+4	8192	6554	8192	59802

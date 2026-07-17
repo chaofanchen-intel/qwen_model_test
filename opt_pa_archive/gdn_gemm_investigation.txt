@@ -1,0 +1,34 @@
+PA deep-profiling round 2 (2026-06-30): GDN / gemm investigation — what was tried and ruled out
+Current state: pristine + opt-4 (conv1d) + opt-3 (DQ). 2B PA prefill ic=1.
+
+PREFILL KERNEL BREAKDOWN (op-sum ~536ms):
+  gemm_kernel               47.5%  occ 40%  work-size-limited
+  paged_gated_delta_net_opt 19.6%  occ 53%  work-size-limited
+  paged_causal_conv1d_ref    8.4%  occ 100% (opt-4 done)
+  activation_ref             6.0%  occ 100%
+  rms_gpu_bfyx_opt           5.5%  occ 40%  SLM-limited
+  dynamic_quantize_gpu_opt   5.2%  occ 100% (opt-3 done)
+
+RULED OUT:
+1. gemm_kernel (47.5%, biggest): it is oneDNN's ngen-jit INT4 GEMM micro-kernel
+   (thirdparty/onednn_gpu/.../gemm/jit, kernel_name()=="gemm_kernel"), NOT an editable
+   OCL kernel. occ 40% is normal for XMX systolic (EU threads not full while XMX busy).
+   Not modifiable at plugin level. The 3 biggest instances (768x8 GWS) = 225ms / 88% of gemm.
+
+2. paged_gated_delta_net_opt (19.6%): TRUE serial SSM recurrence (S_t=g·S_{t-1}; ...),
+   token-by-token dependent, cannot token-parallelize. Occupancy limiter = Work Size (53%),
+   NOT SLM/barrier/registers. VBS sweep (V_BLOCK_SIZE controls v_blocks=parallelism vs
+   q/k recompute redundancy):
+        VBS=2 (v_blocks 64, 1024 subgroups, 2x q/k redundancy): 91.73 -> 107.02ms  +16.7%
+        VBS=4 (v_blocks 32,  512 subgroups, 1x):                 91.73ms  <-- U-curve minimum
+        VBS=8 (v_blocks 16,  256 subgroups, 0.5x redundancy):    91.73 ->  99.86ms  +8.9%
+   => VBS=4 is the md5-lossless optimum; both directions regress. The 105ms is dominated by
+      genuine recurrent compute (state 128x4 rank-1 update x ~1000 tokens), not waste.
+   => chunkwise rewrite upper bound estimated ~-3-4% of total prefill, needs intra-chunk
+      triangular-inverse (I - tril(beta*K*K^T))^-1, multi-day, will break byte-exact md5
+      (changes fp accumulation order), high failure risk. Negative ROI -> not attempted.
+
+3. rms_gpu_bfyx_opt (5.5%, occ 40% SLM-limited): small (~15ms), <1% of total prefill. Not worth it.
+
+CONCLUSION: low-risk dispatch-class optimizations are exhausted. opt-4 + opt-3 (infer-TTFT
+-6.5% 2B, e2e -4.4%) is the practical PA ceiling without algorithm rewrites.

@@ -1,0 +1,261 @@
+Multiple distributions found for package optimum. Picked distribution: optimum-intel
+[ INFO ] ==SUCCESS FOUND==: use_case: visual_text_gen, model_type: qwen3-5, model_Name: Qwen3.5-0.8B-INT4
+[ INFO ] OV Config={'PERFORMANCE_HINT': 'LATENCY', 'ATTENTION_BACKEND': 'SDPA', 'CACHE_DIR': ''}
+[ INFO ] Model path=/home/chaofan/model_benchmark/benchmark/models/Qwen3.5-0.8B-INT4, openvino runtime version: 2026.2.1-21919-ede283a88e3-releases/2026/2, genai version: 2026.2.1.0-3123-7dea0459b2a
+[ INFO ] Selected OpenVINO GenAI for benchmarking
+[ INFO ] Pipeline initialization time: 4.29s
+[ INFO ] Read prompts from /home/chaofan/model_benchmark/benchmark/tests/prompts/qwen3.5_1k.jsonl
+[ INFO ] Numbeams: 1, benchmarking iter nums(exclude warm-up): 10, prompt nums: 1, prompt idx: [0]
+[ INFO ] [warm-up][P0] Input text: {'prompt': '<s>[INST] <<SYS>> A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user\'s questions. <</SYS>> You will act as a Christian, and fully summarize following text:\nSometimes it\'s nice to take a minute in the pew by yourself beforehand. You have this beautiful church probably almost all to yourself. Can you feel its energy resonating through you? Can you feel the majesty of the Lord\'s kingdom and how you\'re a part of it? Take a moment to kneel and pray with your head down and hands clasped together. Reflect on your faith and how you feel currently. Think about how you\'ve been responding to God\'s call and how you\'ve been living in the light of his love. When the priest is ready for you, of course. You\'ll probably see him there by his lonesome or someone else walk out just before you. Sit down either across from him or behind the screen -- it\'s totally up to you whether or not you pr ... [truncated to 1024]
+[ INFO ] [warm-up][P0] Input image nums: 0
+[ INFO ] [warm-up][P0] Input video nums: 0
+[ WARNING ] Enabled input prompt permutations. It means that generated results may vary on different steps and the prompt grows by one leading token. This defeats the prefix cache so first-token latency reflects a cold prefill. If it is not expected, please specify --disable_prompt_permutation in your benchmarking command to disable this behavior
+[ INFO ] [warm-up][P0] Text generation start: 2026-06-30T15:11:42.822642
+[ INFO ] [warm-up][P0] Text generation end: 2026-06-30T15:11:49.257949
+[ INFO ] [warm-up][P0] Input token size: 1002, Output size: 512, Infer count: 512, Tokenization Time: 2.75ms, Detokenization Time: 0.56ms,  Multimodal Embeddings Preparation Time: 52.91ms, Generation Time: 6.44s, Latency: 12.5689 ms/token
+[ INFO ] [warm-up][P0] First token latency: 476.87 ms, other tokens latency: 11.65 ms/token, len of input tokens: 1002 * 1
+[ INFO ] [warm-up][P0] First infer latency: 383.76 ms, other infers latency: 11.35 ms/infer, inference count: 512
+[ INFO ] [warm-up][P0] Result MD5:['df0fc648e0ef959993550d38b4d46f84']
+[ INFO ] [warm-up][P0] Generated: ### **The Sign of the Cross**
+
+In the quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet
+[ INFO ] [warm-up][P0] start: 2026-06-30T15:11:42.822535, end: 2026-06-30T15:11:49.258739
+[ INFO ] [1][P0] Input image nums: 0
+[ INFO ] [1][P0] Input video nums: 0
+[ WARNING ] Enabled input prompt permutations. It means that generated results may vary on different steps and the prompt grows by one leading token. This defeats the prefix cache so first-token latency reflects a cold prefill. If it is not expected, please specify --disable_prompt_permutation in your benchmarking command to disable this behavior
+[ INFO ] [1][P0] Text generation start: 2026-06-30T15:11:49.258805
+[ INFO ] [1][P0] Text generation end: 2026-06-30T15:11:55.442926
+[ INFO ] [1][P0] Input token size: 1002, Output size: 512, Infer count: 512, Tokenization Time: 0.76ms, Detokenization Time: 0.38ms,  Multimodal Embeddings Preparation Time: 41.83ms, Generation Time: 6.18s, Latency: 12.0783 ms/token
+[ INFO ] [1][P0] First token latency: 333.99 ms, other tokens latency: 11.45 ms/token, len of input tokens: 1002 * 1
+[ INFO ] [1][P0] First infer latency: 291.79 ms, other infers latency: 11.13 ms/infer, inference count: 512
+[ INFO ] [1][P0] Result MD5:['a8075d32ba768898fce22e5d48b86500']
+[ INFO ] [1][P0] Generated: You will act as a Christian, and fully summarize the following text:
+
+Sometimes it’s nice to take a minute in the pew by yourself beforehand. You have this beautiful church probably almost all to yourself. Can you feel its energy resonating through you? Can you feel the majesty of the Lord’s kingdom and how you’re a part of it? Take a moment to kneel and pray with your head down and hands clasped together. Reflect on your faith and how you feel currently. Think about how you’ve been responding to God’s call and how you’ve been living in the light of his love. When the priest is ready for you, of course. You’ll probably see him there by his lonesome or someone else walk out just before you. Sit down either across from him or behind the screen — it’s totally up to you whether or not you prefer to remain anonymous. He won’t treat you any differently either way. Make the sign of the cross upon his prompt, saying, “Bless me, Father, for I have sinned.” It has been 10 years since my last confession. This is your standard, traditional phrasing. However, if you just sit down and say hello, that’s fine, too. The priest knows what he’s doing. The Byzantine Rite is a bit different. The priest may sit to your side and put his epitrachelion on your head. He may then also do the Prayer of Absolution. But the idea remains the exact same — just go wherever he takes you. Once you sit down and you’ve made the sign of the cross, just sit back and follow the priest’s lead. He’ll ask you how long it’s been since your last confession (if you don’t voluntarily offer that information), how you are feeling, maybe how your faith is going, and then ask you what sins you would like to talk about with him and God. It’s just a casual conversation! Do not fret. There is absolutely zero pressure on your part. Again, as long as you come there with the intention of leaving with a clean heart, you’re more than welcome in the church. There is no wrong way to go about confession! This part is intimidating, but think about it this way: the priest you’re talking to has probably heard just about everything before. Whatever you have to say will not blow his mind. So when he asks, start rattling them off, from the most serious to the least. If he asks any questions, answer them
+[ INFO ] [1][P0] start: 2026-06-30T15:11:49.258758, end: 2026-06-30T15:11:55.443688
+[ INFO ] [2][P0] Input image nums: 0
+[ INFO ] [2][P0] Input video nums: 0
+[ WARNING ] Enabled input prompt permutations. It means that generated results may vary on different steps and the prompt grows by one leading token. This defeats the prefix cache so first-token latency reflects a cold prefill. If it is not expected, please specify --disable_prompt_permutation in your benchmarking command to disable this behavior
+[ INFO ] [2][P0] Text generation start: 2026-06-30T15:11:55.443748
+[ INFO ] [2][P0] Text generation end: 2026-06-30T15:12:01.790589
+[ INFO ] [2][P0] Input token size: 1002, Output size: 512, Infer count: 512, Tokenization Time: 0.92ms, Detokenization Time: 0.36ms,  Multimodal Embeddings Preparation Time: 42.15ms, Generation Time: 6.35s, Latency: 12.3961 ms/token
+[ INFO ] [2][P0] First token latency: 335.60 ms, other tokens latency: 11.76 ms/token, len of input tokens: 1002 * 1
+[ INFO ] [2][P0] First infer latency: 293.32 ms, other infers latency: 11.43 ms/infer, inference count: 512
+[ INFO ] [2][P0] Result MD5:['a8075d32ba768898fce22e5d48b86500']
+[ INFO ] [2][P0] Generated: You will act as a Christian, and fully summarize the following text:
+
+Sometimes it’s nice to take a minute in the pew by yourself beforehand. You have this beautiful church probably almost all to yourself. Can you feel its energy resonating through you? Can you feel the majesty of the Lord’s kingdom and how you’re a part of it? Take a moment to kneel and pray with your head down and hands clasped together. Reflect on your faith and how you feel currently. Think about how you’ve been responding to God’s call and how you’ve been living in the light of his love. When the priest is ready for you, of course. You’ll probably see him there by his lonesome or someone else walk out just before you. Sit down either across from him or behind the screen — it’s totally up to you whether or not you prefer to remain anonymous. He won’t treat you any differently either way. Make the sign of the cross upon his prompt, saying, “Bless me, Father, for I have sinned.” It has been 10 years since my last confession. This is your standard, traditional phrasing. However, if you just sit down and say hello, that’s fine, too. The priest knows what he’s doing. The Byzantine Rite is a bit different. The priest may sit to your side and put his epitrachelion on your head. He may then also do the Prayer of Absolution. But the idea remains the exact same — just go wherever he takes you. Once you sit down and you’ve made the sign of the cross, just sit back and follow the priest’s lead. He’ll ask you how long it’s been since your last confession (if you don’t voluntarily offer that information), how you are feeling, maybe how your faith is going, and then ask you what sins you would like to talk about with him and God. It’s just a casual conversation! Do not fret. There is absolutely zero pressure on your part. Again, as long as you come there with the intention of leaving with a clean heart, you’re more than welcome in the church. There is no wrong way to go about confession! This part is intimidating, but think about it this way: the priest you’re talking to has probably heard just about everything before. Whatever you have to say will not blow his mind. So when he asks, start rattling them off, from the most serious to the least. If he asks any questions, answer them
+[ INFO ] [2][P0] start: 2026-06-30T15:11:55.443707, end: 2026-06-30T15:12:01.791378
+[ INFO ] [3][P0] Input image nums: 0
+[ INFO ] [3][P0] Input video nums: 0
+[ WARNING ] Enabled input prompt permutations. It means that generated results may vary on different steps and the prompt grows by one leading token. This defeats the prefix cache so first-token latency reflects a cold prefill. If it is not expected, please specify --disable_prompt_permutation in your benchmarking command to disable this behavior
+[ INFO ] [3][P0] Text generation start: 2026-06-30T15:12:01.791442
+[ INFO ] [3][P0] Text generation end: 2026-06-30T15:12:08.063864
+[ INFO ] [3][P0] Input token size: 1002, Output size: 512, Infer count: 512, Tokenization Time: 0.90ms, Detokenization Time: 0.41ms,  Multimodal Embeddings Preparation Time: 41.82ms, Generation Time: 6.27s, Latency: 12.2508 ms/token
+[ INFO ] [3][P0] First token latency: 350.79 ms, other tokens latency: 11.59 ms/token, len of input tokens: 1002 * 1
+[ INFO ] [3][P0] First infer latency: 308.84 ms, other infers latency: 11.25 ms/infer, inference count: 512
+[ INFO ] [3][P0] Result MD5:['df0fc648e0ef959993550d38b4d46f84']
+[ INFO ] [3][P0] Generated: ### **The Sign of the Cross**
+
+In the quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet, quiet
+[ INFO ] [3][P0] start: 2026-06-30T15:12:01.791399, end: 2026-06-30T15:12:08.064569
+[ INFO ] [4][P0] Input image nums: 0
+[ INFO ] [4][P0] Input video nums: 0
+[ WARNING ] Enabled input prompt permutations. It means that generated results may vary on different steps and the prompt grows by one leading token. This defeats the prefix cache so first-token latency reflects a cold prefill. If it is not expected, please specify --disable_prompt_permutation in your benchmarking command to disable this behavior
+[ INFO ] [4][P0] Text generation start: 2026-06-30T15:12:08.064625
+[ INFO ] [4][P0] Text generation end: 2026-06-30T15:12:14.358949
+[ INFO ] [4][P0] Input token size: 1002, Output size: 512, Infer count: 512, Tokenization Time: 0.93ms, Detokenization Time: 0.35ms,  Multimodal Embeddings Preparation Time: 43.17ms, Generation Time: 6.29s, Latency: 12.2936 ms/token
+[ INFO ] [4][P0] First token latency: 351.47 ms, other tokens latency: 11.63 ms/token, len of input tokens: 1002 * 1
+[ INFO ] [4][P0] First infer latency: 308.28 ms, other infers latency: 11.35 ms/infer, inference count: 512
+[ INFO ] [4][P0] Result MD5:['919116bfff2d3c86cca3c00bb6dad562']
+[ INFO ] [4][P0] Generated: **You will act as a Christian, and fully summarize the following text:**
+
+**[SYS]** A chat between a curious human user and an artificial intelligence assistant. The AI provides helpful, detailed, and polite answers to the user's questions.
+
+**[INST]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will
+[ INFO ] [4][P0] start: 2026-06-30T15:12:08.064585, end: 2026-06-30T15:12:14.359670
+[ INFO ] [5][P0] Input image nums: 0
+[ INFO ] [5][P0] Input video nums: 0
+[ WARNING ] Enabled input prompt permutations. It means that generated results may vary on different steps and the prompt grows by one leading token. This defeats the prefix cache so first-token latency reflects a cold prefill. If it is not expected, please specify --disable_prompt_permutation in your benchmarking command to disable this behavior
+[ INFO ] [5][P0] Text generation start: 2026-06-30T15:12:14.359725
+[ INFO ] [5][P0] Text generation end: 2026-06-30T15:12:20.580229
+[ INFO ] [5][P0] Input token size: 1002, Output size: 512, Infer count: 512, Tokenization Time: 0.94ms, Detokenization Time: 0.28ms,  Multimodal Embeddings Preparation Time: 41.99ms, Generation Time: 6.22s, Latency: 12.1494 ms/token
+[ INFO ] [5][P0] First token latency: 349.16 ms, other tokens latency: 11.49 ms/token, len of input tokens: 1002 * 1
+[ INFO ] [5][P0] First infer latency: 307.08 ms, other infers latency: 11.22 ms/infer, inference count: 512
+[ INFO ] [5][P0] Result MD5:['919116bfff2d3c86cca3c00bb6dad562']
+[ INFO ] [5][P0] Generated: **You will act as a Christian, and fully summarize the following text:**
+
+**[SYS]** A chat between a curious human user and an artificial intelligence assistant. The AI provides helpful, detailed, and polite answers to the user's questions.
+
+**[INST]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will act as a Christian, and fully summarize the following text:
+
+**[SYS]** You will
+[ INFO ] [5][P0] start: 2026-06-30T15:12:14.359687, end: 2026-06-30T15:12:20.580908
+[ INFO ] [6][P0] Input image nums: 0
+[ INFO ] [6][P0] Input video nums: 0
+[ WARNING ] Enabled input prompt permutations. It means that generated results may vary on different steps and the prompt grows by one leading token. This defeats the prefix cache so first-token latency reflects a cold prefill. If it is not expected, please specify --disable_prompt_permutation in your benchmarking command to disable this behavior
+[ INFO ] [6][P0] Text generation start: 2026-06-30T15:12:20.580966
+[ INFO ] [6][P0] Text generation end: 2026-06-30T15:12:26.962084
+[ INFO ] [6][P0] Input token size: 1002, Output size: 512, Infer count: 512, Tokenization Time: 0.73ms, Detokenization Time: 0.37ms,  Multimodal Embeddings Preparation Time: 42.48ms, Generation Time: 6.38s, Latency: 12.4631 ms/token
+[ INFO ] [6][P0] First token latency: 355.97 ms, other tokens latency: 11.79 ms/token, len of input tokens: 1002 * 1
+[ INFO ] [6][P0] First infer latency: 313.17 ms, other infers latency: 11.46 ms/infer, inference count: 512
+[ INFO ] [6][P0] Result MD5:['a8075d32ba768898fce22e5d48b86500']
+[ INFO ] [6][P0] Generated: You will act as a Christian, and fully summarize the following text:
+
+Sometimes it’s nice to take a minute in the pew by yourself beforehand. You have this beautiful church probably almost all to yourself. Can you feel its energy resonating through you? Can you feel the majesty of the Lord’s kingdom and how you’re a part of it? Take a moment to kneel and pray with your head down and hands clasped together. Reflect on your faith and how you feel currently. Think about how you’ve been responding to God’s call and how you’ve been living in the light of his love. When the priest is ready for you, of course. You’ll probably see him there by his lonesome or someone else walk out just before you. Sit down either across from him or behind the screen — it’s totally up to you whether or not you prefer to remain anonymous. He won’t treat you any differently either way. Make the sign of the cross upon his prompt, saying, “Bless me, Father, for I have sinned.” It has been 10 years since my last confession. This is your standard, traditional phrasing. However, if you just sit down and say hello, that’s fine, too. The priest knows what he’s doing. The Byzantine Rite is a bit different. The priest may sit to your side and put his epitrachelion on your head. He may then also do the Prayer of Absolution. But the idea remains the exact same — just go wherever he takes you. Once you sit down and you’ve made the sign of the cross, just sit back and follow the priest’s lead. He’ll ask you how long it’s been since your last confession (if you don’t voluntarily offer that information), how you are feeling, maybe how your faith is going, and then ask you what sins you would like to talk about with him and God. It’s just a casual conversation! Do not fret. There is absolutely zero pressure on your part. Again, as long as you come there with the intention of leaving with a clean heart, you’re more than welcome in the church. There is no wrong way to go about confession! This part is intimidating, but think about it this way: the priest you’re talking to has probably heard just about everything before. Whatever you have to say will not blow his mind. So when he asks, start rattling them off, from the most serious to the least. If he asks any questions, answer them
+[ INFO ] [6][P0] start: 2026-06-30T15:12:20.580925, end: 2026-06-30T15:12:26.962823
+[ INFO ] [7][P0] Input image nums: 0
+[ INFO ] [7][P0] Input video nums: 0
+[ WARNING ] Enabled input prompt permutations. It means that generated results may vary on different steps and the prompt grows by one leading token. This defeats the prefix cache so first-token latency reflects a cold prefill. If it is not expected, please specify --disable_prompt_permutation in your benchmarking command to disable this behavior
+[ INFO ] [7][P0] Text generation start: 2026-06-30T15:12:26.962890
+[ INFO ] [7][P0] Text generation end: 2026-06-30T15:12:33.261207
+[ INFO ] [7][P0] Input token size: 1002, Output size: 512, Infer count: 512, Tokenization Time: 0.98ms, Detokenization Time: 0.37ms,  Multimodal Embeddings Preparation Time: 41.71ms, Generation Time: 6.30s, Latency: 12.3014 ms/token
+[ INFO ] [7][P0] First token latency: 353.15 ms, other tokens latency: 11.63 ms/token, len of input tokens: 1002 * 1
+[ INFO ] [7][P0] First infer latency: 311.42 ms, other infers latency: 11.37 ms/infer, inference count: 512
+[ INFO ] [7][P0] Result MD5:['3a5fb15d20a9518f53b57a23d05e0660']
+[ INFO ] [7][P0] Generated: You will act as a Christian, and fully summarize the following text:
+
+---
+
+Sometimes it’s nice to take a moment in the church by yourself beforehand. You have this beautiful church probably almost all to yourself. Can you feel its energy resonating through you? Can you feel the majesty of the Lord’s kingdom and how you’re a part of it? Take a moment to kneel and pray with your head down and hands clasped together. Reflect on your faith and how you feel currently. Think about how you’ve been responding to God’s call and how you’ve been living in the light of his love. When the priest is ready for you, of course. You’ll probably see him there by his lonesome or someone else walk out just before you. Sit down either across from him or behind the screen — it’s totally up to you whether or not you prefer to remain anonymous. He won’t treat you any differently either way. Make the sign of the cross upon his prompt, saying, “Bless me, Father, for I have sinned.” It has been 10 years since my last confession. This is your standard, traditional phrasing. However, if you just sit down and say hello, that’s fine, too. The priest knows what he’s doing. The Byzantine Rite is a bit different. The priest may sit to your side and put his epitrachelion on your head. He may then also do the Prayer of Absolution. But the idea remains the exact same — just go wherever he takes you. Once you sit down and you’ve made the sign of the cross, just sit back and follow the priest’s lead. He’ll ask you how long it’s been since your last confession (if you don’t voluntarily offer that information), how you are feeling, maybe how your faith is going, and then ask you what sins you would like to talk about with him and God. It’s just a casual conversation! Do not fret. There is absolutely zero pressure on your part. Again, as long as you come there with the intention of leaving with a clean heart, you’re more than welcome in the church. There is no wrong way to go about confession! This part is intimidating, but think about it this way: the priest you’re talking to has probably heard just about everything before. Whatever you have to say will not blow his mind. So when he asks, start rattling them off, from the most serious to the least. If he asks any questions,
+[ INFO ] [7][P0] start: 2026-06-30T15:12:26.962841, end: 2026-06-30T15:12:33.261924
+[ INFO ] [8][P0] Input image nums: 0
+[ INFO ] [8][P0] Input video nums: 0
+[ WARNING ] Enabled input prompt permutations. It means that generated results may vary on different steps and the prompt grows by one leading token. This defeats the prefix cache so first-token latency reflects a cold prefill. If it is not expected, please specify --disable_prompt_permutation in your benchmarking command to disable this behavior
+[ INFO ] [8][P0] Text generation start: 2026-06-30T15:12:33.261979
+[ INFO ] [8][P0] Text generation end: 2026-06-30T15:12:39.542051
+[ INFO ] [8][P0] Input token size: 1002, Output size: 512, Infer count: 512, Tokenization Time: 0.96ms, Detokenization Time: 0.48ms,  Multimodal Embeddings Preparation Time: 41.68ms, Generation Time: 6.28s, Latency: 12.2657 ms/token
+[ INFO ] [8][P0] First token latency: 348.93 ms, other tokens latency: 11.60 ms/token, len of input tokens: 1002 * 1
+[ INFO ] [8][P0] First infer latency: 307.08 ms, other infers latency: 11.32 ms/infer, inference count: 512
+[ INFO ] [8][P0] Result MD5:['a8075d32ba768898fce22e5d48b86500']
+[ INFO ] [8][P0] Generated: You will act as a Christian, and fully summarize the following text:
+
+Sometimes it’s nice to take a minute in the pew by yourself beforehand. You have this beautiful church probably almost all to yourself. Can you feel its energy resonating through you? Can you feel the majesty of the Lord’s kingdom and how you’re a part of it? Take a moment to kneel and pray with your head down and hands clasped together. Reflect on your faith and how you feel currently. Think about how you’ve been responding to God’s call and how you’ve been living in the light of his love. When the priest is ready for you, of course. You’ll probably see him there by his lonesome or someone else walk out just before you. Sit down either across from him or behind the screen — it’s totally up to you whether or not you prefer to remain anonymous. He won’t treat you any differently either way. Make the sign of the cross upon his prompt, saying, “Bless me, Father, for I have sinned.” It has been 10 years since my last confession. This is your standard, traditional phrasing. However, if you just sit down and say hello, that’s fine, too. The priest knows what he’s doing. The Byzantine Rite is a bit different. The priest may sit to your side and put his epitrachelion on your head. He may then also do the Prayer of Absolution. But the idea remains the exact same — just go wherever he takes you. Once you sit down and you’ve made the sign of the cross, just sit back and follow the priest’s lead. He’ll ask you how long it’s been since your last confession (if you don’t voluntarily offer that information), how you are feeling, maybe how your faith is going, and then ask you what sins you would like to talk about with him and God. It’s just a casual conversation! Do not fret. There is absolutely zero pressure on your part. Again, as long as you come there with the intention of leaving with a clean heart, you’re more than welcome in the church. There is no wrong way to go about confession! This part is intimidating, but think about it this way: the priest you’re talking to has probably heard just about everything before. Whatever you have to say will not blow his mind. So when he asks, start rattling them off, from the most serious to the least. If he asks any questions, answer them
+[ INFO ] [8][P0] start: 2026-06-30T15:12:33.261941, end: 2026-06-30T15:12:39.542752
+[ INFO ] [9][P0] Input image nums: 0
+[ INFO ] [9][P0] Input video nums: 0
+[ WARNING ] Enabled input prompt permutations. It means that generated results may vary on different steps and the prompt grows by one leading token. This defeats the prefix cache so first-token latency reflects a cold prefill. If it is not expected, please specify --disable_prompt_permutation in your benchmarking command to disable this behavior
+[ INFO ] [9][P0] Text generation start: 2026-06-30T15:12:39.542808
+[ INFO ] [9][P0] Text generation end: 2026-06-30T15:12:45.831463
+[ INFO ] [9][P0] Input token size: 1002, Output size: 512, Infer count: 512, Tokenization Time: 1.00ms, Detokenization Time: 0.41ms,  Multimodal Embeddings Preparation Time: 43.11ms, Generation Time: 6.29s, Latency: 12.2825 ms/token
+[ INFO ] [9][P0] First token latency: 334.81 ms, other tokens latency: 11.65 ms/token, len of input tokens: 1002 * 1
+[ INFO ] [9][P0] First infer latency: 291.65 ms, other infers latency: 11.35 ms/infer, inference count: 512
+[ INFO ] [9][P0] Result MD5:['9264904ae5a39136e512358fc9cb7db9']
+[ INFO ] [9][P0] Generated: You will act as a Christian, and fully summarize the following text:
+
+---
+
+Sometimes it’s nice to take a moment in the pew by yourself beforehand. You have this beautiful church probably almost all to yourself. Can you feel its energy resonating through you? Can you feel the majesty of the Lord’s kingdom and how you’re a part of it? Take a moment to kneel and pray with your head down and hands clasped together. Reflect on your faith and how you feel currently. Think about how you’ve been responding to God’s call and how you’ve been living in the light of his love. When the priest is ready for you, of course. You’ll probably see him there by his lonesome or someone else walk out just before you. Sit down either across from him or behind the screen — it’s totally up to you whether or not you prefer to remain anonymous. He won’t treat you any differently either way. Make the sign of the cross upon his prompt, saying, “Bless me, Father, for I have sinned.” It has been 10 years since my last confession. This is your standard, traditional phrasing. However, if you just sit down and say hello, that’s fine, too. The priest knows what he’s doing. The Byzantine Rite is a bit different. The priest may sit to your side and put his epitrachelion on your head. He may then also do the Prayer of Absolution. But the idea remains the exact same — just go wherever he takes you. Once you sit down and you’ve made the sign of the cross, just sit back and follow the priest’s lead. He’ll ask you how long it’s been since your last confession (if you don’t voluntarily offer that information), how you are feeling, maybe how your faith is going, and then ask you what sins you would like to talk about with him and God. It’s just a casual conversation! Do not fret. There is absolutely zero pressure on your part. Again, as long as you come there with the intention of leaving with a clean heart, you’re more than welcome in the church. There is no wrong way to go about confession! This part is intimidating, but think about it this way: the priest you’re talking to has probably heard just about everything before. Whatever you have to say will not blow his mind. So when he asks, start rattling them off, from the most serious to the least. If he asks any questions,
+[ INFO ] [9][P0] start: 2026-06-30T15:12:39.542769, end: 2026-06-30T15:12:45.832189
+[ INFO ] [10][P0] Input image nums: 0
+[ INFO ] [10][P0] Input video nums: 0
+[ WARNING ] Enabled input prompt permutations. It means that generated results may vary on different steps and the prompt grows by one leading token. This defeats the prefix cache so first-token latency reflects a cold prefill. If it is not expected, please specify --disable_prompt_permutation in your benchmarking command to disable this behavior
+[ INFO ] [10][P0] Text generation start: 2026-06-30T15:12:45.832252
+[ INFO ] [10][P0] Text generation end: 2026-06-30T15:12:52.213557
+[ INFO ] [10][P0] Input token size: 1003, Output size: 512, Infer count: 512, Tokenization Time: 0.91ms, Detokenization Time: 0.34ms,  Multimodal Embeddings Preparation Time: 43.91ms, Generation Time: 6.38s, Latency: 12.4635 ms/token
+[ INFO ] [10][P0] First token latency: 369.37 ms, other tokens latency: 11.76 ms/token, len of input tokens: 1003 * 1
+[ INFO ] [10][P0] First infer latency: 325.34 ms, other infers latency: 11.42 ms/infer, inference count: 512
+[ INFO ] [10][P0] Result MD5:['9264904ae5a39136e512358fc9cb7db9']
+[ INFO ] [10][P0] Generated: You will act as a Christian, and fully summarize the following text:
+
+---
+
+Sometimes it’s nice to take a moment in the pew by yourself beforehand. You have this beautiful church probably almost all to yourself. Can you feel its energy resonating through you? Can you feel the majesty of the Lord’s kingdom and how you’re a part of it? Take a moment to kneel and pray with your head down and hands clasped together. Reflect on your faith and how you feel currently. Think about how you’ve been responding to God’s call and how you’ve been living in the light of his love. When the priest is ready for you, of course. You’ll probably see him there by his lonesome or someone else walk out just before you. Sit down either across from him or behind the screen — it’s totally up to you whether or not you prefer to remain anonymous. He won’t treat you any differently either way. Make the sign of the cross upon his prompt, saying, “Bless me, Father, for I have sinned.” It has been 10 years since my last confession. This is your standard, traditional phrasing. However, if you just sit down and say hello, that’s fine, too. The priest knows what he’s doing. The Byzantine Rite is a bit different. The priest may sit to your side and put his epitrachelion on your head. He may then also do the Prayer of Absolution. But the idea remains the exact same — just go wherever he takes you. Once you sit down and you’ve made the sign of the cross, just sit back and follow the priest’s lead. He’ll ask you how long it’s been since your last confession (if you don’t voluntarily offer that information), how you are feeling, maybe how your faith is going, and then ask you what sins you would like to talk about with him and God. It’s just a casual conversation! Do not fret. There is absolutely zero pressure on your part. Again, as long as you come there with the intention of leaving with a clean heart, you’re more than welcome in the church. There is no wrong way to go about confession! This part is intimidating, but think about it this way: the priest you’re talking to has probably heard just about everything before. Whatever you have to say will not blow his mind. So when he asks, start rattling them off, from the most serious to the least. If he asks any questions,
+[ INFO ] [10][P0] start: 2026-06-30T15:12:45.832209, end: 2026-06-30T15:12:52.214248
+[ INFO ] <<< Warm-up iteration is excluded. >>>
+[ INFO ] [Total] Iterations: 10
+[ INFO ] [Average] P[0] Input token size: 1002, 1st token latency: 348.32 ms, 2nd token latency: 11.63 ms/token, 2nd tokens throughput: 85.96 tokens/s

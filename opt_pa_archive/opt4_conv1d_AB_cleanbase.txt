@@ -1,0 +1,9 @@
+opt-4 (token-parallel paged_causal_conv1d_ref) on CLEAN pristine base, PA
+model_bench C++ + local OV, n=8, ic=1 pure-prefill, real 1000-tok prompt
+model               B0_pristine   B1_opt4  delta_ms  delta_%   md5
+Qwen3.5-0.8B-INT4         69.23     66.16     -3.07    -4.4%    OK
+Qwen3.5-2B-INT4           98.14     94.98     -3.16    -3.2%    OK
+Qwen3.5-4B-INT4          224.26    221.37     -2.90    -1.3%    OK
+
+vtune 2B prefill (measured on D'-base earlier, mechanism identical): conv1d 66.3ms@20%occ -> 45.8ms@100%occ
+md5 prefill(ic1)+decode(ic128) byte-identical to pristine across all 3 sizes

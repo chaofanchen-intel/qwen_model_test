@@ -1,0 +1,266 @@
+Multiple distributions found for package optimum. Picked distribution: optimum-intel
+[ INFO ] ==SUCCESS FOUND==: use_case: text_embed, model_type: qwen3, model_Name: Qwen3-Embedding-0.6B-INT4
+[ INFO ] OV Config={'CACHE_DIR': ''}
+[ INFO ] Model path=/home/chaofan/model_benchmark/benchmark/models/Qwen3-Embedding-0.6B-INT4, openvino runtime version: 2026.2.1-21919-ede283a88e3-releases/2026/2, genai version: 2026.2.1.0-3123-7dea0459b2a
+[ INFO ] Selected OpenVINO GenAI for benchmarking
+[ INFO ] Pipeline initialization time: 1.18s
+[ INFO ] Read prompts from /home/chaofan/model_benchmark/benchmark/tests/prompts/embedding/texts_len_1k_2k_4k_6k_8k.jsonl
+[ INFO ] [warm-up][P1] Input text: embedding token performance retrieval vector semantic OpenVINO benchmark embedding token performance retrieval vector semantic OpenVINO benchmark embedding token performance retrieval vector semantic OpenVINO benchmark embedding token performance retrieval vector semantic OpenVINO benchmark embedding token performance retrieval vector semantic OpenVINO benchmark embedding token performance retrieval vector semantic OpenVINO benchmark embedding token performance retrieval vector semantic OpenVINO benchmark embedding token performance retrieval vector semantic OpenVINO benchmark embedding token performance retrieval vector semantic OpenVINO benchmark embedding token performance retrieval vector semantic OpenVINO benchmark embedding token performance retrieval vector semantic OpenVINO benchmark embedding token performance retrieval vector semantic OpenVINO benchmark embedding token performance retrieval vector semantic OpenVINO benchmark embedding token performance retrieval vector sema ... [truncated to 1024]
+[ INFO ] [warm-up] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [warm-up][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 7.86ms, Generation Time: 0.84s, Latency: 0.8405 ms/3prompts
+[ INFO ] [warm-up][P1] First iteration latency: 840.53 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [warm-up][P1] First infer latency: 840.53 ms, other infers latency: NA, inference count: 1
+[ INFO ] [warm-up][P1] start: 2026-07-08T14:11:37.212157, end: 2026-07-08T14:11:38.061148
+[ INFO ] [1] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [1][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 7.01ms, Generation Time: 0.83s, Latency: 0.8256 ms/3prompts
+[ INFO ] [1][P1] First iteration latency: 825.56 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [1][P1] First infer latency: 825.56 ms, other infers latency: NA, inference count: 1
+[ INFO ] [1][P1] start: 2026-07-08T14:11:38.061184, end: 2026-07-08T14:11:38.894307
+[ INFO ] [2] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [2][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.97ms, Generation Time: 0.82s, Latency: 0.8229 ms/3prompts
+[ INFO ] [2][P1] First iteration latency: 822.91 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [2][P1] First infer latency: 822.91 ms, other infers latency: NA, inference count: 1
+[ INFO ] [2][P1] start: 2026-07-08T14:11:38.894342, end: 2026-07-08T14:11:39.724788
+[ INFO ] [3] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [3][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.78ms, Generation Time: 0.85s, Latency: 0.8493 ms/3prompts
+[ INFO ] [3][P1] First iteration latency: 849.30 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [3][P1] First infer latency: 849.30 ms, other infers latency: NA, inference count: 1
+[ INFO ] [3][P1] start: 2026-07-08T14:11:39.724823, end: 2026-07-08T14:11:40.581420
+[ INFO ] [4] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [4][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.83ms, Generation Time: 0.83s, Latency: 0.8350 ms/3prompts
+[ INFO ] [4][P1] First iteration latency: 834.99 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [4][P1] First infer latency: 834.99 ms, other infers latency: NA, inference count: 1
+[ INFO ] [4][P1] start: 2026-07-08T14:11:40.581454, end: 2026-07-08T14:11:41.423839
+[ INFO ] [5] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [5][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.77ms, Generation Time: 0.84s, Latency: 0.8416 ms/3prompts
+[ INFO ] [5][P1] First iteration latency: 841.60 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [5][P1] First infer latency: 841.60 ms, other infers latency: NA, inference count: 1
+[ INFO ] [5][P1] start: 2026-07-08T14:11:41.423875, end: 2026-07-08T14:11:42.272796
+[ INFO ] [6] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [6][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.61ms, Generation Time: 0.82s, Latency: 0.8216 ms/3prompts
+[ INFO ] [6][P1] First iteration latency: 821.62 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [6][P1] First infer latency: 821.62 ms, other infers latency: NA, inference count: 1
+[ INFO ] [6][P1] start: 2026-07-08T14:11:42.272831, end: 2026-07-08T14:11:43.101596
+[ INFO ] [7] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [7][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.86ms, Generation Time: 0.84s, Latency: 0.8379 ms/3prompts
+[ INFO ] [7][P1] First iteration latency: 837.92 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [7][P1] First infer latency: 837.92 ms, other infers latency: NA, inference count: 1
+[ INFO ] [7][P1] start: 2026-07-08T14:11:43.101631, end: 2026-07-08T14:11:43.946943
+[ INFO ] [8] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [8][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 7.12ms, Generation Time: 0.82s, Latency: 0.8183 ms/3prompts
+[ INFO ] [8][P1] First iteration latency: 818.26 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [8][P1] First infer latency: 818.26 ms, other infers latency: NA, inference count: 1
+[ INFO ] [8][P1] start: 2026-07-08T14:11:43.946991, end: 2026-07-08T14:11:44.772926
+[ INFO ] [9] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [9][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 7.38ms, Generation Time: 0.82s, Latency: 0.8219 ms/3prompts
+[ INFO ] [9][P1] First iteration latency: 821.86 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [9][P1] First infer latency: 821.86 ms, other infers latency: NA, inference count: 1
+[ INFO ] [9][P1] start: 2026-07-08T14:11:44.772959, end: 2026-07-08T14:11:45.602723
+[ INFO ] [10] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [10][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.61ms, Generation Time: 0.84s, Latency: 0.8356 ms/3prompts
+[ INFO ] [10][P1] First iteration latency: 835.58 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [10][P1] First infer latency: 835.58 ms, other infers latency: NA, inference count: 1
+[ INFO ] [10][P1] start: 2026-07-08T14:11:45.602758, end: 2026-07-08T14:11:46.445461
+[ INFO ] [11] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [11][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.98ms, Generation Time: 0.82s, Latency: 0.8226 ms/3prompts
+[ INFO ] [11][P1] First iteration latency: 822.55 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [11][P1] First infer latency: 822.55 ms, other infers latency: NA, inference count: 1
+[ INFO ] [11][P1] start: 2026-07-08T14:11:46.445499, end: 2026-07-08T14:11:47.275578
+[ INFO ] [12] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [12][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.54ms, Generation Time: 0.84s, Latency: 0.8427 ms/3prompts
+[ INFO ] [12][P1] First iteration latency: 842.74 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [12][P1] First infer latency: 842.74 ms, other infers latency: NA, inference count: 1
+[ INFO ] [12][P1] start: 2026-07-08T14:11:47.275612, end: 2026-07-08T14:11:48.125428
+[ INFO ] [13] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [13][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.75ms, Generation Time: 0.84s, Latency: 0.8387 ms/3prompts
+[ INFO ] [13][P1] First iteration latency: 838.71 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [13][P1] First infer latency: 838.71 ms, other infers latency: NA, inference count: 1
+[ INFO ] [13][P1] start: 2026-07-08T14:11:48.125459, end: 2026-07-08T14:11:48.971453
+[ INFO ] [14] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [14][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.29ms, Generation Time: 0.85s, Latency: 0.8452 ms/3prompts
+[ INFO ] [14][P1] First iteration latency: 845.23 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [14][P1] First infer latency: 845.23 ms, other infers latency: NA, inference count: 1
+[ INFO ] [14][P1] start: 2026-07-08T14:11:48.971488, end: 2026-07-08T14:11:49.823502
+[ INFO ] [15] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [15][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.30ms, Generation Time: 0.83s, Latency: 0.8270 ms/3prompts
+[ INFO ] [15][P1] First iteration latency: 826.98 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [15][P1] First infer latency: 826.98 ms, other infers latency: NA, inference count: 1
+[ INFO ] [15][P1] start: 2026-07-08T14:11:49.823537, end: 2026-07-08T14:11:50.657559
+[ INFO ] [16] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [16][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.79ms, Generation Time: 0.83s, Latency: 0.8330 ms/3prompts
+[ INFO ] [16][P1] First iteration latency: 832.99 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [16][P1] First infer latency: 832.99 ms, other infers latency: NA, inference count: 1
+[ INFO ] [16][P1] start: 2026-07-08T14:11:50.657595, end: 2026-07-08T14:11:51.497920
+[ INFO ] [17] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [17][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.14ms, Generation Time: 0.83s, Latency: 0.8270 ms/3prompts
+[ INFO ] [17][P1] First iteration latency: 827.02 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [17][P1] First infer latency: 827.02 ms, other infers latency: NA, inference count: 1
+[ INFO ] [17][P1] start: 2026-07-08T14:11:51.497959, end: 2026-07-08T14:11:52.331660
+[ INFO ] [18] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [18][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.60ms, Generation Time: 0.83s, Latency: 0.8280 ms/3prompts
+[ INFO ] [18][P1] First iteration latency: 828.00 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [18][P1] First infer latency: 828.00 ms, other infers latency: NA, inference count: 1
+[ INFO ] [18][P1] start: 2026-07-08T14:11:52.331696, end: 2026-07-08T14:11:53.166838
+[ INFO ] [19] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [19][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.56ms, Generation Time: 0.85s, Latency: 0.8517 ms/3prompts
+[ INFO ] [19][P1] First iteration latency: 851.66 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [19][P1] First infer latency: 851.66 ms, other infers latency: NA, inference count: 1
+[ INFO ] [19][P1] start: 2026-07-08T14:11:53.166874, end: 2026-07-08T14:11:54.025662
+[ INFO ] [20] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [20][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.49ms, Generation Time: 0.84s, Latency: 0.8412 ms/3prompts
+[ INFO ] [20][P1] First iteration latency: 841.16 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [20][P1] First infer latency: 841.16 ms, other infers latency: NA, inference count: 1
+[ INFO ] [20][P1] start: 2026-07-08T14:11:54.025698, end: 2026-07-08T14:11:54.873907
+[ INFO ] [21] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [21][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.57ms, Generation Time: 0.84s, Latency: 0.8423 ms/3prompts
+[ INFO ] [21][P1] First iteration latency: 842.32 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [21][P1] First infer latency: 842.32 ms, other infers latency: NA, inference count: 1
+[ INFO ] [21][P1] start: 2026-07-08T14:11:54.873939, end: 2026-07-08T14:11:55.723457
+[ INFO ] [22] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [22][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.32ms, Generation Time: 0.83s, Latency: 0.8306 ms/3prompts
+[ INFO ] [22][P1] First iteration latency: 830.59 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [22][P1] First infer latency: 830.59 ms, other infers latency: NA, inference count: 1
+[ INFO ] [22][P1] start: 2026-07-08T14:11:55.723490, end: 2026-07-08T14:11:56.560915
+[ INFO ] [23] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [23][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.27ms, Generation Time: 0.84s, Latency: 0.8416 ms/3prompts
+[ INFO ] [23][P1] First iteration latency: 841.65 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [23][P1] First infer latency: 841.65 ms, other infers latency: NA, inference count: 1
+[ INFO ] [23][P1] start: 2026-07-08T14:11:56.560949, end: 2026-07-08T14:11:57.409390
+[ INFO ] [24] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [24][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.79ms, Generation Time: 0.82s, Latency: 0.8216 ms/3prompts
+[ INFO ] [24][P1] First iteration latency: 821.59 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [24][P1] First infer latency: 821.59 ms, other infers latency: NA, inference count: 1
+[ INFO ] [24][P1] start: 2026-07-08T14:11:57.409425, end: 2026-07-08T14:11:58.238395
+[ INFO ] [25] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [25][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.36ms, Generation Time: 0.82s, Latency: 0.8239 ms/3prompts
+[ INFO ] [25][P1] First iteration latency: 823.85 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [25][P1] First infer latency: 823.85 ms, other infers latency: NA, inference count: 1
+[ INFO ] [25][P1] start: 2026-07-08T14:11:58.238429, end: 2026-07-08T14:11:59.069186
+[ INFO ] [26] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [26][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.25ms, Generation Time: 0.82s, Latency: 0.8237 ms/3prompts
+[ INFO ] [26][P1] First iteration latency: 823.75 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [26][P1] First infer latency: 823.75 ms, other infers latency: NA, inference count: 1
+[ INFO ] [26][P1] start: 2026-07-08T14:11:59.069224, end: 2026-07-08T14:11:59.899756
+[ INFO ] [27] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [27][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.28ms, Generation Time: 0.82s, Latency: 0.8187 ms/3prompts
+[ INFO ] [27][P1] First iteration latency: 818.69 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [27][P1] First infer latency: 818.69 ms, other infers latency: NA, inference count: 1
+[ INFO ] [27][P1] start: 2026-07-08T14:11:59.899792, end: 2026-07-08T14:12:00.725325
+[ INFO ] [28] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [28][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 7.05ms, Generation Time: 0.85s, Latency: 0.8454 ms/3prompts
+[ INFO ] [28][P1] First iteration latency: 845.45 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [28][P1] First infer latency: 845.45 ms, other infers latency: NA, inference count: 1
+[ INFO ] [28][P1] start: 2026-07-08T14:12:00.725363, end: 2026-07-08T14:12:01.578462
+[ INFO ] [29] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [29][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.85ms, Generation Time: 0.84s, Latency: 0.8362 ms/3prompts
+[ INFO ] [29][P1] First iteration latency: 836.19 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [29][P1] First infer latency: 836.19 ms, other infers latency: NA, inference count: 1
+[ INFO ] [29][P1] start: 2026-07-08T14:12:01.578499, end: 2026-07-08T14:12:02.422088
+[ INFO ] [30] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [30][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 7.18ms, Generation Time: 0.84s, Latency: 0.8389 ms/3prompts
+[ INFO ] [30][P1] First iteration latency: 838.89 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [30][P1] First infer latency: 838.89 ms, other infers latency: NA, inference count: 1
+[ INFO ] [30][P1] start: 2026-07-08T14:12:02.422130, end: 2026-07-08T14:12:03.268760
+[ INFO ] [31] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [31][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 7.10ms, Generation Time: 0.82s, Latency: 0.8214 ms/3prompts
+[ INFO ] [31][P1] First iteration latency: 821.36 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [31][P1] First infer latency: 821.36 ms, other infers latency: NA, inference count: 1
+[ INFO ] [31][P1] start: 2026-07-08T14:12:03.268793, end: 2026-07-08T14:12:04.097799
+[ INFO ] [32] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [32][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.16ms, Generation Time: 0.84s, Latency: 0.8409 ms/3prompts
+[ INFO ] [32][P1] First iteration latency: 840.85 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [32][P1] First infer latency: 840.85 ms, other infers latency: NA, inference count: 1
+[ INFO ] [32][P1] start: 2026-07-08T14:12:04.097835, end: 2026-07-08T14:12:04.945429
+[ INFO ] [33] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [33][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 7.16ms, Generation Time: 0.83s, Latency: 0.8251 ms/3prompts
+[ INFO ] [33][P1] First iteration latency: 825.11 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [33][P1] First infer latency: 825.11 ms, other infers latency: NA, inference count: 1
+[ INFO ] [33][P1] start: 2026-07-08T14:12:04.945462, end: 2026-07-08T14:12:05.778270
+[ INFO ] [34] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [34][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.35ms, Generation Time: 0.82s, Latency: 0.8212 ms/3prompts
+[ INFO ] [34][P1] First iteration latency: 821.21 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [34][P1] First infer latency: 821.21 ms, other infers latency: NA, inference count: 1
+[ INFO ] [34][P1] start: 2026-07-08T14:12:05.778306, end: 2026-07-08T14:12:06.606423
+[ INFO ] [35] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [35][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.52ms, Generation Time: 0.85s, Latency: 0.8462 ms/3prompts
+[ INFO ] [35][P1] First iteration latency: 846.19 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [35][P1] First infer latency: 846.19 ms, other infers latency: NA, inference count: 1
+[ INFO ] [35][P1] start: 2026-07-08T14:12:06.606458, end: 2026-07-08T14:12:07.459724
+[ INFO ] [36] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [36][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 7.27ms, Generation Time: 0.82s, Latency: 0.8250 ms/3prompts
+[ INFO ] [36][P1] First iteration latency: 824.98 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [36][P1] First infer latency: 824.98 ms, other infers latency: NA, inference count: 1
+[ INFO ] [36][P1] start: 2026-07-08T14:12:07.459764, end: 2026-07-08T14:12:08.292579
+[ INFO ] [37] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [37][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 7.01ms, Generation Time: 0.84s, Latency: 0.8384 ms/3prompts
+[ INFO ] [37][P1] First iteration latency: 838.43 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [37][P1] First infer latency: 838.43 ms, other infers latency: NA, inference count: 1
+[ INFO ] [37][P1] start: 2026-07-08T14:12:08.292615, end: 2026-07-08T14:12:09.138592
+[ INFO ] [38] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [38][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.66ms, Generation Time: 0.84s, Latency: 0.8392 ms/3prompts
+[ INFO ] [38][P1] First iteration latency: 839.21 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [38][P1] First infer latency: 839.21 ms, other infers latency: NA, inference count: 1
+[ INFO ] [38][P1] start: 2026-07-08T14:12:09.138623, end: 2026-07-08T14:12:09.985032
+[ INFO ] [39] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [39][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 7.04ms, Generation Time: 0.84s, Latency: 0.8391 ms/3prompts
+[ INFO ] [39][P1] First iteration latency: 839.12 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [39][P1] First infer latency: 839.12 ms, other infers latency: NA, inference count: 1
+[ INFO ] [39][P1] start: 2026-07-08T14:12:09.985066, end: 2026-07-08T14:12:10.831819
+[ INFO ] [40] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [40][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 7.27ms, Generation Time: 0.82s, Latency: 0.8249 ms/3prompts
+[ INFO ] [40][P1] First iteration latency: 824.85 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [40][P1] First infer latency: 824.85 ms, other infers latency: NA, inference count: 1
+[ INFO ] [40][P1] start: 2026-07-08T14:12:10.831855, end: 2026-07-08T14:12:11.664564
+[ INFO ] [41] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [41][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.46ms, Generation Time: 0.83s, Latency: 0.8290 ms/3prompts
+[ INFO ] [41][P1] First iteration latency: 829.04 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [41][P1] First infer latency: 829.04 ms, other infers latency: NA, inference count: 1
+[ INFO ] [41][P1] start: 2026-07-08T14:12:11.664601, end: 2026-07-08T14:12:12.500651
+[ INFO ] [42] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [42][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.04ms, Generation Time: 0.82s, Latency: 0.8246 ms/3prompts
+[ INFO ] [42][P1] First iteration latency: 824.60 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [42][P1] First infer latency: 824.60 ms, other infers latency: NA, inference count: 1
+[ INFO ] [42][P1] start: 2026-07-08T14:12:12.500684, end: 2026-07-08T14:12:13.331885
+[ INFO ] [43] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [43][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 7.36ms, Generation Time: 0.83s, Latency: 0.8280 ms/3prompts
+[ INFO ] [43][P1] First iteration latency: 827.96 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [43][P1] First infer latency: 827.96 ms, other infers latency: NA, inference count: 1
+[ INFO ] [43][P1] start: 2026-07-08T14:12:13.331920, end: 2026-07-08T14:12:14.167807
+[ INFO ] [44] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [44][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 7.37ms, Generation Time: 0.85s, Latency: 0.8485 ms/3prompts
+[ INFO ] [44][P1] First iteration latency: 848.53 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [44][P1] First infer latency: 848.53 ms, other infers latency: NA, inference count: 1
+[ INFO ] [44][P1] start: 2026-07-08T14:12:14.167840, end: 2026-07-08T14:12:15.024421
+[ INFO ] [45] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [45][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.25ms, Generation Time: 0.84s, Latency: 0.8366 ms/3prompts
+[ INFO ] [45][P1] First iteration latency: 836.60 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [45][P1] First infer latency: 836.60 ms, other infers latency: NA, inference count: 1
+[ INFO ] [45][P1] start: 2026-07-08T14:12:15.024457, end: 2026-07-08T14:12:15.867884
+[ INFO ] [46] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [46][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.48ms, Generation Time: 0.84s, Latency: 0.8427 ms/3prompts
+[ INFO ] [46][P1] First iteration latency: 842.69 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [46][P1] First infer latency: 842.69 ms, other infers latency: NA, inference count: 1
+[ INFO ] [46][P1] start: 2026-07-08T14:12:15.867919, end: 2026-07-08T14:12:16.717617
+[ INFO ] [47] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [47][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 7.03ms, Generation Time: 0.84s, Latency: 0.8373 ms/3prompts
+[ INFO ] [47][P1] First iteration latency: 837.34 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [47][P1] First infer latency: 837.34 ms, other infers latency: NA, inference count: 1
+[ INFO ] [47][P1] start: 2026-07-08T14:12:16.717651, end: 2026-07-08T14:12:17.562600
+[ INFO ] [48] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [48][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.73ms, Generation Time: 0.85s, Latency: 0.8460 ms/3prompts
+[ INFO ] [48][P1] First iteration latency: 845.98 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [48][P1] First infer latency: 845.98 ms, other infers latency: NA, inference count: 1
+[ INFO ] [48][P1] start: 2026-07-08T14:12:17.562640, end: 2026-07-08T14:12:18.415873
+[ INFO ] [49] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [49][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 6.87ms, Generation Time: 0.83s, Latency: 0.8283 ms/3prompts
+[ INFO ] [49][P1] First iteration latency: 828.30 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [49][P1] First infer latency: 828.30 ms, other infers latency: NA, inference count: 1
+[ INFO ] [49][P1] start: 2026-07-08T14:12:18.415907, end: 2026-07-08T14:12:19.251609
+[ INFO ] [50] Batch_size=3, all input token size after padding: 2048 * 3, 
+[ INFO ] [50][P1] Input token size: 6144, Infer count: 1, Tokenization Time: 7.35ms, Generation Time: 0.83s, Latency: 0.8286 ms/3prompts
+[ INFO ] [50][P1] First iteration latency: 828.57 ms, other iterations latency: NA, len of input tokens: 6144 * 3
+[ INFO ] [50][P1] First infer latency: 828.57 ms, other infers latency: NA, inference count: 1
+[ INFO ] [50][P1] start: 2026-07-08T14:12:19.251645, end: 2026-07-08T14:12:20.088111
+[ INFO ] <<< Warm-up iteration is excluded. >>>
+[ INFO ] [Total] Iterations: 50
+[ INFO ] [Average] P[1] Input token size: 6144, 1st iteration latency: 833.21 ms, 2nd iteration latency: NA, 2nd iteration throughput: NA

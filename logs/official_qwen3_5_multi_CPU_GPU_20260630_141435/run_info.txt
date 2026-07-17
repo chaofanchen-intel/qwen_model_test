@@ -1,0 +1,25 @@
+runner:           official_qwen3_5
+task:             visual_text_gen
+devices:          CPU GPU
+models:           /home/chaofan/model_benchmark/benchmark/models/Qwen3.5-0.8B-INT4 /home/chaofan/model_benchmark/benchmark/models/Qwen3.5-2B-INT4 /home/chaofan/model_benchmark/benchmark/models/Qwen3.5-4B-INT4
+prompt_file:      /home/chaofan/model_benchmark/benchmark/tests/prompts/qwen3.5_1k.jsonl
+prompt_index:     0
+images:           
+infer_count:      512
+iters:            10
+batch_size:       1
+num_beams:        1
+apply_chat_tpl:   0
+disable_perm:     0
+load_config:      
+default_load_config: {"PERFORMANCE_HINT":"LATENCY","ATTENTION_BACKEND":"PA"}
+npu_load_config:  {"MAX_PROMPT_LEN":1024,"MIN_RESPONSE_LEN":512,"CACHE_DIR":"/home/chaofan/model_benchmark/benchmark/cache_npu/qwen3_5","NPUW_LLM_PREFILL_CHUNK_SIZE":2048}
+resource_monitor: 1
+resource_interval:1000
+memory_mode:      0
+benchmark_csv:    /home/chaofan/model_benchmark/benchmark/results/benchmark_qwen3_5_official.csv
+benchmark_json:   /home/chaofan/model_benchmark/benchmark/results/benchmark_qwen3_5_official.json
+python_cmd:       python
+python:           Python 3.12.3
+openvino:         2026.2.1-21919-ede283a88e3-releases/2026/2
+openvino_genai:   2026.2.1.0-3123-7dea0459b2a

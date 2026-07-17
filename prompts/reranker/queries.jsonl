@@ -1,0 +1,10 @@
+{"prompt": "what ai features are provided by intel core ultra processors"}
+{"prompt": "how does openvino help deploy models on cpu gpu and npu"}
+{"prompt": "how should reranker latency be benchmarked with many candidate documents"}
+{"prompt": "which memory metrics matter when deploying local language models"}
+{"prompt": "how does int8 quantization affect transformer inference performance"}
+{"prompt": "which documents explain rag retrieval and semantic search"}
+{"prompt": "how can mobile pcs reduce power during video collaboration"}
+{"prompt": "why use a reranker after vector search in a rag pipeline"}
+{"prompt": "how should max sequence length be chosen for embedding models"}
+{"prompt": "what is the difference between embedding and reranking models"}

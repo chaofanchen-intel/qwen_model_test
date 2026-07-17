@@ -1,0 +1,64 @@
+{"text": "Intel Core Ultra processors include CPU, GPU, and NPU compute engines. The NPU is designed for efficient local AI inference, while the CPU and GPU handle general purpose and parallel workloads."}
+{"text": "OpenVINO helps deploy optimized neural networks across Intel CPU, integrated GPU, discrete GPU, and NPU devices. It provides graph optimizations, model compilation, and runtime device plugins."}
+{"text": "A reranker receives one query and a set of candidate documents, scores every query document pair, and returns the highest scoring candidates. Benchmarking should vary the number of documents per query."}
+{"text": "Useful memory metrics for local model deployment include process RSS before loading, peak RSS during compilation, runtime RSS, system memory pressure, and memory growth between iterations."}
+{"text": "INT8 quantization can reduce model size and memory bandwidth pressure. For transformer inference it often improves throughput, but accuracy and ranking quality should be validated on task data."}
+{"text": "A RAG pipeline usually embeds documents into vectors, retrieves a candidate set with approximate nearest neighbor search, optionally reranks the candidates, and then sends the best passages to a generator."}
+{"text": "Mobile PC power efficiency can improve through workload scheduling, hardware video acceleration, optimized conferencing effects, and using low power AI engines for background blur and noise suppression."}
+{"text": "Embedding models map text to vectors for semantic search. Reranking models compare a query with each candidate document and produce relevance scores, usually improving precision after initial retrieval."}
+{"text": "The top_n parameter changes how many ranked documents are returned. It usually has much less performance impact than candidate document count or maximum sequence length."}
+{"text": "Maximum sequence length controls how much of each query document pair is kept before truncation. Larger values can preserve more context but increase latency and memory use."}
+{"text": "NPU compilation often prefers static input shapes. For encoder style models, fixed maximum length and padding can make benchmark runs more reproducible and avoid dynamic shape compile failures."}
+{"text": "Hardware monitoring during benchmark runs should report CPU utilization, per core CPU utilization, GPU utilization when available, NPU busy time, and process memory usage."}
+{"text": "Some xpu-smi versions expose GPU memory utilization but not compute engine utilization. In that case GPU memory utilization should not be mislabeled as compute utilization."}
+{"text": "For reranker benchmarks, prompt files should contain queries. Candidate documents should be supplied separately through texts_file so the workload matches retrieval and RAG usage."}
+{"text": "The texts_file input is a JSONL document list. Each line should contain a text field representing one candidate passage to be ranked for every query."}
+{"text": "Long chat prompts designed for text generation are poor defaults for reranker queries because they mix instructions, dialogue formatting, and source text instead of a concise information need."}
+{"text": "Embedding benchmark batch size controls how many texts are encoded in one embed_documents call. Text reranker pipelines usually process one query at a time against many candidate documents."}
+{"text": "A retrieval augmented generation service can use a vector database for broad recall and then use a cross encoder reranker to move the most relevant passages to the top."}
+{"text": "GPU devices may show better throughput for large candidate sets because many query document pairs can be processed with parallel tensor operations."}
+{"text": "CPU benchmarks are useful as a deployment baseline and as a reference for memory usage, but they may require tuned thread counts for stable throughput."}
+{"text": "NPU benchmarks should keep sequence length and candidate count controlled because compile time, memory use, and supported shapes can change sharply with input configuration."}
+{"text": "Candidate set size is one of the most important reranker benchmark dimensions. Test small sets such as 4 or 16 and larger sets such as 64 or 256 to understand scaling."}
+{"text": "Document length sweeps reveal how much latency is caused by attention over long passages. Short snippets and full page passages can behave very differently."}
+{"text": "Query length sweeps are useful for enterprise search, where user questions may be short keywords or full natural language troubleshooting descriptions."}
+{"text": "Benchmark reports should exclude warm up iterations from averages because the first iteration can include one time initialization effects."}
+{"text": "Weight compression should be evaluated with both performance metrics and ranking quality metrics, since smaller weights can change relevance scores for close candidates."}
+{"text": "Qwen3 embedding models commonly use last token pooling with left padding and L2 normalization when producing vectors for semantic similarity."}
+{"text": "Normalized embeddings make cosine similarity equivalent to dot product, which is convenient for vector search indexes and retrieval evaluation."}
+{"text": "A vector database stores embedding vectors and metadata. It returns candidates quickly, but those candidates are not always in the best final order for answering a query."}
+{"text": "Retrieval quality is often measured with recall at k, mean reciprocal rank, and normalized discounted cumulative gain. Performance benchmarks alone do not prove ranking quality."}
+{"text": "Reranker quality is commonly evaluated by checking whether known relevant documents are placed in the first few ranks for each query."}
+{"text": "Process memory can grow during repeated benchmark runs if compiled models, tokenizer buffers, or device allocations are retained longer than expected."}
+{"text": "OpenVINO compiled model cache affects pipeline construction time. It is separate from measured reranker inference latency and should be configured deliberately."}
+{"text": "KV prefix cache matters for autoregressive generation metrics such as TTFT. Reranker and embedding tasks are single forward pass workloads and do not decode tokens."}
+{"text": "TTFT, TPOT, and decode throughput are generation metrics. They should not be used as primary metrics for embedding or reranking models."}
+{"text": "Prompt JSONL files for text benchmarks should use a prompt field. For reranking, that prompt should be a query rather than a long assistant conversation."}
+{"text": "Candidate document JSONL files for reranking should use a text field. The same candidate list is scored for every query in the official llm_bench text_rerank task."}
+{"text": "A code generation benchmark prompt asks for source code completion and does not represent a retrieval query or candidate passage ranking workload."}
+{"text": "The Eiffel Tower is a wrought iron landmark in Paris. This passage is useful as an unrelated candidate when testing whether a reranker can downrank irrelevant results."}
+{"text": "Photosynthesis is the process by which plants convert light energy into chemical energy. It is unrelated to AI deployment and can serve as a distractor document."}
+{"text": "A recipe for tomato soup usually includes tomatoes, onions, stock, olive oil, and herbs. It is not relevant to hardware inference benchmark questions."}
+{"text": "Travel planning documents discuss flights, hotels, visas, and local attractions. They are usually unrelated to OpenVINO performance tuning."}
+{"text": "Sports analytics may use machine learning to predict player performance, but this document does not explain NPU utilization or reranker candidate scaling."}
+{"text": "Financial reports summarize revenue, margin, and cash flow. They can be useful business documents but are not specific to text reranking benchmarks."}
+{"text": "Image generation benchmarks measure denoising or transformer steps for producing pictures. They have different metrics from text reranking workloads."}
+{"text": "Compile time should be tracked separately from steady state inference latency because deployment startup and online request handling have different service level goals."}
+{"text": "Latency for reranking is the time to score the candidate set for one query. Throughput can be reported as documents per second or query document pairs per second."}
+{"text": "Throughput in documents per second is easier to compare when each run reports the number of candidate documents and the maximum sequence length."}
+{"text": "Transformer attention cost grows with sequence length, so increasing reranking_max_length from 512 to 2048 can cause a large latency increase."}
+{"text": "Truncating long documents can make benchmarks faster but may remove evidence needed for a correct relevance score. Quality validation should use realistic truncation settings."}
+{"text": "Model configuration may allow long contexts, but supported maximum position embeddings should not be confused with the best benchmark length for a production workload."}
+{"text": "Top one score determinism across repeated iterations is a useful sanity check for reranker pipelines when the same query and candidate set are used."}
+{"text": "Running multiple queries in a prompt file helps expose variance across input lengths and relevance distributions instead of measuring only one easy query."}
+{"text": "Resource monitors should be sampled at a stable interval and summarized with average utilization and peak memory, while raw per iteration timings remain the primary performance data."}
+{"text": "Padding to maximum length can make each iteration use the same shape. This improves reproducibility but may overstate latency for naturally short inputs."}
+{"text": "NPU compile memory can be sensitive to static sequence length. Smaller fixed lengths such as 512 are often more practical for smoke tests than very large limits."}
+{"text": "Local benchmark scripts append CSV rows and JSON entries, so repeated sweeps should use separate output files or clean previous results before comparison."}
+{"text": "Official llm_bench summary CSV is useful for compact dashboards, while detailed per iteration CSV and JSON preserve timing distributions for analysis."}
+{"text": "A reranker can use multiple texts_file inputs, but a single controlled candidate file is easier to interpret when comparing devices or quantization formats."}
+{"text": "Search query examples should be short and direct for reranker tests, such as openvino npu inference or intel core ultra ai features."}
+{"text": "Enterprise search documents often contain product notes, troubleshooting guidance, policy snippets, and technical explanations mixed with unrelated content."}
+{"text": "Technical support documents can be long and repetitive. They are useful for testing whether max length settings truncate important details."}
+{"text": "Long context documents may contain relevant information near the end. Reranker quality can degrade if the maximum length removes that section."}
+{"text": "Synthetic benchmark data should be clearly marked as performance input only. It can test latency scaling but should not be treated as a ranking quality evaluation dataset."}

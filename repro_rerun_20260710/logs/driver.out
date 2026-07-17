@@ -1,0 +1,52 @@
+[21:43:40] ================ RERUN START (COOL=45s, permute ON both) ================
+[21:43:40] ---- GPU size 0.8B-INT4 ----
+[21:43:41]   swapped GPU plugin -> pristine (e989ab40506e)
+[21:43:41] cooldown 45s (pkg=49C)
+[21:44:26] GPU RUN size=0.8B-INT4 label=pristine pkg_before=48C
+[21:45:10]   done -> benchmark/tests/repro_rerun_20260710/gpu_pa/0.8B-INT4/pristine.json  (TTFT_mean=200.65 std=1.16)
+[21:45:10]   swapped GPU plugin -> opt3 (80490f6764b6)
+[21:45:10] cooldown 45s (pkg=56C)
+[21:45:55] GPU RUN size=0.8B-INT4 label=opt3 pkg_before=52C
+[21:46:40]   done -> benchmark/tests/repro_rerun_20260710/gpu_pa/0.8B-INT4/opt3.json  (TTFT_mean=202.03 std=1.01)
+[21:46:40]   swapped GPU plugin -> opt3_opt5 (d47dfb60a747)
+[21:46:40] cooldown 45s (pkg=59C)
+[21:47:25] GPU RUN size=0.8B-INT4 label=opt3_opt5 pkg_before=56C
+[21:48:10]   done -> benchmark/tests/repro_rerun_20260710/gpu_pa/0.8B-INT4/opt3_opt5.json  (TTFT_mean=196.72 std=2.24)
+[21:48:10]   swapped GPU plugin -> opt3_opt5_opt6 (de95bee0c6c6)
+[21:48:10] cooldown 45s (pkg=63C)
+[21:48:55] GPU RUN size=0.8B-INT4 label=opt3_opt5_opt6 pkg_before=59C
+[21:49:39]   done -> benchmark/tests/repro_rerun_20260710/gpu_pa/0.8B-INT4/opt3_opt5_opt6.json  (TTFT_mean=192.62 std=1.59)
+[21:49:40]   swapped GPU plugin -> pristine (e989ab40506e)
+[21:49:40] cooldown 45s (pkg=66C)
+[21:50:25] GPU RUN size=0.8B-INT4 label=pristine_recheck pkg_before=61C
+[21:51:09]   done -> benchmark/tests/repro_rerun_20260710/gpu_pa/0.8B-INT4/pristine_recheck.json  (TTFT_mean=207.98 std=1.76)
+[21:51:09] ---- GPU size 2B-INT4 ----
+[21:51:09]   swapped GPU plugin -> pristine (e989ab40506e)
+[21:51:09] cooldown 45s (pkg=99C)
+[21:51:54] GPU RUN size=2B-INT4 label=pristine pkg_before=65C
+[21:53:08]   done -> benchmark/tests/repro_rerun_20260710/gpu_pa/2B-INT4/pristine.json  (TTFT_mean=285.61 std=2.34)
+[21:53:08]   swapped GPU plugin -> opt3 (80490f6764b6)
+[21:53:08] cooldown 45s (pkg=75C)
+[21:53:53] GPU RUN size=2B-INT4 label=opt3 pkg_before=69C
+[21:55:04]   done -> benchmark/tests/repro_rerun_20260710/gpu_pa/2B-INT4/opt3.json  (TTFT_mean=289.51 std=6.20)
+[21:55:04]   swapped GPU plugin -> opt3_opt5 (d47dfb60a747)
+[21:55:04] cooldown 45s (pkg=79C)
+[21:55:49] GPU RUN size=2B-INT4 label=opt3_opt5 pkg_before=74C
+[21:57:00]   done -> benchmark/tests/repro_rerun_20260710/gpu_pa/2B-INT4/opt3_opt5.json  (TTFT_mean=305.41 std=12.90)
+[21:57:00]   swapped GPU plugin -> opt3_opt5_opt6 (de95bee0c6c6)
+[21:57:00] cooldown 45s (pkg=84C)
+[21:57:45] GPU RUN size=2B-INT4 label=opt3_opt5_opt6 pkg_before=77C
+[21:58:57]   done -> benchmark/tests/repro_rerun_20260710/gpu_pa/2B-INT4/opt3_opt5_opt6.json  (TTFT_mean=319.83 std=15.21)
+[21:58:57]   swapped GPU plugin -> pristine (e989ab40506e)
+[21:58:57] cooldown 45s (pkg=87C)
+[21:59:42] GPU RUN size=2B-INT4 label=pristine_recheck pkg_before=80C
+[22:00:55]   done -> benchmark/tests/repro_rerun_20260710/gpu_pa/2B-INT4/pristine_recheck.json  (TTFT_mean=356.40 std=17.80)
+[22:00:55] ---- GPU size 4B-INT4 ----
+[22:00:56]   swapped GPU plugin -> pristine (e989ab40506e)
+[22:00:56] cooldown 45s (pkg=88C)
+[22:01:41] GPU RUN size=4B-INT4 label=pristine pkg_before=81C
+[22:04:10]   done -> benchmark/tests/repro_rerun_20260710/gpu_pa/4B-INT4/pristine.json  (TTFT_mean=824.36 std=64.78)
+[22:04:10]   swapped GPU plugin -> opt3 (80490f6764b6)
+[22:04:10] cooldown 45s (pkg=92C)
+[22:04:55] GPU RUN size=4B-INT4 label=opt3 pkg_before=84C
+[22:05:54] RESTORED installed plugin -> de95bee0c6c6 (expect de95bee0c6c6)

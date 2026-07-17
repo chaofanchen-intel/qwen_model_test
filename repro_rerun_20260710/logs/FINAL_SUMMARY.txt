@@ -1,0 +1,46 @@
+========= GPU =========
+
+-- 0.8B-INT4 --
+  pristine           mean= 204.53 std= 3.66 202->203 TPOT= 8.67 TPS=110.45 E2E=  4635.7
+  opt3               mean= 197.75 std= 1.12 199->198 TPOT= 8.68 TPS=110.47 E2E=  4635.0
+  opt3_opt5          mean= 195.23 std= 1.41 196->197 TPOT= 8.70 TPS=110.28 E2E=  4642.8
+  opt3_opt5_opt6     mean= 188.99 std= 2.89 194->189 TPOT= 8.67 TPS=110.81 E2E=  4620.7
+  pristine_recheck   mean= 201.19 std= 0.79 202->202 TPOT= 8.66 TPS=110.64 E2E=  4627.7
+  >>> gradient check: pristine=204.53 recheck=201.19 Δ=-3.34  [OK]
+
+-- 2B-INT4 --
+  pristine           mean= 271.24 std= 0.93 273->272 TPOT=14.02 TPS= 68.83 E2E=  7438.4
+  opt3               mean= 264.18 std= 1.75 267->264 TPOT=14.07 TPS= 68.69 E2E=  7453.7
+  opt3_opt5          mean= 260.76 std= 1.90 264->260 TPOT=14.07 TPS= 68.68 E2E=  7454.4
+  opt3_opt5_opt6     mean= 253.14 std= 1.23 255->254 TPOT=14.11 TPS= 68.58 E2E=  7466.2
+  pristine_recheck   mean= 271.03 std= 2.12 272->275 TPOT=14.03 TPS= 68.82 E2E=  7440.1
+  >>> gradient check: pristine=271.24 recheck=271.03 Δ=-0.21  [OK]
+
+-- 4B-INT4 --
+  pristine           mean= 575.79 std= 1.90 574->579 TPOT=27.11 TPS= 35.48 E2E= 14430.3
+  opt3               mean= 565.37 std= 2.78 569->567 TPOT=27.07 TPS= 35.56 E2E= 14398.9
+  opt3_opt5          mean= 565.91 std= 2.21 565->569 TPOT=27.11 TPS= 35.50 E2E= 14423.1
+  opt3_opt5_opt6     mean= 549.75 std= 1.25 548->552 TPOT=27.12 TPS= 35.54 E2E= 14407.7
+  pristine_recheck   mean= 575.94 std= 1.60 578->577 TPOT=27.17 TPS= 35.40 E2E= 14463.1
+  >>> gradient check: pristine=575.79 recheck=575.94 Δ=+0.15  [OK]
+
+========= NPU =========
+
+-- Qwen3-0.6B-INT4 --
+  base             mean= 150.19 std= 3.46 151->151 TPOT=10.66 TPS= 91.49 E2E=  5596.4
+  turbo            mean= 143.85 std= 1.50 143->141 TPOT=10.59 TPS= 92.16 E2E=  5555.8
+  best_perf        mean= 153.23 std= 1.93 150->155 TPOT=10.04 TPS= 96.91 E2E=  5283.8
+  best_perf_turbo  mean= 140.85 std= 2.04 143->137 TPOT= 9.12 TPS=106.76 E2E=  4799.4
+
+-- Qwen3-1.7B-INT4 --
+  base             mean= 293.13 std= 2.58 293->292 TPOT=17.47 TPS= 55.52 E2E=  9221.6
+  turbo            mean= 271.48 std= 0.99 271->270 TPOT=17.38 TPS= 55.93 E2E=  9154.3
+  best_perf        mean= 290.63 std= 2.73 292->293 TPOT=16.49 TPS= 58.73 E2E=  8718.6
+  best_perf_turbo  mean= 269.90 std= 3.31 266->271 TPOT=15.27 TPS= 63.46 E2E=  8072.6
+
+-- Qwen3-4B-INT4 --
+  base             mean= 690.46 std= 2.02 688->693 TPOT=31.29 TPS= 30.70 E2E= 16679.5
+  turbo            mean= 652.96 std= 1.36 651->653 TPOT=31.13 TPS= 30.92 E2E= 16560.7
+  best_perf        mean= 695.61 std= 3.76 690->693 TPOT=31.53 TPS= 30.46 E2E= 16808.9
+  best_perf_turbo  mean= 651.15 std= 2.40 647->652 TPOT=29.89 TPS= 32.15 E2E= 15927.1
+  base_recheck     mean= 688.84 std= 2.95 688->692 TPOT=31.10 TPS= 30.88 E2E= 16581.9

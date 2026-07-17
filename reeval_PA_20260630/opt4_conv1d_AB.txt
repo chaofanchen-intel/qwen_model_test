@@ -1,0 +1,8 @@
+opt-4: token-parallel paged_causal_conv1d_ref (PA), model_bench C++ + local OV, n=8, real 1000-tok prompt
+model                E0_ic1   E1_ic1  delta_ms  delta_%
+Qwen3.5-0.8B-INT4     67.89    64.42     -3.46    -5.1%
+Qwen3.5-2B-INT4       95.06    91.65     -3.41    -3.6%
+Qwen3.5-4B-INT4      219.22   216.10     -3.12    -1.4%
+
+vtune 2B prefill: paged_causal_conv1d_ref 66.3ms@20%occ -> 45.8ms@100%occ (-31% kernel op-time)
+md5: prefill(ic1)+decode(ic128) byte-identical to E0 across all 3 sizes

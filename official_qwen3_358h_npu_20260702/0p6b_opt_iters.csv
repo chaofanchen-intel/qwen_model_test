@@ -1,0 +1,31 @@
+iteration,model,framework,device,pretrain_time(s),initial_sys_mem(MiB),initial_rss_mem(MiB),compile_max_rss_mem(MiB),compile_max_sys_mem(MiB),compile_max_increase_rss_mem(MiB),compile_max_increase_sys_mem(MiB),input_size,infer_count,generation_time(s),output_size,latency(ms),2nd_tokens_throughput(tokens/s),total_throughput(tokens/s),1st_latency(ms),2nd_avg_latency(ms),precision,max_rss_mem(MiB),max_sys_mem(MiB),max_increase_rss_mem(MiB),max_increase_sys_mem(MiB),prompt_idx,1st_infer_latency(ms),2nd_infer_avg_latency(ms),num_beams,batch_size,tokenization_time,detokenization_time,resource_cpu_avg_util(%),resource_gpu_avg_util(%),resource_gpu_memory_avg_util(%),resource_npu_avg_util(%),resource_avg_rss_mem(MiB),resource_peak_rss_mem(MiB),resource_avg_sys_mem(MiB),resource_peak_sys_mem(MiB),resource_memory_samples,result_md5,start,end
+0,Qwen3-0.6B-INT4,ov,NPU,12.59815,,,,,,,1000,512,4.8934,512,9.55742,111.53693,104.6307,311.78796,8.96564,,,,,,0,310.841,8.7598,1,1,2.58555,0.55965,,,,,,,,,0,['b6cb5167c4428eabe6cd2c09b5193a1d'],2026-07-02T13:15:01.621553,2026-07-02T13:15:06.519063
+1,Qwen3-0.6B-INT4,ov,NPU,,,,,,,,1000,512,4.64718,512,9.07652,113.3217,110.1744,137.7364,8.82444,,,,,,0,137.451,8.55843,1,1,0.55454,0.29426,,,,,,,,,0,['b6cb5167c4428eabe6cd2c09b5193a1d'],2026-07-02T13:15:06.519094,2026-07-02T13:15:11.167920
+2,Qwen3-0.6B-INT4,ov,NPU,,,,,,,,1000,512,4.65444,512,9.0907,113.15958,110.00248,138.54311,8.83708,,,,,,0,138.266,8.58071,1,1,0.57148,0.32816,,,,,,,,,0,['b6cb5167c4428eabe6cd2c09b5193a1d'],2026-07-02T13:15:11.167943,2026-07-02T13:15:15.824048
+3,Qwen3-0.6B-INT4,ov,NPU,,,,,,,,1000,512,4.72904,512,9.2364,111.34167,108.26731,139.40208,8.98136,,,,,,0,139.111,8.65926,1,1,0.58195,0.37179,,,,,,,,,0,['b6cb5167c4428eabe6cd2c09b5193a1d'],2026-07-02T13:15:15.824075,2026-07-02T13:15:20.554843
+4,Qwen3-0.6B-INT4,ov,NPU,,,,,,,,1000,512,4.65288,512,9.08766,113.1725,110.03932,137.46111,8.83607,,,,,,0,136.98,8.60088,1,1,0.57544,0.2949,,,,,,,,,0,['b6cb5167c4428eabe6cd2c09b5193a1d'],2026-07-02T13:15:20.554866,2026-07-02T13:15:25.209458
+5,Qwen3-0.6B-INT4,ov,NPU,,,,,,,,1000,512,4.72093,512,9.22056,111.5263,108.4533,138.80235,8.96649,,,,,,0,138.518,8.65257,1,1,0.60891,0.31014,,,,,,,,,0,['b6cb5167c4428eabe6cd2c09b5193a1d'],2026-07-02T13:15:25.209490,2026-07-02T13:15:29.932144
+6,Qwen3-0.6B-INT4,ov,NPU,,,,,,,,1000,512,4.66226,512,9.10597,112.9887,109.81803,139.52333,8.85044,,,,,,0,139.249,8.58825,1,1,0.55987,0.2949,,,,,,,,,0,['b6cb5167c4428eabe6cd2c09b5193a1d'],2026-07-02T13:15:29.932166,2026-07-02T13:15:34.596071
+7,Qwen3-0.6B-INT4,ov,NPU,,,,,,,,1000,512,4.67688,512,9.13453,112.64613,109.47474,140.17329,8.87736,,,,,,0,139.892,8.59621,1,1,0.58433,0.44057,,,,,,,,,0,['b6cb5167c4428eabe6cd2c09b5193a1d'],2026-07-02T13:15:34.596096,2026-07-02T13:15:39.274988
+8,Qwen3-0.6B-INT4,ov,NPU,,,,,,,,1000,512,4.62504,512,9.03328,113.95488,110.7017,140.42625,8.7754,,,,,,0,140.044,8.53233,1,1,0.62047,0.43023,,,,,,,,,0,['b6cb5167c4428eabe6cd2c09b5193a1d'],2026-07-02T13:15:39.275019,2026-07-02T13:15:43.902093
+9,Qwen3-0.6B-INT4,ov,NPU,,,,,,,,1000,512,4.64657,512,9.07534,113.4018,110.18871,140.31404,8.8182,,,,,,0,140.011,8.58695,1,1,0.61356,0.2347,,,,,,,,,0,['b6cb5167c4428eabe6cd2c09b5193a1d'],2026-07-02T13:15:43.902130,2026-07-02T13:15:48.550314
+10,Qwen3-0.6B-INT4,ov,NPU,,,,,,,,1000,512,4.65884,512,9.09929,113.099,109.89863,140.50284,8.84181,,,,,,0,140.18,8.60394,1,1,0.57548,0.39081,,,,,,,,,0,['b6cb5167c4428eabe6cd2c09b5193a1d'],2026-07-02T13:15:48.550336,2026-07-02T13:15:53.210928
+avg,Qwen3-0.6B-INT4,ov,NPU,,,,,,,,1000.0,512.0,4.66741,512.0,9.11603,112.85579,109.69692,139.28848,8.86087,,,,,,0,138.9702,8.59595,1,1,0.5846,0.33904,,,,,,,,,0,['b6cb5167c4428eabe6cd2c09b5193a1d'],,
+mini,Qwen3-0.6B-INT4,ov,NPU,,,,,,,,1000,512,4.62504,512,9.03328,113.95488,110.7017,137.46111,8.7754,,,,,,0,136.98,8.53233,1,1,0.55454,0.2347,,,,,,,,,0,['b6cb5167c4428eabe6cd2c09b5193a1d'],,
+median,Qwen3-0.6B-INT4,ov,NPU,,,,,,,,1000.0,512.0,4.65664,512.0,9.095,113.12928,109.95053,139.46271,8.83944,,,,,,0,139.18,8.59223,1,1,0.57872,0.31915,,,,,,,,,0,['b6cb5167c4428eabe6cd2c09b5193a1d'],,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+tokenization_time: Tokenizer encode time,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+detokenization_time: Tokenizer decode time,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2nd_tokens_throughput: batch_size * 1000 / 2nd_avg_latency(ms),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+total_throughput: output_size / generation_time(s),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+pretrain_time: Total time of load model and compile model,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+generation_time: Time for one interaction. (e.g. The duration of  answering one question or generating one picture),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+iteration=0: warm-up; iteration=avg: average (exclude warm-up);iteration=mini: minimum value (exclude warm-up);iteration=median: median value (exclude warm-up);,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+max_rss_mem/max_sys_mem: max rss/system memory consumption during iteration;,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+max_increase_rss_mem/max_increase_sys_mem: max increase of rss/system memory during iteration;,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+initial_rss_mem/initial_sys_mem: rss/system memory state at start;,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+compile_max_rss_mem/compile_max_sys_mem: max rss/system memory consumption on compilation phase;,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+compile_max_increase_rss_mem/compile_max_increase_sys_mem: max increase of rss/system memory on compilation phase;,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+resource_* fields: compact whole-run CPU/GPU/NPU utilization and RSS/System memory summary; GPU util is blank if xpu-smi does not expose compute utilization.,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+resource_cpu_cpuN_avg_util: average per-core CPU utilization over the benchmark run,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+resource_gpu_memory_avg_util: average GPU memory utilization reported by xpu-smi,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

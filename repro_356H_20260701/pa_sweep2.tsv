@@ -1,0 +1,12 @@
+SWAP	B0b_r1	Qwen3.5-0.8B-INT4	PA	ic=1	infer=151.42	e2e=196.39	md5=514faf5ax1|cae8d14ex6|dc27db97x1
+SWAP	opt123_r1	Qwen3.5-0.8B-INT4	PA	ic=1	infer=147.97	e2e=192.73	md5=514faf5ax1|cae8d14ex6|dc27db97x1
+SWAP	B0b_r2	Qwen3.5-0.8B-INT4	PA	ic=1	infer=152.02	e2e=197.96	md5=514faf5ax1|cae8d14ex6|dc27db97x1
+SWAP	opt123_r2	Qwen3.5-0.8B-INT4	PA	ic=1	infer=149.03	e2e=195.16	md5=514faf5ax1|cae8d14ex6|dc27db97x1
+SWAP	B0b_r1	Qwen3.5-2B-INT4	PA	ic=1	infer=214.52	e2e=260.11	md5=dd753679x8
+SWAP	opt123_r1	Qwen3.5-2B-INT4	PA	ic=1	infer=207.78	e2e=253.90	md5=dd753679x8
+SWAP	B0b_r2	Qwen3.5-2B-INT4	PA	ic=1	infer=214.38	e2e=259.72	md5=dd753679x8
+SWAP	opt123_r2	Qwen3.5-2B-INT4	PA	ic=1	infer=207.48	e2e=253.57	md5=dd753679x8
+SWAP	B0b_r1	Qwen3.5-4B-INT4	PA	ic=1	infer=506.41	e2e=553.42	md5=e067b6f4x8
+SWAP	opt123_r1	Qwen3.5-4B-INT4	PA	ic=1	infer=494.88	e2e=541.44	md5=e067b6f4x8
+SWAP	B0b_r2	Qwen3.5-4B-INT4	PA	ic=1	infer=506.55	e2e=553.18	md5=e067b6f4x8
+SWAP	opt123_r2	Qwen3.5-4B-INT4	PA	ic=1	infer=496.82	e2e=543.34	md5=e067b6f4x8

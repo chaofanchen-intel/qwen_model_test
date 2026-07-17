@@ -1,0 +1,7 @@
+Qwen3.5 PA backend re-evaluation of opt-1/2/3 (model_bench C++ + local opt-OV, n=8 ic=128, real 1000-tok prompt)
+size   A_base_ms  Dprime_ms  delta_ms  delta_%  md5 ok
+0.8B       70.17      69.00     -1.17    -1.7%    True
+2B         99.01      96.78     -2.24    -2.3%    True
+4B        225.55     221.44     -4.12    -1.8%    True
+
+vs OLD doc (SDPA): 0.8B -20.8%, 2B -16.1%, 4B -12.6%  -> under PA the same 3 opts give only ~2%

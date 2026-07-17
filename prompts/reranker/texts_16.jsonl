@@ -1,0 +1,16 @@
+{"text": "Intel Core Ultra processors include CPU, GPU, and NPU compute engines. The NPU is designed for efficient local AI inference, while the CPU and GPU handle general purpose and parallel workloads."}
+{"text": "OpenVINO helps deploy optimized neural networks across Intel CPU, integrated GPU, discrete GPU, and NPU devices. It provides graph optimizations, model compilation, and runtime device plugins."}
+{"text": "A reranker receives one query and a set of candidate documents, scores every query document pair, and returns the highest scoring candidates. Benchmarking should vary the number of documents per query."}
+{"text": "Useful memory metrics for local model deployment include process RSS before loading, peak RSS during compilation, runtime RSS, system memory pressure, and memory growth between iterations."}
+{"text": "INT8 quantization can reduce model size and memory bandwidth pressure. For transformer inference it often improves throughput, but accuracy and ranking quality should be validated on task data."}
+{"text": "A RAG pipeline usually embeds documents into vectors, retrieves a candidate set with approximate nearest neighbor search, optionally reranks the candidates, and then sends the best passages to a generator."}
+{"text": "Mobile PC power efficiency can improve through workload scheduling, hardware video acceleration, optimized conferencing effects, and using low power AI engines for background blur and noise suppression."}
+{"text": "Embedding models map text to vectors for semantic search. Reranking models compare a query with each candidate document and produce relevance scores, usually improving precision after initial retrieval."}
+{"text": "The top_n parameter changes how many ranked documents are returned. It usually has much less performance impact than candidate document count or maximum sequence length."}
+{"text": "Maximum sequence length controls how much of each query document pair is kept before truncation. Larger values can preserve more context but increase latency and memory use."}
+{"text": "NPU compilation often prefers static input shapes. For encoder style models, fixed maximum length and padding can make benchmark runs more reproducible and avoid dynamic shape compile failures."}
+{"text": "Hardware monitoring during benchmark runs should report CPU utilization, per core CPU utilization, GPU utilization when available, NPU busy time, and process memory usage."}
+{"text": "Some xpu-smi versions expose GPU memory utilization but not compute engine utilization. In that case GPU memory utilization should not be mislabeled as compute utilization."}
+{"text": "For reranker benchmarks, prompt files should contain queries. Candidate documents should be supplied separately through texts_file so the workload matches retrieval and RAG usage."}
+{"text": "The texts_file input is a JSONL document list. Each line should contain a text field representing one candidate passage to be ranked for every query."}
+{"text": "Long chat prompts designed for text generation are poor defaults for reranker queries because they mix instructions, dialogue formatting, and source text instead of a concise information need."}

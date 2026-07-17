@@ -1,0 +1,163 @@
+diff --git a/src/plugins/intel_gpu/src/graph/dynamic_quantize.cpp b/src/plugins/intel_gpu/src/graph/dynamic_quantize.cpp
+index de6e2f4858..fca14a683b 100644
+--- a/src/plugins/intel_gpu/src/graph/dynamic_quantize.cpp
++++ b/src/plugins/intel_gpu/src/graph/dynamic_quantize.cpp
+@@ -20,11 +20,20 @@ static bool should_skip_execution(dynamic_quantize_node const& node, const layou
+         || !act_layout.is_static())
+         return false;
+ 
+-    // Do not skip dynamic quantization if next node is not fully connected.(such as SDPA)
+-    OPENVINO_ASSERT(node.get_users().size() == node.get_outputs_count(),
+-                    "Dynamic quantization is supposed to have only one user-node with duplicated connection: ", node.id());
+-    if (!(*node.get_users().begin())->is_type<fully_connected>())
+-        return false;
++    // Normally a DynamicQuantize feeds exactly one FullyConnected, which consumes every
++    // DQ output (quantized data + scale[+zp]), so users.size() == outputs_count.
++    // opt-3 lets several FullyConnected that share the same activation reuse one DQ
++    // (q/k/v/z or gate/up): then users.size() == outputs_count * num_consumers. Skipping
++    // is still valid in that case — the DQ becomes an f16 pass-through that every consumer
++    // reads identically. Require users to be a whole number of full consumers and that all
++    // of them are fully_connected (skipping is a no-op only for the FC f16 path).
++    const size_t outs = node.get_outputs_count();
++    OPENVINO_ASSERT(outs > 0 && node.get_users().size() % outs == 0,
++                    "Dynamic quantization users are not a whole multiple of its outputs: ", node.id());
++    for (const auto& u : node.get_users()) {
++        if (!u->is_type<fully_connected>())
++            return false;
++    }
+ 
+     // If batch size is 1, dynamic_quantize is disabled for performance reason
+     size_t input_batch = act_layout.batch();
+diff --git a/src/plugins/intel_gpu/src/graph/layout_optimizer.cpp b/src/plugins/intel_gpu/src/graph/layout_optimizer.cpp
+index 5de06f63d8..a4ca6be46e 100644
+--- a/src/plugins/intel_gpu/src/graph/layout_optimizer.cpp
++++ b/src/plugins/intel_gpu/src/graph/layout_optimizer.cpp
+@@ -1047,6 +1047,22 @@ void layout_optimizer::set_onednn_dyn_conv_preferred_format(convolution_node& no
+     auto input_channels = get_convolution_channel_count(node, input_layout, true);
+     auto output_channels = get_convolution_channel_count(node, output_layout, false);
+ 
++    // TTFT-opt: depthwise convolutions (groups == in_ch == out_ch, e.g. the
++    // causal conv1d inside Qwen3.5 Gated-DeltaNet SSM layers) gain nothing from
++    // a blocked fsv16 layout — each output channel reads exactly one input
++    // channel, so there is zero channel-block reuse in the conv kernel. The only
++    // effect of fsv16 here is a bfyx->blocked reorder before the conv and a
++    // blocked->bfyx reorder after; on the SSM conv1d (kernel=4, trivial compute)
++    // those two reorders dominate the layer's prefill cost (~785us/layer x18 on
++    // Qwen3.5-2B). Keep planar format so no reorder is inserted around the conv;
++    // the dynamic OCL conv impl supports bfyx natively.
++    if (input_channels > 0 && static_cast<uint32_t>(input_channels) == node.get_groups() &&
++        input_channels == output_channels) {
++        node.set_preferred_input_fmt(0, format::get_default_format(rank));
++        node.set_preferred_output_fmt(0, format::get_default_format(rank));
++        return;
++    }
++
+     if (i8_u8_input) {
+         // Set default input format for i8/u8 input
+         node.set_preferred_input_fmt(0, get_fsv32_format(rank));
+diff --git a/src/plugins/intel_gpu/src/kernel_selector/kernels/permute/permute_kernel_ref.cpp b/src/plugins/intel_gpu/src/kernel_selector/kernels/permute/permute_kernel_ref.cpp
+index 2cf85c8f71..a525bce3f0 100644
+--- a/src/plugins/intel_gpu/src/kernel_selector/kernels/permute/permute_kernel_ref.cpp
++++ b/src/plugins/intel_gpu/src/kernel_selector/kernels/permute/permute_kernel_ref.cpp
+@@ -146,6 +146,37 @@ CommonDispatchData PermuteKernelRef::SetDefault(const permute_params& params) co
+                                                                         {Tensor::DataChannelName::FEATURE, Tensor::DataChannelName::BATCH}};
+         dispatchData.gws = {in.X().v, in.Y().v * in.Z().v * in.W().v * in.U().v  * in.V().v , in.Feature().v * in.Batch().v};
+         dispatchData.lws = GetOptimalLocalWorkGroupSizes(dispatchData.gws, params.engineInfo, in_layout, out_layout, dims_by_gws);
++
++        // TTFT-opt: in this (non-F_FIRST) branch gws[2] is the F*B axis, which is
++        // the inner-most axis of the OUT_IDX math (output writes are contiguous
++        // along F). For best coalescing the work-group should sit on that axis.
++        // But GetOptimalLocalWorkGroupSizes uses a bfyx priority of x->y->f and
++        // greedily puts the LWS on the Y axis first; when Y is a small or
++        // awkwardly-divisible (often dynamic) seq length, it picks a tiny LWS on
++        // Y and leaves only 1 work-item along F, making the writes scattered.
++        // For the Qwen3.5 SSM post-conv transpose ([1,6144,S]->[1,S,6144]) this
++        // is ~2x slower than the lws={1,1,WG} dispatch that the allocator already
++        // (accidentally) produces for S with no usable Y divisor — which measures
++        // fastest and is what we force here. Trigger only in the pathological
++        // shape (large F axis, tiny LWS landed on F) so we never regress permutes
++        // the allocator already handles well; this is a pure LWS choice and is
++        // numerically identical (verified by md5).
++        const size_t gws_y = dispatchData.gws[1];
++        const size_t gws_f = dispatchData.gws[2];
++        const size_t cur_total_lws = dispatchData.lws[0] * dispatchData.lws[1] * dispatchData.lws[2];
++        const size_t max_wg = params.engineInfo.maxWorkGroupSize ? params.engineInfo.maxWorkGroupSize : 256;
++        if (gws_f >= gws_y && gws_f >= 256) {
++            size_t lws_f = 1;
++            for (size_t cand = std::min<size_t>(max_wg, gws_f); cand >= 1; --cand) {
++                if (gws_f % cand == 0) { lws_f = cand; break; }
++            }
++            // Only override when concentrating the work-group on the coalesced F
++            // axis yields a work-group at least as large as the allocator's pick
++            // (never shrink occupancy) and actually moves more lanes onto F.
++            if (lws_f >= cur_total_lws && lws_f > dispatchData.lws[2]) {
++                dispatchData.lws = {1, 1, lws_f};
++            }
++        }
+     }
+ 
+     return dispatchData;
+diff --git a/src/plugins/intel_gpu/src/plugin/transformations/dynamic_quantize_fully_connected.cpp b/src/plugins/intel_gpu/src/plugin/transformations/dynamic_quantize_fully_connected.cpp
+index 73a4e22b64..16b584b5ee 100644
+--- a/src/plugins/intel_gpu/src/plugin/transformations/dynamic_quantize_fully_connected.cpp
++++ b/src/plugins/intel_gpu/src/plugin/transformations/dynamic_quantize_fully_connected.cpp
+@@ -17,6 +17,44 @@
+ 
+ namespace ov::intel_gpu {
+ 
++namespace {
++// TTFT-opt (opt-3): two FullyConnectedCompressed that consume the SAME activation
++// (e.g. Qwen3.5 linear_attn in_proj_qkv/a/b/z share the input_layernorm output, and
++// mlp gate_proj/up_proj share the post_attention_layernorm output) each get their own
++// DynamicQuantize inserted below. When their quantization configs are identical the
++// activation is re-quantized 2-4x per layer for nothing. The generic SharedOpOptimization
++// cannot dedup them because DynamicQuantize has no visit_attributes (its attr-map is empty,
++// so it would merge even config-mismatched nodes). We dedup explicitly here, reusing an
++// existing DynamicQuantize on the same activation only when every attribute that affects
++// the produced values/output-layout matches exactly -> numerically identical, never merges
++// a config mismatch.
++bool dq_attrs_equal(const ov::op::internal::DynamicQuantize::Attributes& a,
++                    const ov::op::internal::DynamicQuantize::Attributes& b) {
++    return a.quantization_type == b.quantization_type &&
++           a.quantization_dt == b.quantization_dt &&
++           a.scale_dt == b.scale_dt &&
++           a.zp_dt == b.zp_dt &&
++           a.precomputed_reduction == b.precomputed_reduction &&
++           a.precomputed_reduction_dt == b.precomputed_reduction_dt &&
++           a.output_storage_type == b.output_storage_type &&
++           a.group_sizes == b.group_sizes;
++}
++
++// Search the consumers of `act` for an already-inserted DynamicQuantize with an equal
++// config. scales_zp_output_order / group_sizes length depend only on the activation rank,
++// which is identical for consumers of the same Output, so dq_attrs_equal is sufficient.
++std::shared_ptr<ov::op::internal::DynamicQuantize>
++find_reusable_dq(const ov::Output<ov::Node>& act,
++                 const ov::op::internal::DynamicQuantize::Attributes& cfg) {
++    for (const auto& ti : act.get_target_inputs()) {
++        auto cand = ov::as_type_ptr<ov::op::internal::DynamicQuantize>(ti.get_node()->shared_from_this());
++        if (cand && dq_attrs_equal(cand->get_attrs(), cfg))
++            return cand;
++    }
++    return nullptr;
++}
++}  // namespace
++
+ // precomputed_reduction is providing partial reduction of activation from dynamic quantization into onednn for faster computation
+ // It is used for asymmetric weight.
+ DynamicQuantizeFullyConnected::DynamicQuantizeFullyConnected(uint64_t group_size,
+@@ -105,7 +143,13 @@ DynamicQuantizeFullyConnected::DynamicQuantizeFullyConnected(uint64_t group_size
+             config.zp_dt = element::u8; // it supports u8 only now
+         }
+ 
+-        auto dyn_quan = std::make_shared<ov::op::internal::DynamicQuantize>(m_fc->input_value(0), config);
++        // opt-3: reuse a DynamicQuantize already inserted on this same activation by a
++        // sibling FullyConnectedCompressed (e.g. q/k/v/z or gate/up sharing a layernorm
++        // output) when the config is identical, instead of inserting a duplicate.
++        auto dyn_quan = find_reusable_dq(m_fc->input_value(0), config);
++        if (!dyn_quan) {
++            dyn_quan = std::make_shared<ov::op::internal::DynamicQuantize>(m_fc->input_value(0), config);
++        }
+         int dyn_quan_output_idx = 2;
+         auto optional_a_zp = config.quantization_type == QuantizationType::Symmetric ?
+                                 std::make_shared<ov::intel_gpu::op::Placeholder>() : dyn_quan->output(dyn_quan_output_idx++);

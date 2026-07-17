@@ -1,0 +1,91 @@
+Multiple distributions found for package optimum. Picked distribution: optimum-intel
+[ INFO ] ==SUCCESS FOUND==: use_case: text_gen, model_type: qwen, model_Name: Qwen3-0.6B-INT4
+[ INFO ] OV Config={'MAX_PROMPT_LEN': 1024, 'MIN_RESPONSE_LEN': 512, 'NPUW_LLM_PREFILL_CHUNK_SIZE': 2048, 'NPUW_LLM_GENERATE_HINT': 'BEST_PERF', 'CACHE_DIR': ''}
+[ INFO ] Model path=/home/chaofan/model_benchmark/benchmark/models/Qwen3-0.6B-INT4, openvino runtime version: 2026.2.1-21920-7102b88c1f1-qwen-ttft-optimizations, genai version: 2026.2.1.0-3124-5f787b2aaee-qwen-ttft-llm-bench
+[ INFO ] Selected OpenVINO GenAI for benchmarking
+[ INFO ] Pipeline initialization time: 12.42s
+[ INFO ] Read prompts from /home/chaofan/model_benchmark/benchmark/tests/prompts/qwen3_1k.jsonl
+[ INFO ] Numbeams: 1, benchmarking iter nums(exclude warm-up): 10, prompt nums: 1, prompt idx: [0]
+[ INFO ] [warm-up][P0] Input text: <s>[INST] <<SYS>> A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. <</SYS>> You will act as a Christian, and fully summarize following text:
+Sometimes it's nice to take a minute in the pew by yourself beforehand. You have this beautiful church probably almost all to yourself. Can you feel its energy resonating through you? Can you feel the majesty of the Lord's kingdom and how you're a part of it? Take a moment to kneel and pray with your head down and hands clasped together. Reflect on your faith and how you feel currently. Think about how you've been responding to God's call and how you've been living in the light of his love. When the priest is ready for you, of course. You'll probably see him there by his lonesome or someone else walk out just before you. Sit down either across from him or behind the screen -- it's totally up to you whether or not you prefer to remain anonymo ... [truncated to 1024]
+[ INFO ] [warm-up][P0] Text generation start: 2026-07-02T13:13:47.445305
+[ INFO ] [warm-up][P0] Text generation end: 2026-07-02T13:13:52.788920
+[ INFO ] [warm-up][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 2.43ms, Detokenization Time: 1.07ms, Generation Time: 5.34s, Latency: 10.4366 ms/token
+[ INFO ] [warm-up][P0] First token latency: 372.90 ms, other tokens latency: 9.73 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [warm-up][P0] First infer latency: 372.08 ms, other infers latency: 9.30 ms/infer, inference count: 512
+[ INFO ] [warm-up][P0] Result MD5:['b6cb5167c4428eabe6cd2c09b5193a1d']
+[ INFO ] [warm-up][P0] Generated:  pew by yourself before you. You have this beautiful church probably almost all to yourself. Can you feel its energy resonating through you? Can you feel the majesty of the Lord's kingdom and how you're a part of it? Take a moment to kneel and pray with your head down and hands clasped together. Reflect on your faith and how you feel currently. Think about how you've been responding to God's call and how you've been living in the light of his love. When the priest is ready for you, of course. You'll probably see him there by his lonesome or someone else walk out just before you. Sit down either across from him or behind the screen -- it's totally up to you whether or not you prefer to remain anonymous. He will not treat you any differently either way. Make the sign of the cross upon his prompt, saying, "Bless me, Lord, and be with me." So you can feel the love of God and how you are part of the kingdom. So you can feel the love of God and how you are part of the kingdom. So you can feel the love of God and how you are part of the kingdom. So you can feel the love of God and how you are part of the kingdom. So you can feel the love of God and how you are part of the kingdom. So you can feel the love of God and how you are part of the kingdom. So you can feel the love of God and how you are part of the kingdom. So you can feel the love of God and how you are part of the kingdom. So you can feel the love of God and how you are part of the kingdom. So you can feel the love of God and how you are part of the kingdom. So you can feel the love of God and how you are part of the kingdom. So you can feel the love of God and how you are part of the kingdom. So you can feel the love of God and how you are part of the kingdom. So you can feel the love of God and how you are part of the kingdom. So you can feel the love of God and how you are part of the kingdom. So you can feel the love of God and how you are part of the kingdom. So you can feel the love of God and how you are part of the kingdom. So you can feel the love of God and how you are part of the kingdom. So you can feel the love of God and how you are part of the kingdom
+[ INFO ] [warm-up][P0] start: 2026-07-02T13:13:47.442710, end: 2026-07-02T13:13:52.792045
+[ INFO ] [1][P0] Text generation start: 2026-07-02T13:13:52.793974
+[ INFO ] [1][P0] Text generation end: 2026-07-02T13:13:57.931735
+[ INFO ] [1][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 1.72ms, Detokenization Time: 0.72ms, Generation Time: 5.14s, Latency: 10.0344 ms/token
+[ INFO ] [1][P0] First token latency: 150.70 ms, other tokens latency: 9.76 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [1][P0] First infer latency: 149.69 ms, other infers latency: 9.33 ms/infer, inference count: 512
+[ INFO ] [1][P0] Result MD5:['b6cb5167c4428eabe6cd2c09b5193a1d']
+[ INFO ] [1][P0] start: 2026-07-02T13:13:52.792130, end: 2026-07-02T13:13:57.934353
+[ INFO ] [2][P0] Text generation start: 2026-07-02T13:13:57.936135
+[ INFO ] [2][P0] Text generation end: 2026-07-02T13:14:03.150323
+[ INFO ] [2][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 1.59ms, Detokenization Time: 1.00ms, Generation Time: 5.21s, Latency: 10.1837 ms/token
+[ INFO ] [2][P0] First token latency: 146.29 ms, other tokens latency: 9.92 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [2][P0] First infer latency: 145.66 ms, other infers latency: 9.36 ms/infer, inference count: 512
+[ INFO ] [2][P0] Result MD5:['b6cb5167c4428eabe6cd2c09b5193a1d']
+[ INFO ] [2][P0] start: 2026-07-02T13:13:57.934432, end: 2026-07-02T13:14:03.153654
+[ INFO ] [3][P0] Text generation start: 2026-07-02T13:14:03.155768
+[ INFO ] [3][P0] Text generation end: 2026-07-02T13:14:08.296650
+[ INFO ] [3][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 1.91ms, Detokenization Time: 0.89ms, Generation Time: 5.14s, Latency: 10.0406 ms/token
+[ INFO ] [3][P0] First token latency: 151.45 ms, other tokens latency: 9.76 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [3][P0] First infer latency: 150.41 ms, other infers latency: 9.30 ms/infer, inference count: 512
+[ INFO ] [3][P0] Result MD5:['b6cb5167c4428eabe6cd2c09b5193a1d']
+[ INFO ] [3][P0] start: 2026-07-02T13:14:03.153742, end: 2026-07-02T13:14:08.299608
+[ INFO ] [4][P0] Text generation start: 2026-07-02T13:14:08.301494
+[ INFO ] [4][P0] Text generation end: 2026-07-02T13:14:13.477450
+[ INFO ] [4][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 1.68ms, Detokenization Time: 1.15ms, Generation Time: 5.18s, Latency: 10.1090 ms/token
+[ INFO ] [4][P0] First token latency: 151.39 ms, other tokens latency: 9.83 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [4][P0] First infer latency: 150.34 ms, other infers latency: 9.31 ms/infer, inference count: 512
+[ INFO ] [4][P0] Result MD5:['b6cb5167c4428eabe6cd2c09b5193a1d']
+[ INFO ] [4][P0] start: 2026-07-02T13:14:08.299689, end: 2026-07-02T13:14:13.481157
+[ INFO ] [5][P0] Text generation start: 2026-07-02T13:14:13.483299
+[ INFO ] [5][P0] Text generation end: 2026-07-02T13:14:18.650695
+[ INFO ] [5][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 1.92ms, Detokenization Time: 0.54ms, Generation Time: 5.17s, Latency: 10.0923 ms/token
+[ INFO ] [5][P0] First token latency: 151.04 ms, other tokens latency: 9.82 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [5][P0] First infer latency: 150.11 ms, other infers latency: 9.31 ms/infer, inference count: 512
+[ INFO ] [5][P0] Result MD5:['b6cb5167c4428eabe6cd2c09b5193a1d']
+[ INFO ] [5][P0] start: 2026-07-02T13:14:13.481257, end: 2026-07-02T13:14:18.653072
+[ INFO ] [6][P0] Text generation start: 2026-07-02T13:14:18.654901
+[ INFO ] [6][P0] Text generation end: 2026-07-02T13:14:23.811888
+[ INFO ] [6][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 1.64ms, Detokenization Time: 0.56ms, Generation Time: 5.16s, Latency: 10.0720 ms/token
+[ INFO ] [6][P0] First token latency: 150.45 ms, other tokens latency: 9.80 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [6][P0] First infer latency: 149.33 ms, other infers latency: 9.30 ms/infer, inference count: 512
+[ INFO ] [6][P0] Result MD5:['b6cb5167c4428eabe6cd2c09b5193a1d']
+[ INFO ] [6][P0] start: 2026-07-02T13:14:18.653151, end: 2026-07-02T13:14:23.814416
+[ INFO ] [7][P0] Text generation start: 2026-07-02T13:14:23.816395
+[ INFO ] [7][P0] Text generation end: 2026-07-02T13:14:28.986245
+[ INFO ] [7][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 1.79ms, Detokenization Time: 0.74ms, Generation Time: 5.17s, Latency: 10.0972 ms/token
+[ INFO ] [7][P0] First token latency: 148.67 ms, other tokens latency: 9.83 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [7][P0] First infer latency: 147.78 ms, other infers latency: 9.31 ms/infer, inference count: 512
+[ INFO ] [7][P0] Result MD5:['b6cb5167c4428eabe6cd2c09b5193a1d']
+[ INFO ] [7][P0] start: 2026-07-02T13:14:23.814492, end: 2026-07-02T13:14:28.988815
+[ INFO ] [8][P0] Text generation start: 2026-07-02T13:14:28.990705
+[ INFO ] [8][P0] Text generation end: 2026-07-02T13:14:34.153238
+[ INFO ] [8][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 1.68ms, Detokenization Time: 0.51ms, Generation Time: 5.16s, Latency: 10.0828 ms/token
+[ INFO ] [8][P0] First token latency: 150.13 ms, other tokens latency: 9.81 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [8][P0] First infer latency: 149.12 ms, other infers latency: 9.29 ms/infer, inference count: 512
+[ INFO ] [8][P0] Result MD5:['b6cb5167c4428eabe6cd2c09b5193a1d']
+[ INFO ] [8][P0] start: 2026-07-02T13:14:28.988894, end: 2026-07-02T13:14:34.155468
+[ INFO ] [9][P0] Text generation start: 2026-07-02T13:14:34.157256
+[ INFO ] [9][P0] Text generation end: 2026-07-02T13:14:39.324885
+[ INFO ] [9][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 1.60ms, Detokenization Time: 0.51ms, Generation Time: 5.17s, Latency: 10.0928 ms/token
+[ INFO ] [9][P0] First token latency: 149.13 ms, other tokens latency: 9.82 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [9][P0] First infer latency: 148.26 ms, other infers latency: 9.33 ms/infer, inference count: 512
+[ INFO ] [9][P0] Result MD5:['b6cb5167c4428eabe6cd2c09b5193a1d']
+[ INFO ] [9][P0] start: 2026-07-02T13:14:34.155545, end: 2026-07-02T13:14:39.327143
+[ INFO ] [10][P0] Text generation start: 2026-07-02T13:14:39.328859
+[ INFO ] [10][P0] Text generation end: 2026-07-02T13:14:44.506301
+[ INFO ] [10][P0] Input token size: 1000, Output size: 512, Infer count: 512, Tokenization Time: 1.55ms, Detokenization Time: 0.58ms, Generation Time: 5.18s, Latency: 10.1120 ms/token
+[ INFO ] [10][P0] First token latency: 150.77 ms, other tokens latency: 9.84 ms/token, len of input tokens: 1000 * 1
+[ INFO ] [10][P0] First infer latency: 149.78 ms, other infers latency: 9.33 ms/infer, inference count: 512
+[ INFO ] [10][P0] Result MD5:['b6cb5167c4428eabe6cd2c09b5193a1d']
+[ INFO ] [10][P0] start: 2026-07-02T13:14:39.327204, end: 2026-07-02T13:14:44.508891
+[ INFO ] <<< Warm-up iteration is excluded. >>>
+[ INFO ] [Total] Iterations: 10
+[ INFO ] [Average] P[0] Input token size: 1000, 1st token latency: 150.00 ms, 2nd token latency: 9.82 ms/token, 2nd tokens throughput: 101.86 tokens/s

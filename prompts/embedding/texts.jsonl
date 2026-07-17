@@ -1,0 +1,16 @@
+{"prompt": "Given a web search query, retrieve relevant passages about Intel Core Ultra AI acceleration."}
+{"prompt": "OpenVINO optimizes model deployment across CPU, GPU, and NPU devices with runtime plugins and graph transformations."}
+{"prompt": "Embedding models convert text into vectors so that semantically similar passages can be found with nearest neighbor search."}
+{"prompt": "Reranking models compare a query with candidate documents and return relevance scores for each pair."}
+{"prompt": "A RAG pipeline retrieves candidate passages, reranks them, and provides the strongest evidence to a generation model."}
+{"prompt": "INT8 quantization can improve inference throughput by reducing memory bandwidth and model storage requirements."}
+{"prompt": "NPU benchmarks often need fixed sequence lengths to avoid dynamic shape compilation issues."}
+{"prompt": "GPU utilization and GPU memory utilization should be reported separately when hardware tools expose both counters."}
+{"prompt": "Process RSS and system memory are useful deployment metrics but can perturb latency if sampled too aggressively."}
+{"prompt": "Benchmark warm up iterations should be excluded from steady state latency and throughput averages."}
+{"prompt": "Choosing an embedding maximum length requires balancing semantic coverage against latency and memory cost."}
+{"prompt": "Candidate set size is one of the main scaling dimensions for text reranking workloads."}
+{"prompt": "Vector search provides broad recall while reranking improves final precision for the top retrieved documents."}
+{"prompt": "CPU baselines help compare model size, quantization, and plugin settings across machines."}
+{"prompt": "OpenVINO compiled model cache affects startup time but should be separated from inference latency metrics."}
+{"prompt": "Quality metrics such as recall at k and nDCG are separate from performance metrics such as latency and throughput."}

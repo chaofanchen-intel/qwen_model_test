@@ -1,0 +1,51 @@
+================================================================================
+  Qwen3 OpenVINO GenAI Text-Generation Benchmark (C++)
+================================================================================
+  Devices:       NPU 
+  infer_count:   64
+  num_iters:     1 (+1 warm-up)
+  permutation:   OFF
+  profile:       OFF
+
+################################################################################
+  Model: Qwen3-0.6B-INT4 | Device: NPU | Backend: LLMPipeline
+################################################################################
+  Plugin config: CACHE_DIR= MAX_PROMPT_LEN=1024 MIN_RESPONSE_LEN=512 NPUW_LLM_PREFILL_CHUNK_SIZE=2048 NPU_TURBO=YES
+  Compiling pipeline...
+  Compiled in 6.29s
+  Prompts loaded: 1
+
+  [P0] input_tokens=1000  infer_count(max_new)=64  num_iters=1 (+1 warmup)  permute=false
+    [warm-up][0][P0] in=1000 out=64 TTFT=283.2ms TPOT=13.01ms E2E=1104ms TPS=58.0
+    [1][P0] in=1000 out=64 TTFT=141.4ms TPOT=10.41ms E2E=798ms TPS=80.2
+
+================================================================================
+  Result: Qwen3-0.6B-INT4 | NPU | text-only | prompt[0] in=1000 out_max=64
+  Pipeline: LLMPipeline  measured_iters=1  compile=6.29s
+================================================================================
+  Metric                   Mean      Std        P50        P90        P95      Min      Max  Unit
+  ------------------ ---------- -------- ---------- ---------- ---------- -------- --------  ----
+  TTFT                   141.42     0.00     141.42     141.42     141.42   141.42   141.42  [ms]
+  TPOT                    10.41     0.00      10.41      10.41      10.41    10.41    10.41  [ms]
+  1st infer              141.14     0.00     141.14     141.14     141.14   141.14   141.14  [ms]
+  2nd infer                9.96     0.00       9.96       9.96       9.96     9.96     9.96  [ms]
+  Throughput              80.20     0.00      80.20      80.20      80.20    80.20    80.20  [tok/s]
+  Decode TPS              96.04     0.00      96.04      96.04      96.04    96.04    96.04  [tok/s]
+  Output tokens           64.00     0.00      64.00      64.00      64.00    64.00    64.00  [tok]
+  Gen time                 0.80     0.00       0.80       0.80       0.80     0.80     0.80  [s]
+  Prefill                141.42     0.00     141.42     141.42     141.42   141.42   141.42  [ms]
+  Decode                 656.54     0.00     656.54     656.54     656.54   656.54   656.54  [ms]
+  E2E                    797.97     0.00     797.97     797.97     797.97   797.97   797.97  [ms]
+  Tokenization             1.21     0.00       1.21       1.21       1.21     1.21     1.21  [ms]
+  Detokenization           0.13     0.00       0.13       0.13       0.13     0.13     0.13  [ms]
+
+  --- Memory ---
+  Memory monitor: unavailable/disabled
+
+  --- Device Utilization ---
+================================================================================
+CSV  written: /tmp/qwen3_npu_358h_md5_06/0p6b_turbo.csv
+JSON written: /tmp/qwen3_npu_358h_md5_06/0p6b_turbo.json
+
+  Total runs: 1
+  Done.
