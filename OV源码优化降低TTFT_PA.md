@@ -14,6 +14,7 @@
 > **【新增 opt-5，2026-07-01】** 用 vtune 归因 opt-4 回退（占用率虽 60→100% 但冗余 K-窗口读使 conv1d 变 memory-bound、2× 慢）后，设计出 **opt-5：token-TILED conv1d**——只切成很少的 G 个连续块、块内保留串行滑动窗口（无冗余读），既把占用率打到 100% 又不放大内存。opt-5 在 356H 上 conv1d kernel 14.1→10.5ms/iter（−26%），叠加 opt-3 后 infer-TTFT 相对 pristine：**0.8B −4.0% / 2B −4.4% / 4B −1.7%**，md5 全尺寸 prefill+decode 逐一无损。**opt-5 阶段的 356H 建议：opt-3 + opt-5（不用 opt-4）；当前最终建议已由 opt-6 更新为 opt-3 + opt-5 + opt-6。** 详见 §4.5/§4.7，patch `opt_pa_archive/pa_opt5_conv1d_tiled.patch`。
 > **【新增 opt-6，2026-07-02】** 继续 profiling opt-3+opt-5 态后发现大尺寸 dynamic-shape `activation_ref` 仍是可编辑热点（0.8B/2B prefill 中约 6–7% task time）。OpenVINO 已有 float4 向量化的 `activation_opt`，但此前不支持 dynamic shape，且 kernel 签名缺少 shape-info 参数；**opt-6：dynamic activation 走 activation_opt** 只放开「同布局、无 fused ops、无 runtime activation 参数」的安全子集。356H 上叠加 opt-3+opt-5 后，infer-TTFT 相对 pristine：**0.8B −9.2% / 2B −8.1% / 4B −4.7%**，e2e-TTFT：**0.8B −5.6% / 2B −6.1% / 4B −4.1%**。356H 当前最终建议：**opt-3 + opt-5 + opt-6**。详见 §4.7，patch `benchmark/openvino/qwen_patch/opt6_dynamic_activation_opt.patch`。
 > **【新增 opt-7，2026-07-03】** 重新 profiling/审视 e2e gap 后确认：opt-3/opt-5/opt-6 后 2B 当前 GPU kernel 热点已主要是 `gemm_kernel`(~49%)、`paged_gated_delta_net_opt`(~20%)、`rms`(~7%)、DQ(~5%)、conv1d(~4%)、activation_opt(~3%)；opt-3/5/6 均已按预期生效。e2e 仍比 `first_token_infer` 多约 45ms，其中一部分来自 GenAI text-only VLM 的 embedding host/memory path。**opt-7：Qwen3.5 text-only 时去掉 text embedding 输出到 `inputs_embeds` 的整块 memcpy**，是 e2e-only 小优化：叠加后 356H e2e-TTFT 0.8B/2B/4B 分别为 **185.1 / 243.9 / 527.7 ms**（相对 pristine **−5.9% / −6.4% / −4.4%**）。详见 §4.8，patch `benchmark/openvino/qwen_patch/opt7_genai_qwen35_text_embedding_copy_elision.patch`。
+> **【更新 opt-5 自适应分块，2026-07-22】** opt-5 的分块因子 **G 原为硬编码 3**（356H 手工调优值），现改为**自适应**（`.cl` kernel 不变，仅 `.cpp` 的 dispatch 改为按设备+序列计算 G）。公式：`G = clamp( ceil( HW线程 × SIMD32 × 3/2 / (seq_count × hidden) ), 1, min( 平均序列长度/16, 64, token总数 ) )`，其中 `HW线程 = execution_units_count × num_threads_per_eu`。含义：（a）**按 GPU 规模**取 G 使 `seq_count×hidden×G` 个 work-item 以 ~1.5× 过订阅填满硬件线程——大 iGPU 自动取更大 G、小 iGPU 更小，无需按机器重调；（b）**按序列长度**保证每块 ≥16 token 且块数 ≤ token 总数（decode 每序列 1 token → G=1，退化为原串行 kernel）。`OV_CONV1D_TOKEN_GROUPS=<n>` 仍可**强制**覆盖（unset/0=自动），`OV_CONV1D_DEBUG=1` 打印一次选中的 G。**本次在 HEAD `b0fbbcafa7` 重建 GPU 插件复测**：356H（EU=32×threads/eu=10=320 线程、hidden=6144、1000-tok prefill）自动选到 **G=3**——与原手工值一致；A/B（`OV_CONV1D_TOKEN_GROUPS=1` 串行 ≡ pristine vs 自动 G=3）在 0.8B/2B ic=128 n=8 下**逐迭代 md5 完全一致（bit-exact）**；infer-TTFT 保持 opt-5 收益（2B whole-model G 扫描：串行 G=1 211.3 → 自动 G=3 207.8ms，见 §4.5.2）。358H（Arc B390，pristine conv1d 占用率 20% ⇒ ~960 线程）按同式**预计 G≈8**，即这版自适应 opt-5 预期在 358H 上也有效（仍是分块、无 opt-4 的内存放大），从而有望**统一替代 opt-4**（待 358H 实测确认）。4B 本机已无模型，逻辑按同式覆盖。详见 §4.5.2，patch 已更新（`opt5_conv1d_token_tiled.patch` / `pa_opt5_conv1d_tiled.patch`）。
 
 ---
 
@@ -23,8 +24,8 @@
 
 | 平台 | PA 推荐 patch | 已测结果摘要 | 备注 |
 |---|---|---|---|
-| **Core Ultra X7 358H + Arc B390 iGPU** | opt-3 + opt-4（历史数据） | infer-TTFT：0.8B −6.7%、2B −6.5%、4B −3.9%；e2e-TTFT：0.8B −3.9%、2B −4.4%、4B −3.6% | opt-4 在大 iGPU 上有效；opt-5/opt-6 尚未在 358H 上补测，不外推 |
-| **Core Ultra 7 356H + 32 XVE iGPU** | **opt-3 + opt-5 + opt-6**；text-only GenAI e2e 再叠 **opt-7** | infer-TTFT：0.8B −9.0%、2B −7.9%、4B −4.8%；e2e-TTFT：0.8B −5.9%、2B −6.4%、4B −4.4% | opt-4 在 356H 回退，必须用 opt-5 取代；opt-6 是 GPU kernel 优化；opt-7 是 GenAI text-only e2e 小优化 |
+| **Core Ultra X7 358H + Arc B390 iGPU** | opt-3 + opt-4（历史数据）；**自适应 opt-5 后建议改用 opt-3 + opt-5(+opt-6)** | infer-TTFT：0.8B −6.7%、2B −6.5%、4B −3.9%（opt-3+opt-4 历史数据） | opt-4 在大 iGPU 上有效；**自 2026-07-22 起 opt-5 的 G 自适应（358H 预计 G≈8），预期在 358H 上取代 opt-4 —— 待 358H 实测确认后即可全平台统一用 opt-5**；opt-6 尚未在 358H 补测，不外推 |
+| **Core Ultra 7 356H + 32 XVE iGPU** | **opt-3 + opt-5 + opt-6**；text-only GenAI e2e 再叠 **opt-7** | infer-TTFT：0.8B −9.0%、2B −7.9%、4B −4.8%；e2e-TTFT：0.8B −5.9%、2B −6.4%、4B −4.4% | opt-4 在 356H 回退，必须用 opt-5 取代（自适应 G 在 356H 自动=3）；opt-6 是 GPU kernel 优化；opt-7 是 GenAI text-only e2e 小优化 |
 
 后续正文保留了原始时间线（358H → 356H 补测 → opt-5 → opt-6），但读结论时优先看本表。
 
@@ -219,7 +220,7 @@ opt-3 源自 SDPA 时代（详细根因/踩坑见 SDPA 文档 §5），但与 op
 
 ---
 
-## 4.5 【356H】opt-4 回退的 vtune 归因 + opt-5：token-TILED conv1d（356H 上取代 opt-4 的有效优化）
+## 4.5 【356H】opt-4 回退的 vtune 归因 + opt-5：token-TILED conv1d（自适应分块，取代 opt-4；356H 已测、358H 预计通用）
 
 > 2026-07-01 在 356H 上用 vtune gpu-hotspots（xe 驱动，`Display controller 0xb0a0`，**32 XVE × 10 threads/XVE = 320 HW threads**）对 opt-4 做占用率对账，定位回退根因，并据此设计出 356H 上真正有效的 opt-5。原始数据：`repro_356H_20260701/vtune/`（`vt_B0/opt4/opt5G3/opt5G4/best2b.csv`）。
 
@@ -229,7 +230,7 @@ opt-3 源自 SDPA 时代（详细根因/踩坑见 SDPA 文档 §5），但与 op
 |---|---|---:|---|---:|
 | **pristine（串行）** | `1×6144×1` | 60% | Work Size | 14.13 ms/iter |
 | **opt-4（全 token 并行）** | `1×6144×1002` | 100% | — | **24.71 ms/iter** |
-| **opt-5（token 分块 G=3）** | `1×6144×3` | 100% | — | **10.45 ms/iter** |
+| **opt-5（token 分块，356H 自动 G=3）** | `1×6144×3` | 100% | — | **10.45 ms/iter** |
 
 - 串行版占用率 = 6144 work-items ÷ SIMD32 = **192 threads = 320 的 60%**——与 vtune 实测 60% 完全对上，即「work-size 受限」。
 - opt-4 把 GWS 撑到 `6144×1002`（每个输出 token 一个 work-item），占用率确实到 100%，**但每个 work-item 都要从 global 重新读自己的 K=4 元窗口**，全局读放大 ~K 倍 → kernel 变 memory-bound → 14.1→24.7ms/iter（**+75%**）。其余 kernel 全部不变，op-sum +9.3ms/iter，正好对上墙钟 2B +10ms/iter 的回退。
@@ -242,7 +243,14 @@ opt-3 源自 SDPA 时代（详细根因/踩坑见 SDPA 文档 §5），但与 op
 - 额外读只有 `hidden×G×(K-1)`（可忽略），**没有 opt-4 的 `hidden×total_tokens×K` 内存放大**。
 - 数学逐元素 fma 顺序与串行版一致 → **bit 级无损**；状态写回被唯一块拥有（连续不重叠）→ 无竞争。
 
-G 扫描（2B PA ic=1，`OV_CONV1D_TOKEN_GROUPS` 环境变量可调）：conv1d kernel 在 **G=3 达到 10.45ms/iter 谷底**（G=4 为 11.54ms），故默认取 G=3。改 2 文件（`paged_causal_conv1d_ref.{cl,cpp}`），patch：`opt_pa_archive/pa_opt5_conv1d_tiled.patch`（与 opt-4 patch 互斥，二者只能取一；356H 用 opt-5，358H 仍用 opt-4）。
+**G 自适应选取（2026-07-22 更新，取代原「硬编码默认 3」）。** dispatch 时按公式
+`G = clamp( ceil( HW线程 × SIMD32 × 3/2 / (seq_count × hidden) ), 1, min( 平均序列长度/16, 64, token总数 ) )`
+自动计算 G（`HW线程 = execution_units_count × num_threads_per_eu`；SIMD32 为该 scalar kernel 实测 pack 宽度）：
+- **按 GPU 规模填满线程**：取 G 使 `seq_count×hidden×G` 个 work-item 以 ~1.5× 过订阅硬件线程数。大 iGPU（EU 多）自动取更大 G，小 iGPU 更小 —— 这是让 opt-5 跨 iGPU 规模无需重调的关键。
+- **按序列长度收敛**：每块保持 ≥16 token（使每块一次性的 K-1 priming 读相对流式工作量可忽略），块数不超过 token 总数（decode 每序列 1 token → **G=1，退化为原串行 kernel**）。
+- **356H**（320 线程、hidden=6144、~1000-tok prefill）自动得 **G=3**（`target=320×32×1.5=15360`, `ceil(15360/6144)=3`）——与之前手工值一致，`OV_CONV1D_DEBUG=1` 已实测确认。**358H**（~960 线程）预计 **G≈8**。
+
+`OV_CONV1D_TOKEN_GROUPS=<n>` 可**强制**指定 G（unset/0=自动）。实测 whole-model G 扫描（2B PA ic=1 n=8，1st-infer）：G=1 211.3 / G=2 211.2 / **G=3 207.8（自动）** / G=4 208.2 / G=5 206.0 / G=8 206.5 ms —— 自动的 G=3 已在收益「膝点」，更大 G 仅亚毫秒差异；vtune 口径 conv1d kernel 仍在 G=3 附近达 10.45ms/iter 谷底（G=4 11.54ms）。改 2 文件（`paged_causal_conv1d_ref.{cl,cpp}`），patch：`opt_pa_archive/pa_opt5_conv1d_tiled.patch`（与 opt-4 patch 互斥，二者只能取一；356H 用 opt-5，自适应后 358H 亦应用 opt-5 取代 opt-4，待实测）。
 
 ### 4.5.3 opt-5 效果（356H，交错热插拔 A/B，n=8，ic=1，3 reps 均值）
 
@@ -353,7 +361,7 @@ e2e-TTFT 同口径：0.8B 196.7→190.6（**−3.1%**）、2B 260.7→250.6（**
 | `paged_gated_delta_net_opt` | ~20% | 真串行 SSM 递归，100% occupancy，仍不适合局部 dispatch 优化 |
 | `rms_gpu_bfyx_opt` | ~7% | 前文已证伪：提高 occupancy 不降墙钟 |
 | `dynamic_quantize_gpu_opt` | ~5% | opt-3 已减少重复 DQ，剩余为必要量化 |
-| `paged_causal_conv1d_ref` | ~4% | opt-5 生效；`OV_CONV1D_TOKEN_GROUPS` 扫描 G=3/5/8 仅亚毫秒差异，默认 G=3 仍合理 |
+| `paged_causal_conv1d_ref` | ~4% | opt-5 生效；G 自适应在 356H 选到 3（G=3/5/8 whole-model 仅亚毫秒差异，3 已在膝点） |
 | `activation_opt` | ~3% | opt-6 生效；尝试 float8 vector width 触发 `CL_OUT_OF_RESOURCES`，已回退 |
 
 所以继续压 GPU infer 的低风险空间已经很小。e2e 角度看，2B 当前 `first_token_infer≈197.6ms`、e2e≈244.8ms，中间约 47ms 是 GenAI/VLM host 和 embedding 准备路径。
@@ -605,7 +613,7 @@ S_t = b_g · S_{t-1};  h_k = <S_t, k_t>;  S_t += k_t ⊗ ((v_t − h_k)·β_t); 
 | `src/plugins/intel_gpu/src/plugin/transformations/dynamic_quantize_fully_connected.cpp` + `src/graph/dynamic_quantize.cpp` | opt-3：共享激活的 FC 复用 DynamicQuantize（PA 下仍有效） |
 | `opt_pa_archive/pa_opt4_conv1d.patch` | opt-4 git patch（基于 pristine HEAD `ede283a88e`，2 文件） |
 | `opt_pa_archive/pa_opt3_dq_reuse.patch` | opt-3 git patch（基于 pristine HEAD，2 文件；与 opt-4/opt-5 文件不重叠，可一起 apply） |
-| **`opt_pa_archive/pa_opt5_conv1d_tiled.patch`** | **【356H】opt-5：token-TILED conv1d（2 文件，与 opt-4 互斥；356H 用它取代 opt-4）。默认 G=3，可用 `OV_CONV1D_TOKEN_GROUPS` 覆盖** |
+| **`opt_pa_archive/pa_opt5_conv1d_tiled.patch`** | **opt-5：token-TILED conv1d（2 文件，与 opt-4 互斥）。分块因子 G 自适应（按 GPU 线程预算 EU×threads/eu + 序列长度：356H→3、大 iGPU 更大、decode→1），`OV_CONV1D_TOKEN_GROUPS` 可强制覆盖、`OV_CONV1D_DEBUG=1` 打印选中的 G** |
 | **`benchmark/openvino/qwen_patch/opt6_dynamic_activation_opt.patch`** | **【356H】opt-6：dynamic activation 走 `activation_opt`（2 文件）；叠加 opt-3+opt-5 后，356H infer/e2e TTFT 为 0.8B 137.3/185.7ms、2B 196.9/244.8ms、4B 481.2/529.5ms** |
 | **`benchmark/openvino/qwen_patch/opt7_genai_qwen35_text_embedding_copy_elision.patch`** | **【356H】opt-7：GenAI Qwen3.5 text-only VLM 去掉 text embedding → inputs_embeds 的冗余 memcpy；最终 e2e TTFT 为 0.8B 185.1ms、2B 243.9ms、4B 527.7ms** |
 | `benchmark/openvino/qwen_patch/README.md` | 统一 patch 目录说明：按 PA/SDPA、358H/356H 平台列出推荐 patch、机制、infer/e2e 数据与正确性口径 |

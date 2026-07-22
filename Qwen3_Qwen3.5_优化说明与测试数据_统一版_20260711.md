@@ -68,14 +68,14 @@
 
 **vtune 证据**：DQ 实例数 **1044 → 576**，kernel 时间 **18.85 → 12.36 ms/iter（−34%）**，占用率保持 100%。
 
-### 3.2 opt-5：token-TILED causal conv1d（本机取代 opt-4）
+### 3.2 opt-5：token-TILED causal conv1d（自适应分块，取代 opt-4）
 
 **观察（vtune）**：`paged_causal_conv1d_ref` dispatch 为 `GWS={seq_count, hidden}`、`LWS={1,256}`。prefill 时 `seq_count==1`，整个 kernel 只有 `hidden=6144` 个线程，**每个线程沿时间轴串行扫 ~1000 个 token**——token 维零并行，占用率仅 ~60%（6144÷SIMD32=192 线程=320 HW 线程的 60%，vtune「work-size 受限」）。
 
 **第一版尝试 opt-4（token 全并行）→ 本机回退**：把 token 加进 global range（`GWS={seq,hidden,total_tokens}`）后占用率确实到 100%，**但每个 output-token work-item 都要从 global 重新读自己的 K 元窗口**，全局读放大 ~K 倍 → kernel 变 memory-bound。vtune 对账：conv1d **14.13 → 24.71 ms/iter（+75%）**，其余 kernel 不变，正好对上 2B 墙钟 +10 ms/iter 的净回退。（opt-4 在 358H 大 iGPU 上「占用率红利 > 冗余读代价」是净收益；在 356H 小 iGPU 上相反。md5 仍无损，纯性能回退。）
 
 **opt-5（token 分块，保留流式复用）**：把每条序列切成**很少的 G 个连续块**，`GWS={seq_count, hidden, G}`，每个 `(seq,h,g)` work-item **串行扫自己那一块**（块内滑动窗口、零冗余读），只在块起点一次性重建 K-1 元历史。这样占用率 = `hidden×G`（G≥2 即 100%），额外读只有 `hidden×G×(K-1)`（可忽略），**没有 opt-4 的 `hidden×total_tokens×K` 内存放大**；逐元素 fma 顺序与串行版一致 → bit 无损。
-G 扫描在 **G=3 达谷底**，故默认 G=3。源码：`intel_gpu/src/graph/impls/ocl_v2/paged_causal_conv1d_ref.{cl,cpp}`（patch `pa_opt5_conv1d_tiled.patch`，与 opt-4 互斥）。
+**G 自适应（2026-07-22 更新，原为硬编码 3）**：dispatch 时按 `G = clamp( ceil( HW线程 × SIMD32 × 3/2 / (seq_count×hidden) ), 1, min(平均序列长度/16, 64, token总数) )` 计算（`HW线程 = execution_units_count × num_threads_per_eu`）——大 iGPU 自动取更大 G、小 iGPU 更小、decode→G=1；356H 自动=3（与原手工值一致、落在膝点），358H 预计 ≈8。`OV_CONV1D_TOKEN_GROUPS` 可强制覆盖。**在 HEAD `b0fbbcafa7` 重建复测**：356H 自动 G=3，`OV_CONV1D_TOKEN_GROUPS=1`（串行 ≡ pristine）vs 自动 G 在 0.8B/2B ic=128 逐迭代 md5 一致（bit-exact）。源码：`intel_gpu/src/graph/impls/ocl_v2/paged_causal_conv1d_ref.{cl,cpp}`（patch `pa_opt5_conv1d_tiled.patch`，与 opt-4 互斥）。
 
 **vtune 证据**：conv1d **14.13 → 10.45 ms/iter（−26%）**，占用率 **60% → 100%**，最终 `GWS=1×6144×3`。
 

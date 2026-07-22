@@ -305,15 +305,17 @@ The conv1d kernel stood out on both machines because of its low occupancy — th
 | **358H** opt-4 (full token-parallel) | 1×6144×1002 | 100% | **45.1 ms — faster ✅** |
 | **356H** pristine (serial) | 1×6144×1 | 60% | 14.1 ms/iter |
 | **356H** opt-4 (full token-parallel) | 1×6144×1002 | 100% | **24.7 ms/iter — slower ❌** |
-| **356H** opt-5 (token-tiled, G=3) | 1×6144×3 | 100% | **10.5 ms/iter — faster ✅** |
+| **356H** opt-5 (token-tiled, adaptive G=3) | 1×6144×3 | 100% | **10.5 ms/iter — faster ✅** |
 
 On the large 358H iGPU, opt-4 helps: the occupancy benefit outweighs the extra memory reads. But on the small 356H iGPU, opt-4 *hurts*: every work-item re-reads its own K-element window from global memory, which multiplies global reads by ~K and makes the kernel memory-bound. The output was still bit-exact — it was purely a performance regression. **So opt-4 is not a general optimization, and we exclude it.**
 
-**The general fix: opt-5, token-tiled conv1d.** Instead of one work-item per token, split each sequence into a small number G of contiguous blocks (G=3 by default). Each work-item processes one block serially with a sliding window, so there is no redundant reading inside a block. This gets the best of both worlds:
+**The general fix: opt-5, token-tiled conv1d.** Instead of one work-item per token, split each sequence into a small number G of contiguous blocks. Each work-item processes one block serially with a sliding window, so there is no redundant reading inside a block. This gets the best of both worlds:
 
 - Occupancy reaches 100% (with G≥2 there are >12,000 work-items, well above the 320 HW threads).
 - No memory blow-up — the extra reads are only at block boundaries (negligible).
 - The per-element math order is identical to the serial version → bit-exact.
+
+**G is chosen adaptively, not hardcoded.** The tiling factor G is computed at dispatch time from (a) the GPU's hardware-thread budget — `execution_units_count × num_threads_per_eu` — so `seq_count × hidden × G` work-items oversubscribe the machine by ~1.5×, and (b) the sequence length — each tile stays ≥16 tokens and G never exceeds the token count (decode → G=1 = the original serial kernel). This makes one patch portable across iGPU sizes: it selects **G=3 on the 356H** (320 threads) and a larger G on bigger iGPUs (**projected G≈8 on the 358H's ~960 threads**), so the adaptive opt-5 is expected to supersede opt-4 even on the 358H (pending 358H measurement). `OV_CONV1D_TOKEN_GROUPS=<n>` can force G for tuning. Verified on the 356H (rebuilt at HEAD `b0fbbcafa7`): auto-selects G=3, bit-exact vs the serial baseline on 0.8B and 2B (identical 128-token md5 sequence), and a G-sweep confirms G=3 sits at the knee (G=1/2 ≈ 211 ms, G=3–8 ≈ 206–208 ms on 2B).
 
 **Result on 356H:** conv1d kernel 14.1 → 10.5 ms/iter (−26%), occupancy 60% → 100%. Unlike opt-4, it does not regress on the small iGPU.
 

@@ -175,17 +175,18 @@ paged_causal_conv1d_ref      5.5%  occupancy 60%    <- LOW occupancy -> opt-5
 | 358H opt-4 full-parallel | 100% | 45.1 ms ✅ |
 | 356H serial | 60% | 14.1 ms/iter |
 | 356H opt-4 full-parallel | 100% | 24.7 ms/iter ❌ (memory-bound) |
-| **356H opt-5 tiled (G=3)** | 100% | **10.5 ms/iter ✅** |
+| **356H opt-5 tiled (adaptive G=3)** | 100% | **10.5 ms/iter ✅** |
 
 - opt-4: every work-item re-reads its window → memory-bound on the small iGPU → **excluded**
 - opt-5: split each sequence into a few blocks → 100% occupancy AND no extra memory → **−26%, bit-exact**
+- **G is chosen adaptively** from the GPU thread budget (EU × threads/EU) + sequence length: **3 on the 356H, ~8 on the 358H, 1 (serial) for decode** → one portable patch, expected to replace opt-4 on the 358H too
 
 **Script:**
 "Now the convolution, and this is a good engineering story. The problem: the kernel used only about six thousand threads, each walking serially over a thousand tokens.
 
 Our first attempt, opt-4, was the obvious one — give every token its own work-item, fully parallel. On the large 358H iGPU this worked: occupancy went to one hundred percent and the kernel got faster. But on the small 356H it got slower — from fourteen to twenty-five milliseconds. The reason is that every work-item re-reads its own window from memory, which multiplies memory traffic and makes it memory-bound on the small iGPU. It was still correct, just slower. So we exclude that version.
 
-The real fix is opt-5. Instead of one work-item per token, we split each sequence into just a few blocks — three by default. Each work-item processes one block with a sliding window, so there is no redundant reading. This gives both full occupancy and no extra memory. The convolution drops twenty-six percent and stays bit-exact. The lesson: the same idea must be tuned to the hardware size."
+The real fix is opt-5. Instead of one work-item per token, we split each sequence into just a few blocks. Each work-item processes one block with a sliding window, so there is no redundant reading. This gives both full occupancy and no extra memory. And importantly, we do not hardcode the number of blocks — it is chosen automatically from the size of the GPU and the sequence length. On the small 356H it picks three; on the larger 358H it would pick about eight; for decode it falls back to one. So a single patch fits every iGPU size, and it should replace the opt-4 version on the 358H as well. The convolution drops twenty-six percent and stays bit-exact. The lesson: the same idea, tuned automatically to the hardware size."
 
 ---
 

@@ -135,19 +135,21 @@ index 82fbebfa2b..bd29f877ce 100644
              sum = fma(state[k], convert_float(conv_weight[w_base + k * weight_kernel_stride]), sum);
          }
 diff --git a/src/plugins/intel_gpu/src/graph/impls/ocl_v2/paged_causal_conv1d_ref.cpp b/src/plugins/intel_gpu/src/graph/impls/ocl_v2/paged_causal_conv1d_ref.cpp
-index cdf3fb0aa5..f7e1c589d5 100644
+index cdf3fb0aa5..d77f32e213 100644
 --- a/src/plugins/intel_gpu/src/graph/impls/ocl_v2/paged_causal_conv1d_ref.cpp
 +++ b/src/plugins/intel_gpu/src/graph/impls/ocl_v2/paged_causal_conv1d_ref.cpp
-@@ -4,6 +4,8 @@
+@@ -4,6 +4,10 @@
  
  #include "paged_causal_conv1d_ref.hpp"
  
++#include <algorithm>
++#include <cstdio>
 +#include <cstdlib>
 +
  #include "intel_gpu/primitives/paged_causal_conv1d.hpp"
  #include "primitive_ocl_base.hpp"
  #include "utils/kernel_generator.hpp"
-@@ -40,7 +42,7 @@ protected:
+@@ -40,7 +44,7 @@ protected:
  
          args.push_back({ArgumentDescriptor::Types::OUTPUT, 0});
  
@@ -156,47 +158,91 @@ index cdf3fb0aa5..f7e1c589d5 100644
          for (size_t i = 0; i < num_scalars; i++) {
              args.push_back({ArgumentDescriptor::Types::SCALAR, static_cast<uint32_t>(i)});
          }
-@@ -90,9 +92,38 @@ protected:
+@@ -90,9 +94,82 @@ protected:
              const int32_t output_token_stride = read_pitch(out_layout, 0);
              const int32_t output_hidden_stride = read_pitch(out_layout, 1);
  
-+            // TTFT-opt (PA) opt-5: token-TILING. The original kernel dispatched
-+            // GWS={seq_count, hidden}, so at prefill only `hidden` work-items run —
-+            // work-size-limited occupancy (192/320 threads = 60% on the 356H iGPU).
-+            // opt-4's fully token-parallel GWS={seq,hidden,total_tokens} reached 100%
-+            // occupancy but re-read each token's K-element window from global memory,
-+            // becoming memory-bound and NET SLOWER on 356H. opt-5 instead splits the
-+            // sequence into a SMALL number of contiguous token tiles (dim 2 = token
-+            // group); each work-item still streams its tile with a sliding window
-+            // (no per-token redundant reads). A tiny G lifts occupancy to 100%
-+            // (hidden*G work-items) without the memory blowup.
++            // TTFT-opt (PA) opt-5: token-TILING with an ADAPTIVE tiling factor G.
++            // The original kernel dispatched GWS={seq_count, hidden}, so at prefill only
++            // `hidden` work-items run — work-size-limited occupancy (e.g. 6144/SIMD32 =
++            // 192 HW threads = 60% on the 356H iGPU's 320-thread budget). opt-4's fully
++            // token-parallel GWS={seq,hidden,total_tokens} reached 100% occupancy but
++            // re-read each token's K-element window from global memory, becoming
++            // memory-bound and NET SLOWER on the smaller iGPU. opt-5 instead splits each
++            // sequence into G contiguous token tiles (GWS dim 2 = token group); each
++            // (seq,h,g) work-item still streams its tile with a sliding window (no
++            // per-token redundant reads) — so a small G lifts occupancy WITHOUT opt-4's
++            // memory blowup.
 +            //
-+            // Choose G so hidden*G comfortably exceeds the machine's HW-thread budget
-+            // (=EU count * threads/EU * SIMD), capped so tiles stay long enough that the
-+            // one-time K-1 priming reads per tile stay negligible. Overridable via
-+            // OV_CONV1D_TOKEN_GROUPS for tuning.
++            // G is chosen ADAPTIVELY (not a hardcoded constant), from two axes:
++            //   (a) GPU scale — pick G so seq_count*hidden*G work-items oversubscribe the
++            //       machine's HW-thread budget (execution_units_count * num_threads_per_eu)
++            //       by ~1.5x, enough to hide memory latency. A larger iGPU (more EUs) gets
++            //       a larger G automatically; a smaller iGPU gets less. This is what makes
++            //       opt-5 portable across iGPU sizes without re-tuning.
++            //   (b) sequence length — keep every tile >= MIN_TILE_TOKENS so the one-time
++            //       K-1 window-priming reads per tile stay negligible vs the streamed work,
++            //       and never dispatch more tiles than there are tokens (decode, 1 token
++            //       per sequence, therefore falls back to G=1 = the original serial kernel).
++            // Override with OV_CONV1D_TOKEN_GROUPS=<n> to force G (unset/0 = auto). Set
++            // OV_CONV1D_DEBUG=1 to print the auto-selected G once (diagnostic only).
++            const auto& dev_info = params.get_device_info();
 +            const size_t total_tokens = static_cast<size_t>(input_shape[0].get_length());
              const size_t lws_y = std::min<size_t>(256, static_cast<size_t>(hidden_size));
              const size_t gws_y = ((static_cast<size_t>(hidden_size) + lws_y - 1) / lws_y) * lws_y;
 -            wgs.global = {static_cast<size_t>(seq_count), gws_y, 1};
 +
-+            size_t token_groups = 3;  // default: 356H-tuned (hidden*3 = 18432 wi >> 320 threads; vtune sweet spot)
++            size_t token_groups = 0;  // 0 => auto-select below
 +            if (const char* env = std::getenv("OV_CONV1D_TOKEN_GROUPS")) {
 +                const int v = std::atoi(env);
 +                if (v >= 1)
 +                    token_groups = static_cast<size_t>(v);
 +            }
-+            // Never dispatch more groups than there are tokens.
-+            if (total_tokens > 0 && token_groups > total_tokens)
++            if (token_groups == 0) {
++                constexpr size_t SIMD = 32;             // observed SIMD pack width for this scalar kernel (matches vtune occupancy accounting)
++                constexpr size_t OVERSUB_NUM = 3;       // target 1.5x (= 3/2) oversubscription of the HW-thread budget
++                constexpr size_t OVERSUB_DEN = 2;
++                constexpr size_t MIN_TILE_TOKENS = 16;  // keep tiles long enough that per-tile K-1 priming reads stay negligible
++                constexpr size_t G_HARD_CAP = 64;       // safety cap for very large machines / tiny hidden
++
++                const size_t eu = static_cast<size_t>(dev_info.execution_units_count);
++                const size_t tpe = static_cast<size_t>(dev_info.num_threads_per_eu);
++                const size_t hw_threads = (eu > 0 && tpe > 0) ? (eu * tpe) : 320;  // fallback ~356H (32 XVE x 10)
++                const size_t target_wi = hw_threads * SIMD * OVERSUB_NUM / OVERSUB_DEN;
++
++                const size_t seqs = static_cast<size_t>(std::max(seq_count, 1));
++                const size_t wi_per_group = static_cast<size_t>(hidden_size) * seqs;  // work-items added by each token group
++                const size_t g_occ = (wi_per_group > 0) ? ((target_wi + wi_per_group - 1) / wi_per_group) : 1;  // ceil -> fill the GPU
++
++                const size_t avg_seq_len = (total_tokens > 0) ? std::max<size_t>(1, total_tokens / seqs) : 1;
++                const size_t g_len = std::max<size_t>(1, avg_seq_len / MIN_TILE_TOKENS);  // cap for short sequences
++
++                token_groups = std::min(std::min(g_occ, g_len), G_HARD_CAP);
++            }
++            // Never dispatch more groups than there are tokens; keep >= 1
++            // (clamp unconditionally so a forced env G is bounded even when total_tokens==0).
++            if (token_groups > total_tokens)
 +                token_groups = total_tokens;
 +            if (token_groups < 1)
 +                token_groups = 1;
++
++            if (std::getenv("OV_CONV1D_DEBUG")) {
++                static bool logged = false;
++                if (!logged) {
++                    logged = true;
++                    fprintf(stderr,
++                            "[conv1d opt-5] EU=%u threads/EU=%u (HW threads=%u) | seq_count=%d hidden=%d total_tokens=%zu => token_groups(G)=%zu\n",
++                            dev_info.execution_units_count, dev_info.num_threads_per_eu,
++                            dev_info.execution_units_count * dev_info.num_threads_per_eu,
++                            seq_count, hidden_size, total_tokens, token_groups);
++                }
++            }
 +
 +            wgs.global = {static_cast<size_t>(seq_count), gws_y, token_groups};
              wgs.local = {1, lws_y, 1};
  
              kd.params.scalars.clear();
-@@ -110,6 +141,7 @@ protected:
+@@ -110,6 +187,7 @@ protected:
                  output_token_stride,
                  output_hidden_stride,
                  static_cast<int32_t>(params.get_input_layout(paged_causal_conv1d::CONV_STATE_TABLE).get_partial_shape()[0].get_length()),
