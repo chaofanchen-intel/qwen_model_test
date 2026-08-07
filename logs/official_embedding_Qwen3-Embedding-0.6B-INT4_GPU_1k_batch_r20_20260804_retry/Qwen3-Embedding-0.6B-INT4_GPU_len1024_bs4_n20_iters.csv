@@ -1,0 +1,41 @@
+iteration,model,framework,device,pretrain_time(s),initial_sys_mem(MiB),initial_rss_mem(MiB),compile_max_rss_mem(MiB),compile_max_sys_mem(MiB),compile_max_increase_rss_mem(MiB),compile_max_increase_sys_mem(MiB),input_size,infer_count,generation_time(s),output_size,latency(ms),2nd_tokens_throughput(tokens/s),total_throughput(tokens/s),1st_latency(ms),2nd_avg_latency(ms),precision,max_rss_mem(MiB),max_sys_mem(MiB),max_increase_rss_mem(MiB),max_increase_sys_mem(MiB),prompt_idx,1st_infer_latency(ms),2nd_infer_avg_latency(ms),num_beams,batch_size,tokenization_time,detokenization_time,resource_cpu_avg_util(%),resource_gpu_avg_util(%),resource_gpu_memory_avg_util(%),resource_npu_avg_util(%),resource_avg_rss_mem(MiB),resource_peak_rss_mem(MiB),resource_avg_sys_mem(MiB),resource_peak_sys_mem(MiB),resource_memory_samples,result_md5,start,end
+0,Qwen3-Embedding-0.6B-INT4,ov,GPU,4.28429,,,,,,,4096,1,0.70355,,0.70355,,,703.55054,NA,,,,,,0,703.55054,NA,1,4,9.3702,,,,,,,,,,0,,2026-08-04T20:57:10.586565,2026-08-04T20:57:11.300621
+1,Qwen3-Embedding-0.6B-INT4,ov,GPU,,,,,,,,4096,1,0.69504,,0.69504,,,695.03947,NA,,,,,,0,695.03947,NA,1,4,7.50501,,,,,,,,,,0,,2026-08-04T20:57:11.300697,2026-08-04T20:57:12.004169
+2,Qwen3-Embedding-0.6B-INT4,ov,GPU,,,,,,,,4096,1,0.66135,,0.66135,,,661.35405,NA,,,,,,0,661.35405,NA,1,4,8.79605,,,,,,,,,,0,,2026-08-04T20:57:12.004266,2026-08-04T20:57:12.675285
+3,Qwen3-Embedding-0.6B-INT4,ov,GPU,,,,,,,,4096,1,0.64744,,0.64744,,,647.43895,NA,,,,,,0,647.43895,NA,1,4,7.09737,,,,,,,,,,0,,2026-08-04T20:57:12.675347,2026-08-04T20:57:13.330674
+4,Qwen3-Embedding-0.6B-INT4,ov,GPU,,,,,,,,4096,1,0.64833,,0.64833,,,648.32792,NA,,,,,,0,648.32792,NA,1,4,6.99405,,,,,,,,,,0,,2026-08-04T20:57:13.330738,2026-08-04T20:57:13.986829
+5,Qwen3-Embedding-0.6B-INT4,ov,GPU,,,,,,,,4096,1,0.64863,,0.64863,,,648.62933,NA,,,,,,0,648.62933,NA,1,4,7.80041,,,,,,,,,,0,,2026-08-04T20:57:13.986896,2026-08-04T20:57:14.644072
+6,Qwen3-Embedding-0.6B-INT4,ov,GPU,,,,,,,,4096,1,0.64879,,0.64879,,,648.7885,NA,,,,,,0,648.7885,NA,1,4,8.62737,,,,,,,,,,0,,2026-08-04T20:57:14.644139,2026-08-04T20:57:15.302388
+7,Qwen3-Embedding-0.6B-INT4,ov,GPU,,,,,,,,4096,1,0.64904,,0.64904,,,649.04296,NA,,,,,,0,649.04296,NA,1,4,8.60629,,,,,,,,,,0,,2026-08-04T20:57:15.302449,2026-08-04T20:57:15.960892
+8,Qwen3-Embedding-0.6B-INT4,ov,GPU,,,,,,,,4096,1,0.64832,,0.64832,,,648.31704,NA,,,,,,0,648.31704,NA,1,4,7.14862,,,,,,,,,,0,,2026-08-04T20:57:15.961000,2026-08-04T20:57:16.617274
+9,Qwen3-Embedding-0.6B-INT4,ov,GPU,,,,,,,,4096,1,0.64739,,0.64739,,,647.38899,NA,,,,,,0,647.38899,NA,1,4,8.15967,,,,,,,,,,0,,2026-08-04T20:57:16.617351,2026-08-04T20:57:17.273714
+10,Qwen3-Embedding-0.6B-INT4,ov,GPU,,,,,,,,4096,1,0.6476,,0.6476,,,647.6042,NA,,,,,,0,647.6042,NA,1,4,7.071,,,,,,,,,,0,,2026-08-04T20:57:17.273788,2026-08-04T20:57:17.929271
+11,Qwen3-Embedding-0.6B-INT4,ov,GPU,,,,,,,,4096,1,0.64859,,0.64859,,,648.588,NA,,,,,,0,648.588,NA,1,4,7.0701,,,,,,,,,,0,,2026-08-04T20:57:17.929350,2026-08-04T20:57:18.585793
+12,Qwen3-Embedding-0.6B-INT4,ov,GPU,,,,,,,,4096,1,0.64904,,0.64904,,,649.0425,NA,,,,,,0,649.0425,NA,1,4,7.03648,,,,,,,,,,0,,2026-08-04T20:57:18.585859,2026-08-04T20:57:19.242692
+13,Qwen3-Embedding-0.6B-INT4,ov,GPU,,,,,,,,4096,1,0.64932,,0.64932,,,649.31796,NA,,,,,,0,649.31796,NA,1,4,7.01258,,,,,,,,,,0,,2026-08-04T20:57:19.242759,2026-08-04T20:57:19.899886
+14,Qwen3-Embedding-0.6B-INT4,ov,GPU,,,,,,,,4096,1,0.64743,,0.64743,,,647.42926,NA,,,,,,0,647.42926,NA,1,4,6.84943,,,,,,,,,,0,,2026-08-04T20:57:19.899964,2026-08-04T20:57:20.555019
+15,Qwen3-Embedding-0.6B-INT4,ov,GPU,,,,,,,,4096,1,0.64711,,0.64711,,,647.10859,NA,,,,,,0,647.10859,NA,1,4,7.39253,,,,,,,,,,0,,2026-08-04T20:57:20.555087,2026-08-04T20:57:21.210396
+16,Qwen3-Embedding-0.6B-INT4,ov,GPU,,,,,,,,4096,1,0.64568,,0.64568,,,645.6762,NA,,,,,,0,645.6762,NA,1,4,7.29624,,,,,,,,,,0,,2026-08-04T20:57:21.210464,2026-08-04T20:57:21.864224
+17,Qwen3-Embedding-0.6B-INT4,ov,GPU,,,,,,,,4096,1,0.64529,,0.64529,,,645.28757,NA,,,,,,0,645.28757,NA,1,4,7.0301,,,,,,,,,,0,,2026-08-04T20:57:21.864287,2026-08-04T20:57:22.517421
+18,Qwen3-Embedding-0.6B-INT4,ov,GPU,,,,,,,,4096,1,0.64637,,0.64637,,,646.36612,NA,,,,,,0,646.36612,NA,1,4,7.17806,,,,,,,,,,0,,2026-08-04T20:57:22.517487,2026-08-04T20:57:23.171874
+19,Qwen3-Embedding-0.6B-INT4,ov,GPU,,,,,,,,4096,1,0.64554,,0.64554,,,645.54318,NA,,,,,,0,645.54318,NA,1,4,7.27711,,,,,,,,,,0,,2026-08-04T20:57:23.171952,2026-08-04T20:57:23.825537
+20,Qwen3-Embedding-0.6B-INT4,ov,GPU,,,,,,,,4096,1,0.64571,,0.64571,,,645.71132,NA,,,,,,0,645.71132,NA,1,4,7.13004,,,,,,,,,,0,,2026-08-04T20:57:23.825606,2026-08-04T20:57:24.479230
+avg,Qwen3-Embedding-0.6B-INT4,ov,GPU,,,,,,,,4096.0,1.0,0.6506,,0.6506,,,650.60011,NA,,,,,,0,650.60011,NA,1,4,7.45393,,,,,,,,,,0,,,
+mini,Qwen3-Embedding-0.6B-INT4,ov,GPU,,,,,,,,4096,1,0.64529,,0.64529,,,645.28757,NA,,,,,,0,645.28757,NA,1,4,6.84943,,,,,,,,,,0,,,
+median,Qwen3-Embedding-0.6B-INT4,ov,GPU,,,,,,,,4096.0,1.0,0.64796,,0.64796,,,647.96062,NA,,,,,,0,647.96062,NA,1,4,7.16334,,,,,,,,,,0,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+tokenization_time: Tokenizer encode time,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+detokenization_time: Tokenizer decode time,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2nd_tokens_throughput: batch_size * 1000 / 2nd_avg_latency(ms),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+total_throughput: output_size / generation_time(s),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+pretrain_time: Total time of load model and compile model,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+generation_time: Time for one interaction. (e.g. The duration of  answering one question or generating one picture),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+iteration=0: warm-up; iteration=avg: average (exclude warm-up);iteration=mini: minimum value (exclude warm-up);iteration=median: median value (exclude warm-up);,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+max_rss_mem/max_sys_mem: max rss/system memory consumption during iteration;,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+max_increase_rss_mem/max_increase_sys_mem: max increase of rss/system memory during iteration;,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+initial_rss_mem/initial_sys_mem: rss/system memory state at start;,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+compile_max_rss_mem/compile_max_sys_mem: max rss/system memory consumption on compilation phase;,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+compile_max_increase_rss_mem/compile_max_increase_sys_mem: max increase of rss/system memory on compilation phase;,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+resource_* fields: compact whole-run CPU/GPU/NPU utilization and RSS/System memory summary; GPU util is blank if xpu-smi does not expose compute utilization.,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+resource_cpu_cpuN_avg_util: average per-core CPU utilization over the benchmark run,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+resource_gpu_memory_avg_util: average GPU memory utilization reported by xpu-smi,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
