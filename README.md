@@ -352,6 +352,11 @@ This is separate from `--cache-dir`: `--cache-dir` controls OpenVINO's compiled-
 
 For official comparability, the direct scripts mirror upstream OpenVINO config defaults: Qwen3 text uses `ATTENTION_BACKEND=PA`, Qwen3.5 visual/text uses `ATTENTION_BACKEND=SDPA`, and `CACHE_DIR=""`. Use `-lc/--load-config` to override these plugin properties intentionally.
 
+PA/SDPA applicability for embedding models is documented separately in
+[GME_Qwen3VL_Embedding_PA_SDPA_调查.md](GME_Qwen3VL_Embedding_PA_SDPA_调查.md).
+GME-Qwen2-VL-2B-Instruct and Qwen3-VL-Embedding-2B use stateless embedding IRs and do
+not expose the Qwen3.5 generation pipeline's PA/SDPA backend switch.
+
 The runner scripts now keep the same model-facing defaults as the direct scripts/official benchmark. Their extra default is resource collection: they pass `--monitor` for CPU/GPU/NPU utilization unless `HW_MONITOR=0` is set, and pass `--memory-monitor` unless `MEMORY_MONITOR=0` is set.
 
 Empirical example (`Qwen3-0.6B-INT4`, 256-token prompt, 16-output, CPU):

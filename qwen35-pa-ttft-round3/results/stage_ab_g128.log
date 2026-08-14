@@ -1,0 +1,12 @@
+model=/home/chaofan/model_benchmark/benchmark/models/Qwen3.5-2B-INT4-g128  n=5 ic=1 reps=2
+rep1 pristine: infer=347.34 ttft=352.96
+rep1 opt3: infer=334.00 ttft=339.70
+rep1 opt34: infer=333.35 ttft=339.14
+rep1 opt345: infer=331.73 ttft=337.45
+rep1 opt3456: infer=330.96 ttft=336.86
+rep2 pristine: infer=349.24 ttft=354.95
+rep2 opt3: infer=335.20 ttft=340.86
+rep2 opt34: infer=334.28 ttft=339.95
+rep2 opt345: infer=332.78 ttft=338.46
+rep2 opt3456: infer=317.74 ttft=323.42
+results in /home/chaofan/model_benchmark/benchmark/tests/qwen35-pa-ttft-round3/results/stage_ab
