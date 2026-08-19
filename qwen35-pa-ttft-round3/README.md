@@ -179,7 +179,7 @@ in_proj_z FullyConnected       → reshape (users=1) → swish     # [tokens, 20
 patch：[`patches/opt6_fuse_silu_into_producer.patch`](patches/opt6_fuse_silu_into_producer.patch)
 （6 文件，+245 行；已同步到 `benchmark/openvino/qwen3.5_patch/opt6_fuse_silu_into_producer.patch`）
 
-### 3.3 逐项收益（本机，交错 A/B）
+### 3.3 逐项收益（本机，2026-08-19 fresh rerun）
 
 方法：每个阶段一个独立编译的 plugin binary，**交错**热插拔
 （本机单次运行间有 ~1 ms 单调热漂移，与 opt-4/opt-5 的增量同量级，
@@ -189,17 +189,27 @@ patch：[`patches/opt6_fuse_silu_into_producer.patch`](patches/opt6_fuse_silu_in
 pristine/opt3/opt34/opt345 复用 `benchmark/tests/repro_20263_opt_ab/results` 里
 2026-08-07 用同一棵 2026.3 源码树编出的 binary。
 
+`infer TTFT` 是 `first_token_infer_p50_ms`，`pipeline TTFT` 是 `ttft_p50_ms`，
+`e2e TTFT` 是 `e2e_p50_ms`。本次重测结果写入 `results/stage_ab/`；原来的 2026-08-14
+阶段结果保存在 `results/stage_ab_previous_20260814/`。
+阶段 A/B 使用的插件结果版本为 `2026.3.0-22452-c2638477a62-qwen-ttft-optimizations`；
+所有阶段共享同一个 `openvino_genai` 版本 `2026.3.0.0-3278-0c38b54d7e7-qwen-ttft-llm-bench`。
+
 **Qwen3.5-2B-INT4（per-OC）**
 
-| 阶段 | infer (ms) | vs pristine | 单项增量 | e2e (ms) |
-| --- | ---: | ---: | ---: | ---: |
-| pristine | 293.45 | — | — | 299.15 |
-| + opt-3 | 277.69 | −5.37% | −5.37 pp | 283.33 |
-| + opt-4 | 275.66 | −6.06% | −0.69 pp | 281.30 |
-| + opt-5 | 275.22 | −6.21% | −0.15 pp | 280.93 |
-| **+ opt-6** | **259.19** | **−11.68%** | **−5.46 pp** | **264.88** |
+| 阶段 | infer TTFT (ms) | pipeline TTFT (ms) | e2e TTFT (ms) | vs pristine infer | vs pristine pipeline | vs pristine e2e |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| pristine | 293.44 | 299.08 | 301.24 | — | — | — |
+| + opt-3 | 277.54 | 283.31 | 285.55 | −5.42% | −5.27% | −5.21% |
+| + opt-4 | 275.43 | 281.21 | 283.44 | −6.14% | −5.98% | −5.91% |
+| + opt-5 | 275.31 | 281.01 | 283.32 | −6.18% | −6.04% | −5.95% |
+| **+ opt-6** | **259.34** | **265.05** | **267.31** | **−11.62%** | **−11.38%** | **−11.27%** |
 
-**Qwen3.5-2B-INT4-g128（交叉验证）**
+单项增量（相对前一个阶段）：opt-3 为 `−15.90 / −15.77 / −15.69 ms`，opt-4
+为 `−2.11 / −2.10 / −2.11 ms`，opt-5 为 `−0.12 / −0.20 / −0.12 ms`，opt-6
+为 `−15.97 / −15.96 / −16.01 ms`；三组数字依次对应 infer / pipeline / e2e TTFT。
+
+**Qwen3.5-2B-INT4-g128（此前交叉验证，未在本次 2026-08-19 per-OC 重测中复跑）**
 
 | 阶段 | infer (ms) | vs pristine | 单项增量 |
 | --- | ---: | ---: | ---: |
@@ -209,13 +219,15 @@ pristine/opt3/opt34/opt345 复用 `benchmark/tests/repro_20263_opt_ab/results` �
 | + opt-5 | 332.10 | −5.29% | −0.59 pp |
 | **+ opt-6** | **318.08** | **−9.29%** | **−4.00 pp** |
 
-原始逐轮数据：`results/stage_ab/`、`results/stage_ab_g128_rerun.log`。
+本次 per-OC 原始逐轮数据：`results/stage_ab/`；旧阶段结果：
+`results/stage_ab_previous_20260814/`。g128 交叉验证原始日志仍为
+`results/stage_ab_g128_rerun.log`。
 
 **读法：**
 
-- opt-6 单项 −5.46 pp，**与 opt-3 同量级**，两者合起来基本就是全部收益。
+- opt-6 单项 infer TTFT −5.80 pp，**与 opt-3 同量级**，两者合起来基本就是全部收益。
 - 与 §2.1 的 VTune 预测（12.0 + 3.4 = 15.4 ms）吻合到 1 ms 以内（实测 −16.0 ms）。
-- 收益**基本不随权重量化变化**（−5.46 pp vs −4.00 pp），符合预期：
+- 收益**基本不随权重量化变化**（fresh per-OC infer −5.80 pp；此前 g128 交叉验证 −4.00 pp），符合预期：
   它省的是**激活**的内存趟数，与权重位宽无关。
 
 > ⚠️ g128 第一次跑（`results/stage_ab_g128.log`）的 rep1 opt3456 = 330.96 ms 是离群值，

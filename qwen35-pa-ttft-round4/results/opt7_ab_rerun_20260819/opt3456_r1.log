@@ -1,0 +1,56 @@
+================================================================================
+  Qwen3.5 OpenVINO GenAI VLM Benchmark (C++)
+================================================================================
+  Devices:       GPU 
+  Mode:          text-only
+  infer_count:   1
+  num_iters:     5 (+1 warm-up)
+  permutation:   ON
+  profile:       OFF
+
+################################################################################
+  Model: Qwen3.5-2B-INT4 | Device: GPU | Mode: text-only | Backend: VLMPipeline
+################################################################################
+  Plugin config: ATTENTION_BACKEND=PA CACHE_DIR= PERFORMANCE_HINT=LATENCY
+  Compiling VLMPipeline...
+  Compiled in 4.88s
+  Prompts loaded: 1
+
+  [P0] raw_text_tokens=988  infer_count(max_new)=1  num_iters=5 (+1 warmup)  permute=true
+    [warm-up][0][P0] in=1002 out=1 TTFT=637.1ms TPOT=0.00ms E2E=644ms TPS=1.6
+    [1][P0] in=1002 out=1 TTFT=264.4ms TPOT=0.00ms E2E=267ms TPS=3.7
+    [2][P0] in=1002 out=1 TTFT=263.9ms TPOT=0.00ms E2E=266ms TPS=3.8
+    [3][P0] in=1002 out=1 TTFT=263.9ms TPOT=0.00ms E2E=266ms TPS=3.8
+    [4][P0] in=1002 out=1 TTFT=263.8ms TPOT=0.00ms E2E=266ms TPS=3.8
+    [5][P0] in=1002 out=1 TTFT=264.5ms TPOT=0.00ms E2E=267ms TPS=3.8
+
+================================================================================
+  Result: Qwen3.5-2B-INT4 | GPU | text-only | prompt[0] in=1002 out_max=1
+  Pipeline: VLMPipeline  measured_iters=5  compile=4.88s
+================================================================================
+  Metric                   Mean      Std        P50        P90        P95      Min      Max  Unit
+  ------------------ ---------- -------- ---------- ---------- ---------- -------- --------  ----
+  TTFT                   264.09     0.30     263.86     264.45     264.45   263.82   264.45  [ms]
+  TPOT                     0.00     0.00       0.00       0.00       0.00     0.00     0.00  [ms]
+  1st infer              258.39     0.35     258.16     258.83     258.88   258.07   258.93  [ms]
+  2nd infer                0.00     0.00       0.00       0.00       0.00     0.00     0.00  [ms]
+  Throughput               3.75     0.00       3.76       3.76       3.76     3.75     3.76  [tok/s]
+  Decode TPS               0.00     0.00       0.00       0.00       0.00     0.00     0.00  [tok/s]
+  Output tokens            1.00     0.00       1.00       1.00       1.00     1.00     1.00  [tok]
+  Gen time                 0.27     0.00       0.27       0.27       0.27     0.27     0.27  [s]
+  Prefill                264.09     0.30     263.86     264.45     264.45   263.82   264.45  [ms]
+  Decode                   0.00     0.00       0.00       0.00       0.00     0.00     0.00  [ms]
+  E2E                    266.35     0.31     266.17     266.74     266.77   266.02   266.80  [ms]
+  Tokenization             1.04     0.02       1.03       1.07       1.07     1.02     1.08  [ms]
+  Detokenization           0.31     0.01       0.31       0.32       0.32     0.29     0.32  [ms]
+
+  --- Memory ---
+  Memory monitor: unavailable/disabled
+
+  --- Device Utilization ---
+================================================================================
+CSV  written: /home/chaofan/model_benchmark/benchmark/tests/qwen35-pa-ttft-round4/results/opt7_ab_rerun_20260819/opt3456_r1.csv
+JSON written: /home/chaofan/model_benchmark/benchmark/tests/qwen35-pa-ttft-round4/results/opt7_ab_rerun_20260819/opt3456_r1.json
+
+  Total runs: 1
+  Done.

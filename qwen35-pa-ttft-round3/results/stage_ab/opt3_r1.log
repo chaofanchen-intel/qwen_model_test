@@ -9,40 +9,40 @@
   profile:       OFF
 
 ################################################################################
-  Model: Qwen3.5-2B-INT4-g128 | Device: GPU | Mode: text-only | Backend: VLMPipeline
+  Model: Qwen3.5-2B-INT4 | Device: GPU | Mode: text-only | Backend: VLMPipeline
 ################################################################################
   Plugin config: ATTENTION_BACKEND=PA CACHE_DIR= PERFORMANCE_HINT=LATENCY
   Compiling VLMPipeline...
-  Compiled in 5.66s
+  Compiled in 4.89s
   Prompts loaded: 1
 
   [P0] raw_text_tokens=988  infer_count(max_new)=1  num_iters=5 (+1 warmup)  permute=true
-    [warm-up][0][P0] in=1002 out=1 TTFT=883.9ms TPOT=0.00ms E2E=891ms TPS=1.1
-    [1][P0] in=1002 out=1 TTFT=339.4ms TPOT=0.00ms E2E=342ms TPS=2.9
-    [2][P0] in=1002 out=1 TTFT=339.8ms TPOT=0.00ms E2E=342ms TPS=2.9
-    [3][P0] in=1002 out=1 TTFT=340.6ms TPOT=0.00ms E2E=343ms TPS=2.9
-    [4][P0] in=1002 out=1 TTFT=340.5ms TPOT=0.00ms E2E=343ms TPS=2.9
-    [5][P0] in=1002 out=1 TTFT=341.5ms TPOT=0.00ms E2E=344ms TPS=2.9
+    [warm-up][0][P0] in=1002 out=1 TTFT=635.1ms TPOT=0.00ms E2E=642ms TPS=1.6
+    [1][P0] in=1002 out=1 TTFT=282.3ms TPOT=0.00ms E2E=284ms TPS=3.5
+    [2][P0] in=1002 out=1 TTFT=283.2ms TPOT=0.00ms E2E=285ms TPS=3.5
+    [3][P0] in=1002 out=1 TTFT=284.1ms TPOT=0.00ms E2E=286ms TPS=3.5
+    [4][P0] in=1002 out=1 TTFT=284.2ms TPOT=0.00ms E2E=287ms TPS=3.5
+    [5][P0] in=1002 out=1 TTFT=283.5ms TPOT=0.00ms E2E=286ms TPS=3.5
 
 ================================================================================
-  Result: Qwen3.5-2B-INT4-g128 | GPU | text-only | prompt[0] in=1002 out_max=1
-  Pipeline: VLMPipeline  measured_iters=5  compile=5.66s
+  Result: Qwen3.5-2B-INT4 | GPU | text-only | prompt[0] in=1002 out_max=1
+  Pipeline: VLMPipeline  measured_iters=5  compile=4.89s
 ================================================================================
   Metric                   Mean      Std        P50        P90        P95      Min      Max  Unit
   ------------------ ---------- -------- ---------- ---------- ---------- -------- --------  ----
-  TTFT                   340.35     0.73     340.50     341.13     341.31   339.38   341.49  [ms]
+  TTFT                   283.45     0.68     283.49     284.14     284.15   282.30   284.17  [ms]
   TPOT                     0.00     0.00       0.00       0.00       0.00     0.00     0.00  [ms]
-  1st infer              334.60     0.75     334.71     335.42     335.59   333.62   335.76  [ms]
+  1st infer              277.70     0.68     277.84     278.38     278.40   276.56   278.43  [ms]
   2nd infer                0.00     0.00       0.00       0.00       0.00     0.00     0.00  [ms]
-  Throughput               2.92     0.01       2.92       2.93       2.93     2.91     2.93  [tok/s]
+  Throughput               3.50     0.01       3.50       3.51       3.51     3.49     3.52  [tok/s]
   Decode TPS               0.00     0.00       0.00       0.00       0.00     0.00     0.00  [tok/s]
   Output tokens            1.00     0.00       1.00       1.00       1.00     1.00     1.00  [tok]
-  Gen time                 0.34     0.00       0.34       0.34       0.34     0.34     0.34  [s]
-  Prefill                340.35     0.73     340.50     341.13     341.31   339.38   341.49  [ms]
+  Gen time                 0.29     0.00       0.29       0.29       0.29     0.28     0.29  [s]
+  Prefill                283.45     0.68     283.49     284.14     284.15   282.30   284.17  [ms]
   Decode                   0.00     0.00       0.00       0.00       0.00     0.00     0.00  [ms]
-  E2E                    342.65     0.80     342.63     343.54     343.73   341.56   343.92  [ms]
-  Tokenization             1.06     0.01       1.06       1.07       1.07     1.05     1.07  [ms]
-  Detokenization           0.32     0.03       0.31       0.35       0.36     0.29     0.37  [ms]
+  E2E                    285.66     0.74     285.65     286.42     286.47   284.42   286.52  [ms]
+  Tokenization             1.06     0.01       1.06       1.07       1.07     1.03     1.07  [ms]
+  Detokenization           0.30     0.01       0.29       0.31       0.31     0.29     0.32  [ms]
 
   --- Memory ---
   Memory monitor: unavailable/disabled

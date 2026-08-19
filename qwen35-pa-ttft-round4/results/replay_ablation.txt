@@ -1,0 +1,3 @@
+QWEN_REPLAY_SHARE=1 -> decoder GEMM pass: 81.0 ms   2780.3 GFLOP   34.3 TFLOP/s   (iters=20)
+QWEN_REPLAY_POSTOPS=0 -> decoder GEMM pass: 79.0 ms   2780.3 GFLOP   35.2 TFLOP/s   (iters=20)
+QWEN_REPLAY_SHARE=1 QWEN_REPLAY_POSTOPS=0 -> decoder GEMM pass: 78.2 ms   2780.3 GFLOP   35.5 TFLOP/s   (iters=20)

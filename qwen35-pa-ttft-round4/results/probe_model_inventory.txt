@@ -1,0 +1,12 @@
+case                  gate/up      K2048 N6144      in_proj_qkv  K2048 N6144      down_proj    K6144 N2048      z/out/o_proj K2048 N2048      q_proj       K2048 N4096      k_proj/v_proj K2048 N512       in_proj_b/a   K2048 N16
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+perOC_s4_cab               0.717ms 35.2T 1.00x           0.713ms 35.4T 1.00x           0.682ms 37.0T 1.00x           0.240ms 35.1T 1.00x           0.478ms 35.1T 1.00x           0.060ms 34.9T 1.00x            0.016ms 4.0T 1.00x
+
+ms = per-call wall time, T = TFLOP/s, Nx = speedup vs the first case listed
+iters=60 warmup=20
+
+--- count-weighted decoder total (one prefill pass, M=1002) ---
+case               predicted ms          GFLOP  eff TFLOP/s
+perOC_s4_cab               77.9         2750.9         35.3
+
+Compare `predicted ms` against the measured gemm_kernel time minus lm_head.
